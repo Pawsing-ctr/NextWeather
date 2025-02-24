@@ -1,30 +1,34 @@
- @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
 
-.logo-img{
+.logo-img {
   width: 112px;
   height: 32px;
   cursor: pointer;
 }
 
-.header{
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Inter",serif;
+  font-family: "Inter", serif;
+
+  padding: 10px 75px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-.logo-header{
+.logo-header {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.central-navigation-block{
+.central-navigation-block {
   display: flex;
   gap: 40px;
 }
 
-.user-text{
+.user-text {
   display: flex;
   align-items: center;
   min-width: 136px;
@@ -33,13 +37,13 @@
   gap: 5px;
 }
 
-.right-header-content{
+.right-header-content {
   display: flex;
-  align-items: center; 
-  gap: 15px
+  align-items: center;
+  gap: 15px;
 }
 
-.three-point-button{
+.three-point-button {
   background: none;
   color: black;
   font-weight: 500;
@@ -48,30 +52,30 @@
   cursor: pointer;
 }
 
-.button-content{
+.button-content {
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: rgb(240,240,240);
+  background-color: rgb(240, 240, 240);
   padding: 12px;
   width: 214px;
   cursor: pointer;
 }
 
-.search-button{
+.search-button {
   font-weight: 600;
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.navigation-text{
+.navigation-text {
   font-weight: 600;
   position: relative;
   cursor: pointer;
 }
 
-.navigation-text::after{
+.navigation-text::after {
   content: "";
   position: absolute;
   top: 25;
@@ -100,12 +104,12 @@
   width: 100%;
 }
 
-.right-user-border{
+.right-user-border {
   border: 1px solid grey;
   width: 1px;
   height: 24px;
 }
 
-.button-content:hover{
+.button-content:hover {
   background-color: #e6e8ea;
 }

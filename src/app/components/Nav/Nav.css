@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
+.main {
+  display: flex;
+  width: 100%;
+  min-height: 68px;
+  background-color: #149edc;
+  text-transform: uppercase;
+  justify-content: space-around;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-weather {
+  display: flex;
+  gap: 8px;
+}
+
+.text-weather {
+  justify-content: space-around;
+  color: #fff;
+  font-weight: 700;
+  font-family: "Inter", serif;
+  font-size: 36px;
+}
+
+.input-weather {
+  display: block;
+  width: 100%;
+  padding: 0.625rem 1rem;
+  margin: 0 2.75rem 0 0;
+  color: #202224;
+  background: #f6f6f6;
+  border-radius: 0;
+  border: solid 0.0625rem rgba(0, 0, 0, 0);
+  outline: none;
+  box-sizing: border-box;
+}
