@@ -3,10 +3,9 @@
 .main {
   display: flex;
   width: 100%;
-  min-height: 68px;
   background-color: #149edc;
   text-transform: uppercase;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .wrapper {
@@ -21,18 +20,27 @@
 }
 
 .text-weather {
-  justify-content: space-around;
   color: #fff;
   font-weight: 700;
   font-family: "Inter", serif;
   font-size: 36px;
 }
 
+.rightSection {
+  min-width: 100%;
+}
+
+/* need fix margin: 0 34rem 0 0;*/
+/* maybe rework input styles */
+/* add dropdown menu */
+/* add icons from Material UI + styles */
+
 .input-weather {
   display: block;
   width: 100%;
+  height: 2.75rem;
   padding: 0.625rem 1rem;
-  margin: 0 2.75rem 0 0;
+  margin: 0 34rem 0 0;
   color: #202224;
   background: #f6f6f6;
   border-radius: 0;
