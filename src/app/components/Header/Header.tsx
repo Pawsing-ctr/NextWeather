@@ -1,18 +1,23 @@
+"use client";
 import UserAssets from "@/app/assets/HeaderAssets/UserAssets";
 import React from "react";
 import "./Header.css";
-// import Link from "next/link";
-// import Image from "next/image";
 import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
+
   return (
     <PageBlockWrapper>
       <header className="header">
         <div className="logo-header">
           <img className="logo-img" src="./logoIMG.jpg" alt="" />
-          <div className="user-text">
+          <div
+            onClick={() => router.push("/registrationPage")}
+            className="user-text"
+          >
             <UserAssets width="28px" height="28px" />
             <span>Sign in</span>
           </div>
