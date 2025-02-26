@@ -30,17 +30,21 @@
   min-width: 100%;
 }
 
-/* need fix margin: 0 34rem 0 0;*/
-/* maybe rework input styles */
-/* add dropdown menu */
-/* add icons from Material UI + styles */
+.drop-menu {
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
 .input-weather {
   display: block;
-  width: 100%;
+  width: 150%;
   height: 2.75rem;
-  padding: 0.625rem 1rem;
-  margin: 0 34rem 0 0;
+  padding: 0 0.5rem;
+  padding-right: 565px;
   color: #202224;
   background: #f6f6f6;
   border-radius: 0;
@@ -48,3 +52,28 @@
   outline: none;
   box-sizing: border-box;
 }
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  background-color: #000000;
+  /* bc - fix */
+  color: #545658;
+  box-shadow: 0 0.125rem 0.9375rem rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+/* .drop-inner {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+} */
+
+/* fix styles for dropdown menu */
