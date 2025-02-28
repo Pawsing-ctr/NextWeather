@@ -4,3 +4,8 @@
   border: none;
   box-sizing: border-box;
 }
+
+body {
+  overflow-x: hidden; 
+  width: 100%;
+}

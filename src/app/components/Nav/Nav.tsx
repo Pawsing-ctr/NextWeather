@@ -23,6 +23,7 @@ const Nav = () => {
             <div className="drop-menu">
               <div className="input-container">
                 <input
+                  onBlur={() => setIsDropdownOpen(false)}
                   onClick={toogleDropDown}
                   placeholder="Enter a city"
                   type="text"
