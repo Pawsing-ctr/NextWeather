@@ -12,11 +12,21 @@ const Nav = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  const styles: React.CSSProperties = {
+    display: "flex",
+    width: "100%",
+    backgroundColor: "#fff",
+    textTransform: "uppercase",
+    justifyContent: "space-between",
+    boxShadow: "0 0.125rem 0.9375rem rgba(0, 0, 0, 0.15)",
+  };
+
   return (
     <PageBlockWrapper
-    // backgroundColor={
-    //   !isDropdownOpen ? Colors.backgroundColorNav : Colors.backgroundColorMain
-    // }
+      backgroundColor={
+        !isDropdownOpen ? Colors.backgroundColorNav : Colors.backgroundColorMain
+      }
+      style={!isDropdownOpen ? undefined : styles}
     >
       {!isDropdownOpen ? (
         <main className="main">
