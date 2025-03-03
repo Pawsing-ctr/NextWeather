@@ -14,7 +14,7 @@ const Header = () => {
       <header className="header">
         <div className="logo-header">
           <img className="logo-img" src="./logoIMG.jpg" alt="" />
-          <div onClick={() => router.push("/authPage")} className="user-text">
+          <div onClick={() => router.push("/auth")} className="user-text">
             <UserAssets width="28px" height="28px" />
             <span>Sign in</span>
           </div>

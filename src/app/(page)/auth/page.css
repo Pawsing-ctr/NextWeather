@@ -45,6 +45,7 @@
   width: 100%;
 }
 
+.data-user-input,
 .auth-form-input {
   outline: none;
   background: none;
@@ -57,12 +58,14 @@
   padding: 10px 0;
 }
 
+.data-user-input::placeholder,
 .auth-form-input::placeholder {
   color: rgb(173, 173, 173);
   font-size: 25px;
   transition: all 0.3s ease;
 }
 
+.data-user-input:focus::placeholder,
 .auth-form-input:focus::placeholder {
   transform: translateY(-20px);
   font-size: 15px;
@@ -119,4 +122,26 @@
 .background-img{
   width: 650px;
   height: 1000px;
+}
+
+.input-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+
+/* -----registration-page style-------- */
+
+.data-user-birthday{
+  display: flex;
+  gap: 30px;
+}
+
+.data-user-input{
+  max-width: 200px;
+  width: 100%;
+}
+.error-message{
+  color: red;
 }

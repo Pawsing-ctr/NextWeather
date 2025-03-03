@@ -4,16 +4,8 @@ import "./page.css";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import Link from "next/link";
-import { initialUser } from "@/app/constants/initialUserConst";
-import { useDispatch } from "react-redux";
-import { setUserInput } from "@/app/redux/slice/userSlice";
+
 const ClientComponent = () => {
-  const dispatch = useDispatch();
-  // const [newUser, setNewUser] = useState(initialUser);
-  console.log(initialUser);
-
-  // const [errors, setErrors] = useState<Record<string, string>>({});
-
   return (
     <PageBlockWrapper backgroundColor={Colors.backgroundColorAuth}>
       <div className="auth-page">
@@ -21,7 +13,6 @@ const ClientComponent = () => {
           <div className="auth-title">
             <img className="auth-logo" src="/authLogoIMG.png" alt="" />
             <p className="sign-into-text">Sign into MEX account</p>
-            <p className="enter-email-text">Enter your email</p>
           </div>
           <form className="auth-form-block" action="">
             <div className="input-wrapper">
@@ -30,11 +21,12 @@ const ClientComponent = () => {
                 type="text"
                 name="email"
                 placeholder="Email"
-                onChange={(e) =>
-                  dispatch(
-                    setUserInput({ field: "email", value: e.target.value })
-                  )
-                }
+              />
+              <input
+                className="auth-form-input"
+                type="text"
+                name="password"
+                placeholder="Password"
               />
             </div>
             <button className="form-button">Continue</button>
@@ -51,7 +43,7 @@ const ClientComponent = () => {
             <p className="registration-route-link-title">
               Don&apos;t have a MEX account?
             </p>
-            <Link href={"#"}>
+            <Link href={"/registration"}>
               <p className="auth-link">Register now</p>
             </Link>
           </div>
