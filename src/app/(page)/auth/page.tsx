@@ -4,6 +4,7 @@ import "./page.css";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import Link from "next/link";
+import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 
 const ClientComponent = () => {
   return (
@@ -48,7 +49,18 @@ const ClientComponent = () => {
             </Link>
           </div>
         </div>
-        <img className="background-img" src="./authBackgroundIMG.png" alt="" />
+        <div className="background-and-button">
+          <img
+            className="background-img"
+            src="./authBackgroundIMG.png"
+            alt=""
+          />
+          <Link className="link-button" href={"/"}>
+            <button className="close-button">
+              <CrossSVG width="16" height="16" />
+            </button>
+          </Link>
+        </div>
       </div>
     </PageBlockWrapper>
   );

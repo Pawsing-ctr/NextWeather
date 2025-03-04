@@ -114,6 +114,7 @@
   align-items: center;
 }
 
+.sign-into-discripton,
 .registration-route-link-title{
   color: #fff;
   font-size: 20px;
@@ -127,7 +128,7 @@
 .input-wrapper{
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 
@@ -143,5 +144,28 @@
   width: 100%;
 }
 .error-message{
-  color: red;
+  color: #fff;
+  background-color: #e51854;
+  font-size: 16px;
+  padding: 16px;
+}
+
+.error{
+  border-bottom: 1px solid #e51854;
+}
+
+.background-and-button{
+  display: flex;
+}
+
+.close-button{
+  max-width: 32px;
+  width: 100;
+  max-height: 32px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.link-button{
+  max-height: 32px;
 }

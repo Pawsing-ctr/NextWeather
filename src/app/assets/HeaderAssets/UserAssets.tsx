@@ -1,6 +1,6 @@
 import React from "react";
 
-interface IUserAssets {
+export interface IUserAssets {
   width?: string;
   height?: string;
 }
