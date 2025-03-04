@@ -4,6 +4,7 @@ import "./Nav.css";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
+import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 
 const Nav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -40,28 +41,28 @@ const Nav = () => {
           </div>
 
           <div className="rightSection">
-            <div className="drop-menu">
-              <div className="input-container">
-                <input
-                  type="text"
-                  placeholder="Enter a city"
-                  className="input-weather"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onClick={toggleDropDown}
-                  autoFocus={isDropdownOpen}
-                />
-                <button className="search-icon">
-                  <LoopAssets width="30" height="30" />
-                </button>
-                {isDropdownOpen && (
-                  <button className="close-button" onClick={closeMenu}>
-                    X
-                  </button>
-                )}
-              </div>
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Enter a city"
+                className="input-weather"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onClick={toggleDropDown}
+                autoFocus={isDropdownOpen}
+              />
+              <button className="search-icon">
+                <LoopAssets width="30" height="30" />
+              </button>
               {isDropdownOpen && (
-                <div className="search-dropdown">
+                <button className="close-button" onClick={closeMenu}>
+                  <CrossSVG width="26" height="26" />
+                </button>
+              )}
+            </div>
+            {isDropdownOpen && (
+              <div className="search-dropdown">
+                <div className="dropdown-container">
                   <div className="dropdown-section">
                     <p className="section-title">My locations</p>
                   </div>
@@ -87,8 +88,8 @@ const Nav = () => {
                     </p>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </main>
