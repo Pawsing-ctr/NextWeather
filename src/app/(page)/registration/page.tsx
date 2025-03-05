@@ -9,9 +9,12 @@ import { initialUser } from "@/app/constants/initialUserConst";
 import { handleSchemeCheckError } from "@/app/checkErrorFunc/checkErrorFunc";
 import { registrationUserSchem } from "@/app/zodScheme/zodScheme";
 import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
+import { createUser, ICreateUserData } from "@/app/api/apiUsers";
+import { INewUser } from "@/app/api/apiUsers/types";
 
 const ClientComponent = () => {
   const [newUser, setNewUser] = useState(initialUser);
+  const [users, setUsers] = useState<INewUser[]>([]);
   const [error, setError] = useState<Record<string, string>>({});
 
   const birthdayError = error["day"] || error["month"] || error["year"];
@@ -23,7 +26,7 @@ const ClientComponent = () => {
     }));
   };
 
-  const handleRegistration = async (e: React.FormEvent) => {
+  const handleRegistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errorResult = handleSchemeCheckError(
       registrationUserSchem,
@@ -32,9 +35,28 @@ const ClientComponent = () => {
     );
     if (!errorResult) {
       console.log("Данные введены не правильно");
+      return;
+    }
+    try {
+      const userData: ICreateUserData = {
+        email: newUser.email,
+        password: newUser.password,
+        day: newUser.day,
+        month: newUser.month,
+        year: newUser.year,
+      };
+
+      const userResponse = await createUser(userData);
+      console.log(userResponse);
+      if (userResponse.data) {
+        setUsers([...users, userResponse.data]);
+        setNewUser(initialUser);
+        console.log("Пользователь успешно зарегистрирован:", userResponse.data);
+      }
+    } catch (error) {
+      console.error("Ошибка при создании пользователя:", error);
     }
   };
-
   return (
     <PageBlockWrapper backgroundColor={Colors.backgroundColorAuth}>
       <div className="auth-page">
@@ -46,13 +68,12 @@ const ClientComponent = () => {
               You must be 16 or over to register for a MEX account
             </p>
           </div>
-          <form className="auth-form-block">
+          <form onSubmit={handleRegistSubmit} className="auth-form-block">
             <div className="input-wrapper">
               {formInputs.loginInputs.map((el) => {
                 return (
-                  <>
+                  <div key={el.id}>
                     <input
-                      key={el.id}
                       type={el.type}
                       className={`${el.className} ${
                         error[el.name] ? "error" : ""
@@ -66,7 +87,7 @@ const ClientComponent = () => {
                     {error[el.name] && (
                       <p className="error-message">{error[el.name]}</p>
                     )}
-                  </>
+                  </div>
                 );
               })}
               <div className="data-user-birthday">
@@ -93,9 +114,7 @@ const ClientComponent = () => {
                 <p className="error-message">{birthdayError}</p>
               )}
             </div>
-            <button onClick={handleRegistration} className="form-button">
-              Continue
-            </button>
+            <button className="form-button">Continue</button>
             <div className="auth-link-block">
               <Link className="auth-link" href={"#"}>
                 <p>I have forgotten my email</p>
