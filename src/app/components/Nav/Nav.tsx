@@ -1,13 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Nav.css";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
+import axios from "axios";
+
+export interface ICitiies {
+  el: number;
+  name: string;
+  country: string;
+}
 
 const Nav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [cities, setCities] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const toggleDropDown = () => {
@@ -16,6 +24,26 @@ const Nav = () => {
 
   const closeMenu = () => {
     setIsDropdownOpen(false);
+  };
+
+  const fetchCities = async (el: string) => {
+    if (el.length < 3) return;
+
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/geo/1.0/direct`,
+        {
+          params: {
+            q: el,
+            limit: 3,
+            appId: "261dbd7e97627a1dd1c935605123e095",
+          },
+        }
+      );
+      setCities(response.data);
+    } catch (error) {
+      console.log("Error API");
+    }
   };
 
   const styles: React.CSSProperties = {
@@ -47,7 +75,10 @@ const Nav = () => {
                 placeholder="Enter a city"
                 className="input-weather"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  fetchCities(e.target.value);
+                }}
                 onClick={toggleDropDown}
                 autoFocus={isDropdownOpen}
               />
@@ -62,6 +93,8 @@ const Nav = () => {
             </div>
             {isDropdownOpen && (
               <div className="search-dropdown">
+                {cities.length > 0 && <div className="dropdown-section"></div>}
+                {/* fix */}
                 <div className="dropdown-container">
                   <div className="dropdown-section">
                     <p className="section-title">My locations</p>
