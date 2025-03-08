@@ -1,0 +1,7 @@
+.main-block {
+  max-width: 1200px;
+}
+
+.location {
+  display: flex;
+}
