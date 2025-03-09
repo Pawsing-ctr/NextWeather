@@ -1,7 +1,18 @@
 .main-block {
-  max-width: 1200px;
+  display: flex;
+  width: 100%;
+  background-image: url(https://weather.files.bbci.co.uk/weather-web-lambda-forecast-renderer/327/src/images/G5/@1x-G5_clear-sky-night.jpg);
+}
+
+.wrapper-block {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 auto;
+  gap: 40px;
 }
 
 .location {
   display: flex;
+  gap: 8px;
 }
