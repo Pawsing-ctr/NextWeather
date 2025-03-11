@@ -34,3 +34,13 @@ export const registrationUserSchem = z.object({
       "Oops, that date doesn't look right. Make sure it's a real date written as DD-MM-YYYY e.g. the 5th of June 2009 is 05-06-2009."
     ),
 });
+
+export const loginUserSchem = z.object({
+  email: z
+    .string()
+    .email(
+      "Sorry, that email doesn’t look right. Please check it's a proper email."
+    )
+    .min(1, "Enter your email"),
+  password: z.string().min(8, "Enter your password"),
+});
