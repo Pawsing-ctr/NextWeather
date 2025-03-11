@@ -37,6 +37,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .input-weather {
@@ -88,6 +89,7 @@
   align-items: center;
   justify-content: center;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .close-button:hover svg {
@@ -108,15 +110,51 @@
   box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.2);
 }
 
+.dropdown-section {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.city-dropdown {
+  position: relative;
+  left: 85px;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.city-menu {
+  width: 100%;
+  color: #141414;
+  padding: 0;
+}
+
+.city-ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.city-li {
+  position: relative;
+  border-bottom: 0.0625rem solid #e6e8ea;
+  line-height: 2.5rem;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+
+.city-li:hover {
+  background-color: #202224;
+  color: #f6f6f6;
+}
+
 .dropdown-container {
   max-width: 1160px;
   width: 100%;
   margin: 0 auto;
   padding: 0 16px;
-}
-
-.dropdown-section {
-  padding: 12px 16px;
 }
 
 .section-title {
