@@ -1,12 +1,12 @@
 "use client";
-import AddLocationBtn from "@/app/UI/buttons/AddLocationBtn";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ICitiies } from "../Nav/Nav";
 import "./WeatherBlock.css";
 import ModalGeo from "../ModalGeo/ModalGeo";
+import { WeatherProps } from "@/app/page";
 
-const WeatherBlock = () => {
+const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   const [searchGeo, setSearchGeo] = useState("");
   const [cities, setCities] = useState<ICitiies[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -26,6 +26,8 @@ const WeatherBlock = () => {
     fetchLocation();
   }, [isGeoAllowed]);
 
+  const displayCity = selectedCity || searchGeo || "Your city...";
+
   return (
     <>
       {isModalOpen && (
@@ -40,13 +42,12 @@ const WeatherBlock = () => {
       <main className="main-block">
         <div className="wrapper-block">
           <div className="location">
-            <p>{searchGeo ? searchGeo : "Your city..."}</p>
+            <p>{displayCity}</p>
             {cities.map((city) => (
               <p key={city.name} className="city-option">
                 {city.name}, {city.country}
               </p>
             ))}
-            <AddLocationBtn />
           </div>
         </div>
       </main>
