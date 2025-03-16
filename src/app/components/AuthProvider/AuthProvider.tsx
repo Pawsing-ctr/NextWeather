@@ -1,12 +1,9 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import $api from "@/app/api/$api";
-import {
-  clearAccessToken,
-  getAccessToken,
-  setAccessToken,
-} from "@/app/api/apiTokens";
+import { refreshToken } from "@/app/api/apiTokens";
 import { tokenPath } from "@/app/api/apiTokens/tokenPath";
+import { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import React from "react";
@@ -23,14 +20,14 @@ interface ILoginCredentials {
 }
 
 interface IAuthContextType {
-  user: IUser | null;
-  login: (credentials: ILoginCredentials) => Promise<void>;
+  login: (credentials: ILoginCredentials) => Promise<AxiosResponse>;
   register: (
     email: string,
     password: string,
     birthDate?: { day: string; month: string; year: string }
   ) => Promise<void>;
   logout: () => Promise<void>;
+  user: IUser | null;
   isAuthenticated: boolean;
   isAdmin: boolean;
   loading: boolean;
@@ -53,29 +50,53 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const router = useRouter();
+
+  const refreshTokenFunc = async () => {
+    try {
+      const response = await $api.get(tokenPath.ME_TOKEN);
+      if (response.data && response.data.user) {
+        setUser(response.data.user);
+        setIsAuthenticated(true);
+        setIsAdmin(response.data.user.role === "admin");
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Ошибка получения данных пользователя:", error);
+      return false;
+    }
+  };
+
+  const errorRefreshToken = async () => {
+    setUser(null);
+    setIsAuthenticated(false);
+    setIsAdmin(false);
+  };
 
   // Проверка аутентификации при загрузке
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        if (getAccessToken()) {
-          const response = await $api.get(tokenPath.ME_TOKEN);
-          setUser(response.data.user);
-        } else {
+        setLoading(true);
+
+        const success = await refreshTokenFunc();
+
+        if (!success) {
           try {
-            const response = await $api.post(tokenPath.REFRESH_TOKEN_USER);
-            setAccessToken(response.data.accessToken);
-            setUser(response.data.user);
-          } catch (error) {
-            clearAccessToken();
-            setUser(null);
+            await refreshToken();
+            await refreshTokenFunc();
+          } catch (refreshError) {
+            errorRefreshToken();
+            console.error("Error update token:", refreshError);
           }
         }
       } catch (error) {
-        clearAccessToken();
-        setUser(null);
+        console.error("Ошибка аутентификации:", error);
+        errorRefreshToken();
       } finally {
         setLoading(false);
       }
@@ -83,24 +104,58 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     checkAuth();
   }, []);
 
-  const login = async (credentials: { email: string; password: string }) => {
+  // Пример разбора запросов на функциии СДЕЛАТЬ!!!
+  // const loginRequest = async (
+  //   path: string,
+  //   credentials: {
+  //     email: string;
+  //     password: string;
+  //   }
+  // ) => {
+  //   try {
+  //     return await $api.post(path, credentials);
+  //   } catch (error: any) {
+  //     console.error(error);
+  //     return error;
+  //   }
+  // };
+
+  // const login = async (credentials: { email: string; password: string }) => {
+  //   setLoading(true);
+  //   setError(null);
+
+  //   const response = await loginRequest(tokenPath.USER_LOGIN, credentials);
+
+  //   if (response.status === 200) {
+  //     setUser(response.data.user);
+  //     setIsAuthenticated(true);
+  //     setIsAdmin(response.data.role === "admin");
+  //   } else {
+  //     setError(response.data?.message || "An error occurred during login");
+  //   }
+  //   setLoading(false);
+  //   return response;
+  // };
+
+  const login = async (credentials: ILoginCredentials) => {
+    setLoading(true);
+    setError(null);
+
     try {
-      setLoading(true);
-      setError(null);
+      const response = await $api.post(tokenPath.USER_LOGIN, credentials);
 
-      const response = await $api.post(tokenPath.USER_LOGIN, credentials, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      setAccessToken(response.data.accessToken);
-      setUser(response.data.user);
-
-      if (response.data.user.role === "admin") {
-        router.push("/admin");
+      if (response.data && response.data.user) {
+        setUser(response.data.user);
+        setIsAuthenticated(true);
+        setIsAdmin(response.data.user.role === "admin");
+        if (response.data.accessToken) {
+          $api.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${response.data.accessToken}`;
+        }
+        return response;
       } else {
-        router.push("/");
+        throw new Error(response.data?.message || "Login failed");
       }
     } catch (error: any) {
       setError(
@@ -131,13 +186,13 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         }),
       };
 
-      console.log("Отправляемые данные:", userData);
       const response = await $api.post(tokenPath.USER_REGISTER, userData);
 
-      setAccessToken(response.data.accessToken);
-      setUser(response.data.user);
+      if (response.status === 201 || response.data.user) {
+        refreshTokenFunc();
 
-      router.push("/");
+        router.push("/");
+      }
     } catch (error: any) {
       console.error(
         "Ошибка регистрации:",
@@ -158,8 +213,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       await $api.post(tokenPath.USER_LOGOUT);
 
-      clearAccessToken();
-      setUser(null);
+      errorRefreshToken();
 
       router.push("/");
     } catch (error: any) {
@@ -171,9 +225,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setLoading(false);
     }
   };
-
-  const isAuthenticated = !!user;
-  const isAdmin = isAuthenticated && user?.role === "admin";
 
   const value = {
     user,

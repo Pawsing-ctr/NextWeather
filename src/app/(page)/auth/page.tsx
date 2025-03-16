@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./page.css";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
@@ -47,21 +47,22 @@ const ClientComponent = () => {
       return;
     }
 
-    try {
-      setIsLoading(true);
-      setError({});
+    setIsLoading(true);
+    setError({});
 
-      await login(formData);
+    const response = await login(formData);
 
+    if (response.status === 200) {
       router.push(decodeURIComponent(returnUrl));
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      console.error("Login error:", err);
-      setError(err.response?.data?.message || "Произошла ошибка при входе");
-    } finally {
-      setIsLoading(false);
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // } catch (err: any) {
+    //   console.error("Login error:", err);
+    //   setError(err.response?.data?.message || "Произошла ошибка при входе");
+    // } finally {
+    setIsLoading(false);
+    // }
   };
 
   return (
