@@ -1,14 +1,57 @@
 .main-block {
   display: flex;
-  min-height: 274px;
+  min-height: 200px;
   background-size: cover;
   background-position: center;
   width: 100%;
   color: white;
   padding: 20px 0;
   transition: background-image 0.3s ease;
+  background-color: #4a90e2;
 }
 
+.weather-container {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.city-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.weather-loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333333;
+  border-radius: 4px;
+}
+
+.weather-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.forecast-wrapper {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.forecast-days {
+  display: flex;
+  background-color: white;
+  color: #333;
+}
+
+/* Weather backgrounds */
 .weather-default {
   background-image: url(https://weather.files.bbci.co.uk/weather-web-lambda-forecast-renderer/327/src/images/G4/@1x-G4_sunny-intervals-day.jpg);
 }
@@ -68,171 +111,3 @@
 .weather-mist-night {
   background-image: url(https://weather.files.bbci.co.uk/weather-web-lambda-forecast-renderer/327/src/images/G5/@1x-G5_mist-night.jpg);
 }
-
-.weather-container {
-  width: 100%;
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.location-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
-.city-name {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.add-location-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-}
-
-.add-location-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.weather-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.current-weather-box {
-  background: white;
-  color: #333;
-  border-radius: 4px;
-  padding: 20px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.time-of-day {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.current-weather-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.weather-icon-temp {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.weather-icon-temp img {
-  width: 64px;
-  height: 64px;
-}
-
-.temperature-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.current-temp {
-  font-size: 48px;
-  font-weight: bold;
-  line-height: 1;
-}
-
-.min-temp {
-  font-size: 24px;
-  color: #666;
-}
-
-.weather-description {
-  font-size: 18px;
-  color: #444;
-}
-
-.forecast-container {
-  display: flex;
-  gap: 2px;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.forecast-day {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px 10px;
-  background: white;
-  transition: background-color 0.2s;
-  position: relative;
-}
-
-.forecast-day:hover {
-  background: #f5f5f5;
-}
-
-.forecast-header {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.forecast-date {
-  font-size: 14px;
-  color: #666;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.forecast-icon {
-  margin: 5px 0;
-}
-
-.forecast-icon img {
-  width: 40px;
-  height: 40px;
-}
-
-.forecast-temps {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.max-temp {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.min-temp {
-  font-size: 14px;
-  color: #666;
-}
-
-.weather-loading {
-  text-align: center;
-  padding: 20px;
-  font-size: 18px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-

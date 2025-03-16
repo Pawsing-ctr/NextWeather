@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Nav from "./components/Nav/Nav";
 import Header from "./components/Header/Header";
-import WeatherBlock from "./components/Weather/WeatherBlock";
+import WeatherBlock from "./components/Weather/ui/WeatherBlock/WeatherBlock";
 
 export interface WeatherProps {
   selectedCity: string;
