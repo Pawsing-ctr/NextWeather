@@ -1,69 +1,57 @@
 import $api from "../$api";
 import { tokenPath } from "./tokenPath";
 
-export let accessToken: string | null = null;
-
-export const setAccessToken = (token: string) => {
-  accessToken = token;
-};
-
-export const getAccessToken = () => accessToken;
-
-export const clearAccessToken = () => {
-  accessToken = null;
-};
-
 // Обноавление токена в процессе (флаг)
 let isRefreshing = false;
 
 // Очередь запросов, ожидающих обновления токена
-let refreshSubscribers: ((token: string) => void)[] = [];
+let refreshSubscribers: (() => void)[] = [];
 
 // Функция для добавления запроса в очередь
-const subscribeTokenRefresh = (callback: (token: string) => void) => {
+const subscribeTokenRefresh = (callback: () => void) => {
   refreshSubscribers.push(callback);
 };
 
 // Функция для вып. всех запрсов из очереди
-const onTokenRefreshed = (token: string) => {
-  refreshSubscribers.forEach((callback) => callback(token));
+const onTokenRefreshed = () => {
+  refreshSubscribers.forEach((callback) => callback());
   refreshSubscribers = [];
 };
 
 export const refreshToken = async () => {
   if (isRefreshing) {
-    return new Promise<string>((resolve) => {
-      subscribeTokenRefresh((token) => resolve(token));
+    return new Promise<void>((resolve) => {
+      subscribeTokenRefresh(() => resolve());
     });
   }
 
   isRefreshing = true;
 
   try {
-    const response = await $api.post(
-      tokenPath.REFRESH_TOKEN_USER,
-      {},
-      { withCredentials: true }
-    );
-
-    const newToken = response.data.accessToken;
-    setAccessToken(newToken);
-
-    $api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
+    await $api.post(tokenPath.REFRESH_TOKEN_USER);
 
     isRefreshing = false;
-    onTokenRefreshed(newToken);
-
-    return newToken;
+    onTokenRefreshed();
   } catch (error) {
     isRefreshing = false;
+    throw error;
+  }
+};
 
-    clearAccessToken();
+// export const resetRedirectFlag = () => {
+//   if (typeof window !== "undefined") {
+//     sessionStorage.removeItem("redirected");
+//   }
+// };
 
-    if (typeof window !== "undefined") {
-      window.location.href = "/auth";
-    }
-
-    return Promise.reject(error);
+export const logout = async () => {
+  try {
+    await $api.post(tokenPath.USER_LOGOUT, {}, { withCredentials: true });
+  } catch (error) {
+    console.error("Login Error:", error);
+  } finally {
+    // if (typeof window !== "undefined") {
+    //   window.location.href = "/auth";
+    // }
   }
 };
