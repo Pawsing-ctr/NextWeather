@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Nav from "./components/Nav/Nav";
 import Header from "./components/Header/Header";
 import WeatherBlock from "./components/Weather/ui/WeatherBlock/WeatherBlock";
+import HourlyCast from "./components/Weather/ui/HourlyCast/HourlyCast";
 
 export interface WeatherProps {
   selectedCity: string;
@@ -20,6 +21,7 @@ const page = () => {
         setSelectedCity={setSelectedCity}
         selectedCity={selectedCity}
       />
+      <HourlyCast />
     </div>
   );
 };

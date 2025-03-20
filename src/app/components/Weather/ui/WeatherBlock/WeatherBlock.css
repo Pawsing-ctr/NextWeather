@@ -42,7 +42,6 @@
 .forecast-wrapper {
   display: flex;
   align-items: stretch;
-  position: relative;
 }
 
 .forecast-days {

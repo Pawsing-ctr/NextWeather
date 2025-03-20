@@ -1,7 +1,6 @@
 "use client";
 import axios from "axios";
 import { type FC, useEffect, useState } from "react";
-import type { ICitiies } from "../../../Nav/Nav";
 import ModalGeo from "../../../ModalGeo/ModalGeo";
 import type { WeatherProps } from "@/app/page";
 import type {
@@ -15,17 +14,47 @@ import ForecastDay from "../ForeCast/ForeCast";
 import "./WeatherBlock.css";
 
 const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
-  const [searchGeo, setSearchGeo] = useState("");
-  const [cities, setCities] = useState<ICitiies[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [isGeoAllowed, setIsGeoAllowed] = useState(false);
+  const [searchGeo, setSearchGeo] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("searchGeo") || "";
+    }
+    return "";
+  });
+
+  const [isModalOpen, setIsModalOpen] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("isGeoAllowed") ? false : true;
+    }
+    return true;
+  });
+
+  const [isGeoAllowed, setIsGeoAllowed] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("isGeoAllowed") === "true";
+    }
+    return false;
+  });
+
   const [loading, setLoading] = useState(false);
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [forecastData, setForecastData] = useState<ForecastData | null>(null);
+
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("weatherData");
+      return saved ? JSON.parse(saved) : null;
+    }
+    return null;
+  });
+
+  const [forecastData, setForecastData] = useState<ForecastData | null>(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("forecastData");
+      return saved ? JSON.parse(saved) : null;
+    }
+    return null;
+  });
 
   const API_KEY = "261dbd7e97627a1dd1c935605123e095";
 
-  // function for Data Weather
   const fetchWeatherData = async (city: string) => {
     setLoading(true);
     try {
@@ -33,11 +62,18 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=en`
       );
       setWeatherData(weatherResponse.data);
-
+      sessionStorage.setItem(
+        "weatherData",
+        JSON.stringify(weatherResponse.data)
+      );
       const forecastResponse = await axios.get<ForecastData>(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=en`
       );
       setForecastData(forecastResponse.data);
+      sessionStorage.setItem(
+        "forecastData",
+        JSON.stringify(forecastResponse.data)
+      );
     } catch (error) {
       console.log("Error API weather");
     } finally {
@@ -46,7 +82,28 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   };
 
   useEffect(() => {
+    if (searchGeo) {
+      sessionStorage.setItem("searchGeo", searchGeo);
+    }
+  }, [searchGeo]);
+
+  useEffect(() => {
+    sessionStorage.setItem("isGeoAllowed", isGeoAllowed.toString());
+  }, [isGeoAllowed]);
+
+  useEffect(() => {
+    if (selectedCity) {
+      sessionStorage.setItem("selectedCity", selectedCity);
+    }
+  }, [selectedCity]);
+
+  useEffect(() => {
     if (!isGeoAllowed) return;
+    const savedCity = sessionStorage.getItem("searchGeo");
+    if (savedCity) {
+      setSearchGeo(savedCity);
+      return;
+    }
 
     const fetchLocation = async () => {
       try {
@@ -61,8 +118,15 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   }, [isGeoAllowed]);
 
   useEffect(() => {
+    const savedCity = sessionStorage.getItem("selectedCity");
+
     if (selectedCity) {
       fetchWeatherData(selectedCity);
+    } else if (savedCity) {
+      if (setSelectedCity) {
+        setSelectedCity(savedCity);
+      }
+      fetchWeatherData(savedCity);
     } else if (searchGeo) {
       fetchWeatherData(searchGeo);
     }
@@ -120,7 +184,9 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
                 {forecastData && (
                   <div className="forecast-days">
                     {dailyForecast.map((day, index) => (
-                      <ForecastDay key={index} day={day} />
+                      <div key={index}>
+                        <ForecastDay day={day} />
+                      </div>
                     ))}
                   </div>
                 )}
