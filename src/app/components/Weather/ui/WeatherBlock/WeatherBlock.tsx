@@ -9,151 +9,152 @@ import type {
   ForecastItem,
 } from "../../types/index";
 import { getWeatherBackground } from "../../utils/weather-utils";
-import TodayWeather from "../TodayCast/TodayCast";
-import ForecastDay from "../ForeCast/ForeCast";
+import HourlyCast from "../HourlyCast/HourlyCast";
+import WeatherCard from "../WeatherCard/WeatherCard";
 import "./WeatherBlock.css";
 
 const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
-  const [searchGeo, setSearchGeo] = useState(() => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("searchGeo") || "";
-    }
-    return "";
-  });
-
-  const [isModalOpen, setIsModalOpen] = useState(() => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("isGeoAllowed") ? false : true;
-    }
-    return true;
-  });
-
-  const [isGeoAllowed, setIsGeoAllowed] = useState(() => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("isGeoAllowed") === "true";
-    }
-    return false;
-  });
-
+  const [searchGeo, setSearchGeo] = useState(
+    () => sessionStorage.getItem("searchGeo") || ""
+  );
+  const [isModalOpen, setIsModalOpen] = useState(
+    () => !sessionStorage.getItem("isGeoAllowed")
+  );
+  const [isGeoAllowed, setIsGeoAllowed] = useState(
+    () => sessionStorage.getItem("isGeoAllowed") === "true"
+  );
   const [loading, setLoading] = useState(false);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(() =>
+    JSON.parse(sessionStorage.getItem("weatherData") || "null")
+  );
+  const [forecastData, setForecastData] = useState<ForecastData | null>(() =>
+    JSON.parse(sessionStorage.getItem("forecastData") || "null")
+  );
+  const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [todayHourlyData, setTodayHourlyData] = useState<ForecastItem[]>([]);
 
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(() => {
-    if (typeof window !== "undefined") {
-      const saved = sessionStorage.getItem("weatherData");
-      return saved ? JSON.parse(saved) : null;
-    }
-    return null;
-  });
-
-  const [forecastData, setForecastData] = useState<ForecastData | null>(() => {
-    if (typeof window !== "undefined") {
-      const saved = sessionStorage.getItem("forecastData");
-      return saved ? JSON.parse(saved) : null;
-    }
-    return null;
-  });
-
-  const API_KEY = "261dbd7e97627a1dd1c935605123e095";
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
   const fetchWeatherData = async (city: string) => {
     setLoading(true);
     try {
-      const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=en`
-      );
+      const [weatherResponse, forecastResponse] = await Promise.all([
+        axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=en`
+        ),
+        axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=en`
+        ),
+      ]);
+
       setWeatherData(weatherResponse.data);
+      setForecastData(forecastResponse.data);
       sessionStorage.setItem(
         "weatherData",
         JSON.stringify(weatherResponse.data)
       );
-      const forecastResponse = await axios.get<ForecastData>(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=en`
-      );
-      setForecastData(forecastResponse.data);
       sessionStorage.setItem(
         "forecastData",
         JSON.stringify(forecastResponse.data)
       );
     } catch (error) {
-      console.log("Error API weather");
+      console.error("Error fetching weather data:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (searchGeo) {
-      sessionStorage.setItem("searchGeo", searchGeo);
+  const fetchLocation = async () => {
+    try {
+      const { data } = await axios.get("http://ip-api.com/json/");
+      setSearchGeo(data.city);
+      fetchWeatherData(data.city);
+    } catch (error) {
+      console.error("Error fetching location");
     }
-  }, [searchGeo]);
+  };
 
   useEffect(() => {
-    sessionStorage.setItem("isGeoAllowed", isGeoAllowed.toString());
-  }, [isGeoAllowed]);
+    if (searchGeo) sessionStorage.setItem("searchGeo", searchGeo);
+  }, [searchGeo]);
 
   useEffect(() => {
     if (selectedCity) {
       sessionStorage.setItem("selectedCity", selectedCity);
+      fetchWeatherData(selectedCity);
+    } else {
+      const savedCity = sessionStorage.getItem("selectedCity") || searchGeo;
+      if (savedCity) {
+        setSelectedCity?.(savedCity);
+        fetchWeatherData(savedCity);
+      }
     }
   }, [selectedCity]);
 
   useEffect(() => {
-    if (!isGeoAllowed) return;
-    const savedCity = sessionStorage.getItem("searchGeo");
-    if (savedCity) {
-      setSearchGeo(savedCity);
-      return;
+    if (forecastData) {
+      const today = new Date().toISOString().split("T")[0];
+      setTodayHourlyData(
+        forecastData.list.filter(
+          (item) =>
+            new Date(item.dt * 1000).toISOString().split("T")[0] === today
+        )
+      );
     }
-
-    const fetchLocation = async () => {
-      try {
-        const response = await axios.get("http://ip-api.com/json/");
-        setSearchGeo(response.data.city);
-        fetchWeatherData(response.data.city);
-      } catch (error) {
-        console.log("Error GEO");
-      }
-    };
-    fetchLocation();
-  }, [isGeoAllowed]);
+  }, [forecastData]);
 
   useEffect(() => {
-    const savedCity = sessionStorage.getItem("selectedCity");
-
-    if (selectedCity) {
-      fetchWeatherData(selectedCity);
-    } else if (savedCity) {
-      if (setSelectedCity) {
-        setSelectedCity(savedCity);
-      }
-      fetchWeatherData(savedCity);
-    } else if (searchGeo) {
-      fetchWeatherData(searchGeo);
+    if (isGeoAllowed) {
+      sessionStorage.setItem("isGeoAllowed", "true");
+      fetchLocation();
     }
-  }, [selectedCity, searchGeo]);
+  }, [isGeoAllowed]);
 
   const getDailyForecast = () => {
     if (!forecastData) return [];
 
+    // Получаем сегодняшнюю дату
+    const today = new Date().toISOString().split("T")[0];
+    const uniqueDates = new Set<string>();
+
     return forecastData.list
-      .reduce((acc: ForecastItem[], item) => {
+      .filter((item) => {
         const dateStr = new Date(item.dt * 1000).toISOString().split("T")[0];
-        if (
-          !acc.some(
-            (day) =>
-              new Date(day.dt * 1000).toISOString().split("T")[0] === dateStr
-          )
-        ) {
-          acc.push(item);
-        }
-        return acc;
-      }, [])
-      .slice(0, 6);
+
+        // Пропускаем сегодняшний день, так как он уже отображается отдельно
+        if (dateStr === today) return false;
+
+        // Пропускаем повторяющиеся даты
+        if (uniqueDates.has(dateStr)) return false;
+
+        uniqueDates.add(dateStr);
+        return true;
+      })
+      .slice(0, 5); // Ограничиваем до 5 дней
+  };
+
+  const getHourlyForecast = () => {
+    if (!forecastData) return [];
+    return selectedDay
+      ? forecastData.list.filter(
+          (item) =>
+            new Date(item.dt * 1000).toISOString().split("T")[0] === selectedDay
+        )
+      : todayHourlyData;
   };
 
   const displayCity =
     weatherData?.name || selectedCity || searchGeo || "Your city...";
   const dailyForecast = getDailyForecast();
+  const backgroundWeather = selectedDay
+    ? forecastData?.list.find(
+        (item) =>
+          new Date(item.dt * 1000).toISOString().split("T")[0] === selectedDay
+      )
+    : weatherData;
+  const backgroundClass = backgroundWeather
+    ? getWeatherBackground(backgroundWeather)
+    : "weather-default";
 
   return (
     <>
@@ -166,35 +167,40 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
           }}
         />
       )}
-      <main
-        className={`main-block ${
-          weatherData ? getWeatherBackground(weatherData) : "weather-default"
-        }`}
-      >
+      <main className={`main-block ${backgroundClass}`}>
         <div className="weather-container">
           <div className="city-name">{displayCity}</div>
-
-          {loading && <div className="weather-loading">Loading...</div>}
-
-          {weatherData && (
-            <div className="weather-content">
-              <div className="forecast-wrapper">
-                <TodayWeather weatherData={weatherData} />
-
-                {forecastData && (
-                  <div className="forecast-days">
-                    {dailyForecast.map((day, index) => (
-                      <div key={index}>
-                        <ForecastDay day={day} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+          {loading ? (
+            <div className="weather-loading">Loading...</div>
+          ) : (
+            <div className="forecast-wrapper">
+              {weatherData && (
+                <WeatherCard
+                  day={weatherData}
+                  activeDay={selectedDay}
+                  setActiveDay={setSelectedDay}
+                  isToday
+                />
+              )}
+              {forecastData && (
+                <div className="forecast-days">
+                  {dailyForecast.map((day, index) => (
+                    <WeatherCard
+                      key={index}
+                      day={day}
+                      activeDay={selectedDay}
+                      setActiveDay={setSelectedDay}
+                      isToday={false}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
       </main>
+
+      <HourlyCast data={getHourlyForecast()} selectedDay={selectedDay} />
     </>
   );
 };
