@@ -1,0 +1,103 @@
+.hourly-forecast-container {
+  width: 100%;
+  background-color: white;
+  margin-top: 0; /* Убираем отступ сверху */
+  overflow: hidden;
+  border-top: none; /* Убираем верхнюю границу */
+}
+
+.hourly-forecast-scroll {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  padding: 15px 0;
+  justify-content: center;
+}
+
+.hourly-forecast-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hourly-forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  padding: 0 10px;
+  border-right: 1px solid #eee;
+}
+
+.hourly-forecast-item:last-child {
+  border-right: none;
+}
+
+.hourly-time {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.hourly-icon {
+  margin: 5px 0;
+}
+
+.hourly-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.hourly-temp {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0;
+}
+
+.hourly-precipitation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.precipitation-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.precipitation-value {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.hourly-wind {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.wind-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wind-value {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .hourly-forecast-scroll {
+    justify-content: flex-start;
+  }
+
+  .hourly-forecast-item {
+    min-width: 60px;
+    padding: 0 8px;
+  }
+}
