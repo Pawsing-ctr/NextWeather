@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import Nav from "./components/Nav/Nav";
 import Header from "./components/Header/Header";
 import WeatherBlock from "./components/Weather/ui/WeatherBlock/WeatherBlock";
-import Map from "./components/Map/Map";
+import Map from "./components/MapBlock/MapBlock";
+import SettingsBlock from "./components/SettingsBlock/SettingsBlock";
 export interface WeatherProps {
   selectedCity: string;
   setSelectedCity: (city: string) => void;
@@ -20,7 +21,8 @@ const page = () => {
         setSelectedCity={setSelectedCity}
         selectedCity={selectedCity}
       />
-      <Map />
+      <Map selectedCity={selectedCity} />
+      <SettingsBlock />
     </div>
   );
 };

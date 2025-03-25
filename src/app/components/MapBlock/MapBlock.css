@@ -1,0 +1,10 @@
+.leaflet-container {
+  width: 100%;
+  height: 450px;
+  image-rendering: optimizeSpeed;
+  transform: translateZ(0);
+}
+
+.leaflet-control-attribution {
+  display: none !important;
+}
