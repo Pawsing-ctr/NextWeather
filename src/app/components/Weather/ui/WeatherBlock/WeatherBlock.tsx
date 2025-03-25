@@ -113,24 +113,20 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   const getDailyForecast = () => {
     if (!forecastData) return [];
 
-    // Получаем сегодняшнюю дату
     const today = new Date().toISOString().split("T")[0];
     const uniqueDates = new Set<string>();
 
     return forecastData.list
       .filter((item) => {
         const dateStr = new Date(item.dt * 1000).toISOString().split("T")[0];
-
-        // Пропускаем сегодняшний день, так как он уже отображается отдельно
         if (dateStr === today) return false;
 
-        // Пропускаем повторяющиеся даты
         if (uniqueDates.has(dateStr)) return false;
 
         uniqueDates.add(dateStr);
         return true;
       })
-      .slice(0, 5); // Ограничиваем до 5 дней
+      .slice(0, 5);
   };
 
   const getHourlyForecast = () => {
