@@ -1,17 +1,27 @@
 import React, { FC, useEffect, useState } from "react";
-import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  TileLayer,
+  Popup,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import "./MapBlock.css";
 import "leaflet/dist/leaflet.css";
 import axios from "axios";
-
+import L from "leaflet";
+import MapClickHandler from "./MapClickHandler/MapClickHandler";
 interface MapProps {
   selectedCity: string;
+  setSelectedCity: (city: string) => void;
 }
 
-const Map: FC<MapProps> = ({ selectedCity }) => {
+const Map: FC<MapProps> = ({ selectedCity, setSelectedCity }) => {
   const [position, setPosition] = useState<[number, number] | null>(null);
 
   useEffect(() => {
+    console.log(selectedCity);
     const fetchCoordinates = async () => {
       if (!selectedCity) return;
       try {
@@ -49,6 +59,13 @@ const Map: FC<MapProps> = ({ selectedCity }) => {
     return null;
   };
 
+  const customIcon = new L.Icon({
+    iconUrl: "/custom-marker.png",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
+
   return (
     <div className="leaflet-container">
       <MapContainer
@@ -58,8 +75,11 @@ const Map: FC<MapProps> = ({ selectedCity }) => {
         scrollWheelZoom={true}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+        <MapClickHandler setSelectedCity={setSelectedCity} />
+
         {position && (
-          <Marker position={position}>
+          <Marker position={position} icon={customIcon}>
             <Popup>{selectedCity}</Popup>
           </Marker>
         )}
@@ -70,6 +90,3 @@ const Map: FC<MapProps> = ({ selectedCity }) => {
 };
 
 export default Map;
-
-// need fixes. Search city update.
-// position [51.505, -0.09] fix

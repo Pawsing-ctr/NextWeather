@@ -21,7 +21,7 @@ const page = () => {
         setSelectedCity={setSelectedCity}
         selectedCity={selectedCity}
       />
-      <Map selectedCity={selectedCity} />
+      <Map selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
       <SettingsBlock />
     </div>
   );
