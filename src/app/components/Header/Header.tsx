@@ -6,21 +6,23 @@ import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../AuthProvider/AuthProvider";
+import Link from "next/link";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
+  const { loading } = useAuth();
   const router = useRouter();
 
   return (
     <PageBlockWrapper>
       <header className="header">
-        {isAuthenticated ? (
+        {loading ? (
           <>
             <div className="logo-header">
               <img className="logo-img" src="./logoIMG.jpg" alt="" />
-              <div onClick={() => router.push("/auth")} className="user-text">
+              <div className="user-text">
                 <UserAssets width="28px" height="28px" />
-                <span>Your account</span>
+                <span>Loading...</span>
               </div>
               <div className="right-user-border" />
             </div>
@@ -28,9 +30,17 @@ const Header = () => {
         ) : (
           <div className="logo-header">
             <img className="logo-img" src="./logoIMG.jpg" alt="" />
-            <div onClick={() => router.push("/auth")} className="user-text">
+            <div className="user-text">
               <UserAssets width="28px" height="28px" />
-              <span>Sign in</span>
+              {!isAuthenticated ? (
+                <Link className="header-link" href={"/auth"}>
+                  Sign in
+                </Link>
+              ) : (
+                <Link className="header-link" href={"/account"}>
+                  Your account
+                </Link>
+              )}
             </div>
             <div className="right-user-border" />
           </div>

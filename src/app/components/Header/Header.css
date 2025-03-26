@@ -107,3 +107,9 @@
 .button-content:hover {
   background-color: #e6e8ea;
 }
+
+.header-link{
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
