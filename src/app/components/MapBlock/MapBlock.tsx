@@ -1,12 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import {
-  MapContainer,
-  Marker,
-  TileLayer,
-  Popup,
-  useMap,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
 import "./MapBlock.css";
 import "leaflet/dist/leaflet.css";
 import axios from "axios";
@@ -17,7 +10,7 @@ interface MapProps {
   setSelectedCity: (city: string) => void;
 }
 
-const Map: FC<MapProps> = ({ selectedCity, setSelectedCity }) => {
+const MapBlock: FC<MapProps> = ({ selectedCity, setSelectedCity }) => {
   const [position, setPosition] = useState<[number, number] | null>(null);
 
   useEffect(() => {
@@ -89,4 +82,4 @@ const Map: FC<MapProps> = ({ selectedCity, setSelectedCity }) => {
   );
 };
 
-export default Map;
+export default MapBlock;
