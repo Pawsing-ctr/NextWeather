@@ -1,0 +1,48 @@
+.observations-wrapper {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  padding-top: 32px !important;
+  padding-bottom: 32px !important;
+}
+
+.observations-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-right: 8px;
+  padding-left: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.observations-info {
+  position: relative;
+  padding-right: 20px;
+  min-width: 200px;
+}
+
+.observations-title {
+  color: #141414;
+  font-size: 24px;
+  letter-spacing: normal;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.observations-time {
+  color: #545658;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  margin: 2px 0;
+}
+
+.div-outline {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #e6e8ea;
+}
