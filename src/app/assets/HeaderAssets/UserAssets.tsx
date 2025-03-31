@@ -3,6 +3,7 @@ import React from "react";
 export interface IUserAssets {
   width?: string;
   height?: string;
+  color?: string;
 }
 
 const UserAssets: React.FC<IUserAssets> = ({

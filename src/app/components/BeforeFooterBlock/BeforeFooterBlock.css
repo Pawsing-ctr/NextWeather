@@ -1,0 +1,27 @@
+.title-text{
+  font-size: 32px;
+  line-height: 36px;
+  color: #000;
+  font-weight: 500;
+}
+
+.link-text{
+  color: #000;
+  border-bottom: 1px solid #b3b3b3;
+  text-decoration: none;
+  font-weight: 700;
+  max-width: 110px;
+}
+
+.link-text:hover{
+  color: #0052cc;
+}
+
+.text-block{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 1248px;
+  width: 100%;
+  height: 376px;
+}

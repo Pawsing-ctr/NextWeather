@@ -38,20 +38,11 @@ export const refreshToken = async () => {
   }
 };
 
-// export const resetRedirectFlag = () => {
-//   if (typeof window !== "undefined") {
-//     sessionStorage.removeItem("redirected");
-//   }
-// };
-
 export const logout = async () => {
   try {
     await $api.post(tokenPath.USER_LOGOUT, {}, { withCredentials: true });
   } catch (error) {
     console.error("Login Error:", error);
   } finally {
-    // if (typeof window !== "undefined") {
-    //   window.location.href = "/auth";
-    // }
   }
 };
