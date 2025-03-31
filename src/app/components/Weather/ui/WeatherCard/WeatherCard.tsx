@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import type React from "react";
 import type { ForecastItem, WeatherData } from "../../types/index";
 import {
   formatDay,
@@ -6,6 +8,7 @@ import {
   getWeatherDescription,
 } from "../../utils/weather-utils";
 import "./WeatherCard.css";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 interface WeatherCardProps {
   day: WeatherData | ForecastItem;
@@ -20,6 +23,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   setActiveDay,
   isToday,
 }) => {
+  const { t } = useSettings();
   const isWeatherData = "name" in day;
 
   const timestamp = isWeatherData ? Math.floor(Date.now() / 1000) : day.dt;
@@ -46,7 +50,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
     >
       <div className="weather-card-header">
         <div className="day-name">
-          {isToday ? "Today" : formatDay(timestamp)}
+          {isToday ? t("today") : formatDay(timestamp)}
         </div>
         <div className="day-date">{formatDate(timestamp)}</div>
       </div>

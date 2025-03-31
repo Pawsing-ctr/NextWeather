@@ -1,6 +1,7 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import "./ModalGeo.css";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 interface ModalProps {
   onClose: () => void;
@@ -9,6 +10,7 @@ interface ModalProps {
 
 const ModalGeo: FC<ModalProps> = ({ onClose, onAccept }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useSettings();
 
   useEffect(() => {
     const geoContent = sessionStorage.getItem("geoConsent");
@@ -35,17 +37,17 @@ const ModalGeo: FC<ModalProps> = ({ onClose, onAccept }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h1>Allow Geolocation?</h1>
-        <p>We need your location to show weather data</p>
+        <h1>{t("allowGeolocation")}</h1>
+        <p>{t("needLocation")}</p>
         <div className="modal-btns">
           <button className="decline-btn" onClick={handleDecline}>
-            Decline
+            {t("decline")}
           </button>
           <button className="accept-btn" onClick={handleAccept}>
-            Accept
+            {t("accept")}
           </button>
         </div>
-        <p>Do your agree from geo?</p>
+        <p>{t("agreeGeo")}</p>
       </div>
     </div>
   );

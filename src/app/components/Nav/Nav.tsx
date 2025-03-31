@@ -1,12 +1,14 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import type React from "react";
+import { type FC, useState } from "react";
 import "./Nav.css";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 import axios from "axios";
-import { WeatherProps } from "@/app/page";
+import type { WeatherProps } from "@/app/page";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 export interface ICitiies {
   el: number;
@@ -19,6 +21,7 @@ const Nav: FC<WeatherProps> = ({ setSelectedCity }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [cities, setCities] = useState<ICitiies[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const { t } = useSettings();
 
   const handleCityClick = (city: ICitiies) => {
     setSelectedCity(city.name);
@@ -71,7 +74,7 @@ const Nav: FC<WeatherProps> = ({ setSelectedCity }) => {
             <p
               className={isDropdownOpen ? "text-weather-drop" : "text-weather"}
             >
-              Weather
+              {t("weather")}
             </p>
           </div>
 
@@ -79,7 +82,7 @@ const Nav: FC<WeatherProps> = ({ setSelectedCity }) => {
             <div className="input-container">
               <input
                 type="text"
-                placeholder="Enter a city"
+                placeholder={t("enterCity")}
                 className="input-weather"
                 value={searchTerm}
                 onChange={(e) => {
@@ -121,27 +124,25 @@ const Nav: FC<WeatherProps> = ({ setSelectedCity }) => {
                 {!searchTerm && (
                   <div className="dropdown-container">
                     <div className="dropdown-section">
-                      <p className="section-title">My locations</p>
+                      <p className="section-title">{t("myLocations")}</p>
                     </div>
                     <div className="dropdown-divider"></div>
                     <div className="dropdown-section">
                       <p className="info-text">
-                        We use your postcode to give you relevant local info
-                        across the MEX.
+                        {t("infoText1")}
                         <br />
-                        Add more locations to keep up with what's happening in
-                        the places you care about.
+                        {t("infoText2")}
                       </p>
                     </div>
                     <div className="dropdown-section">
-                      <p className="section-title">Recent searches</p>
+                      <p className="section-title">{t("recentSearches")}</p>
                     </div>
                     <div className="dropdown-divider"></div>
                     <div className="dropdown-section">
                       <p className="info-text">
-                        You haven't searched for any locations yet.
+                        {t("infoText3")}
                         <br />
-                        Previous searches will appear here.
+                        {t("infoText4")}
                       </p>
                     </div>
                   </div>
