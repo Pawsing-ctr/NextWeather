@@ -4,10 +4,10 @@ import Link from "next/link";
 import React from "react";
 import "./style.css";
 
-const AccountFooter = () => {
+const BaseFooter = () => {
   return (
     <footer>
-      <PageBlockWrapper backgroundColor={Colors.backgroundColorAccountFooter}>
+      <PageBlockWrapper backgroundColor={Colors.backgroundColorBaseFooter}>
         <div className="all-footer-block">
           <p className="footer-title">Explore the BBC</p>
           <div className="footer-block">
@@ -93,4 +93,4 @@ const AccountFooter = () => {
   );
 };
 
-export default AccountFooter;
+export default BaseFooter;

@@ -4,14 +4,12 @@ import React from "react";
 import "./Header.css";
 import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
-import { useRouter } from "next/navigation";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import Link from "next/link";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
   const { loading } = useAuth();
-  const router = useRouter();
 
   return (
     <PageBlockWrapper>

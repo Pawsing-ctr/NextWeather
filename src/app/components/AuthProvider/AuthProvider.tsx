@@ -12,6 +12,7 @@ interface IUser {
   id: number;
   email: string;
   role: string;
+  year?: string;
 }
 
 interface ILoginCredentials {
