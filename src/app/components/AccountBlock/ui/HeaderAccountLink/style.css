@@ -1,0 +1,63 @@
+.account-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+.account-header-title{
+  font-size: 28px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.header-link-block{
+  display: flex;
+  align-items: center;
+}
+
+.account-header-link{
+  font-size: 18px;
+  color: #fff;
+  padding: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: 0.3s ease-in-out;
+}
+
+.active-link,
+.account-header-link:hover{
+  border-bottom: 3px solid #fff;
+}
+
+.div-border-link{
+  width: 2px;
+  height: 25px;
+  background-color: #fff;
+}
+
+.settings-header-title{
+  font-size: 28px;
+  color: #000;
+  font-weight: 600;
+}
+
+.settings-link{
+  font-size: 18px;
+  color: #000;
+  font-weight: 600;
+}
+
+
+.active-settings-link,
+.settings-link:hover{
+  border-bottom: 3px solid #006def;
+}
+
+.settings-div-link{
+    width: 2px;
+    height: 25px;
+    background-color: #000;
+}

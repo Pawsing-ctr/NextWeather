@@ -4,13 +4,9 @@ import React from "react";
 import "./style.css";
 import { Colors } from "@/app/constants/colors";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
-import AccountFooter from "../AccountFooter";
-
-const backIMGStyle = {
-  backgroundSize: "50%",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-};
+import BaseFooter from "../../../BaseFooter";
+import HeaderAccountLink from "../HeaderAccountLink";
+import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
 
 const AccountBasePage = () => {
   return (
@@ -20,20 +16,7 @@ const AccountBasePage = () => {
           style={{ position: "relative", zIndex: "10", maxHeight: "64px" }}
           backgroundColor={Colors.backgroundColorHeaderAccount}
         >
-          <header className="account-header">
-            <p className="account-header-title">Your account</p>
-            <div className="header-link-block">
-              <p className="account-header-link active-link">Overview</p>
-              <div className="div-border-link" />
-              <Link className="account-header-link" href={"/account-settings"}>
-                Settings
-              </Link>
-              <div className="div-border-link" />
-              <Link className="account-header-link" href={"/account-sign-out"}>
-                Sign out
-              </Link>
-            </div>
-          </header>
+          <HeaderAccountLink title="Your account" activeLink="overview" />
         </PageBlockWrapper>
         <div className="side-bar left-bar" />
         <div className="background-image" />
@@ -51,7 +34,7 @@ const AccountBasePage = () => {
                 Or visit your settings to view and edit your personal info.
               </p>
               <button className="settings-button">
-                <Link className="button-link" href={"/account-settings"}>
+                <Link className="button-link" href={"/account/settings"}>
                   Continue to Settings
                 </Link>
               </button>
@@ -59,26 +42,8 @@ const AccountBasePage = () => {
           </PageBlockWrapper>
         </section>
       </main>
-      <section>
-        <PageBlockWrapper
-          style={{
-            backgroundImage: Colors.backgroundColorIMGStep,
-            ...backIMGStyle,
-          }}
-        >
-          <div className="text-block">
-            <p className="title-text">Your privacy and the BBC</p>
-            <p className="desctiption-text">
-              Want to know whats happening with your info and how you can take
-              control?
-            </p>
-            <Link className="link-text" href={""}>
-              Find out more
-            </Link>
-          </div>
-        </PageBlockWrapper>
-      </section>
-      <AccountFooter />
+      <BeforeFooterBlock />
+      <BaseFooter />
     </div>
   );
 };

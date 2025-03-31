@@ -1,0 +1,63 @@
+.form-block-title{
+  font-size: 38px;
+  color: #000;
+  font-weight: 600;
+}
+
+.settings-input{
+  max-width: 372px;
+  height: 37px;
+  width: 100%;
+  border-bottom: 1px solid #525252;
+  font-size: 24px;
+  outline: none;
+  color: #525252;
+}
+
+.all-input-block{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.input-edit-button{
+  font-size: 18px;
+  color: #005bc8;
+  background-color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.input-edit-block{
+  display: flex;
+  gap: 16px;
+}
+
+.button-block{
+  display: flex;
+  gap: 15px;
+  border-bottom: 1px solid #005bc8;
+  cursor: pointer;
+}
+
+.button-block:hover,
+.input-edit-button:hover{
+  color: #0457bd;
+}
+
+.delete-account-title{
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.delete-account-link{
+  font-size: 18px;
+  border-bottom-color: #006def;
+  color: #006def;
+}
+
+.delete-account-block{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
