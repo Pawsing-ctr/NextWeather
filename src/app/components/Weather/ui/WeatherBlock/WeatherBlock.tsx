@@ -12,8 +12,10 @@ import { getWeatherBackground } from "../../utils/weather-utils";
 import HourlyCast from "../HourlyCast/HourlyCast";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import "./WeatherBlock.css";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
+  const { t } = useSettings();
   const [searchGeo, setSearchGeo] = useState(
     () => sessionStorage.getItem("searchGeo") || ""
   );
@@ -140,7 +142,7 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   };
 
   const displayCity =
-    weatherData?.name || selectedCity || searchGeo || "Your city...";
+    weatherData?.name || selectedCity || searchGeo || t("yourCity");
   const dailyForecast = getDailyForecast();
   const backgroundWeather = selectedDay
     ? forecastData?.list.find(
@@ -167,7 +169,7 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
         <div className="weather-container">
           <div className="city-name">{displayCity}</div>
           {loading ? (
-            <div className="weather-loading">Loading...</div>
+            <div className="weather-loading">{t("loading")}</div>
           ) : (
             <div className="forecast-wrapper">
               {weatherData && (

@@ -6,15 +6,18 @@ import {
   now,
 } from "../model/getDays";
 import "./ObservationsBlock.css";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 export const ObservationsBlock = () => {
+  const { t } = useSettings();
+
   return (
     <div className="observations-wrapper">
       <div className="observations-container">
         <div className="observations-info">
-          <p className="observations-title">Observations</p>
+          <p className="observations-title">{t("observations")}</p>
           <p className="observations-time">
-            Observed at {formatTime(now)}, <br />
+            {t("observedAt")} {formatTime(now)}, <br />
             {getDayOfWeek(now)} {getDayFormatted(now)}
           </p>
           <div className="div-outline"></div>

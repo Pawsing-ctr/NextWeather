@@ -1,6 +1,7 @@
 import type React from "react";
 import type { ForecastItem } from "../../types/index";
 import "./HourlyCast.css";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 interface HourlyCastProps {
   data: ForecastItem[];
@@ -8,6 +9,8 @@ interface HourlyCastProps {
 }
 
 const HourlyCast: React.FC<HourlyCastProps> = ({ data, selectedDay }) => {
+  const { t } = useSettings();
+
   const formatTime = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
     return date.getHours().toString().padStart(2, "0") + ":00";
@@ -33,7 +36,9 @@ const HourlyCast: React.FC<HourlyCastProps> = ({ data, selectedDay }) => {
               <div className="hourly-icon">
                 <img
                   src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
-                  alt={hour.weather[0].description}
+                  alt={t("weatherDescription", {
+                    description: hour.weather[0].description,
+                  })}
                 />
               </div>
               <div className="hourly-temp">{temp}°</div>
