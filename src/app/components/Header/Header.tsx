@@ -3,7 +3,6 @@ import UserAssets from "@/app/assets/HeaderAssets/UserAssets";
 import "./Header.css";
 import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
-import { useRouter } from "next/navigation";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import Link from "next/link";
 import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
@@ -11,7 +10,6 @@ import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 const Header = () => {
   const { isAuthenticated } = useAuth();
   const { loading } = useAuth();
-  const router = useRouter();
   const { t } = useSettings();
 
   return (
