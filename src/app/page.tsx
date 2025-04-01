@@ -7,6 +7,8 @@ import MapBlock from "./components/MapBlock/MapBlock";
 import SettingsBlock from "./components/SettingsBlock/SettingsBlock";
 import { Parallax } from "./components/Parallax/Parallax";
 import { ObservationsBlock } from "./components/ObservationsBlock/ui/ObservationsBlock";
+import AboutBlock from "./components/AboutBlock/ui/AboutBlock";
+import BaseFooter from "./components/BaseFooter";
 export interface WeatherProps {
   selectedCity: string;
   setSelectedCity: (city: string) => void;
@@ -27,6 +29,8 @@ const page = () => {
       <Parallax />
       <ObservationsBlock />
       <SettingsBlock />
+      <AboutBlock />
+      <BaseFooter />
     </div>
   );
 };
