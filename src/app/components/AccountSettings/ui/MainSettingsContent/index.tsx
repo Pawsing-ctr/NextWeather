@@ -7,26 +7,25 @@ import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import { getInputValue } from "../../modal";
 import AccountSettingsWrapper from "../AccountSettingsWrapper";
 import { useRouter } from "next/navigation";
+import {
+  getUserData,
+  IUserAccountData,
+} from "@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
 
 const MainSettingsContent = () => {
-  const { user } = useAuth();
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<IUserAccountData>({
     email: "",
     password: "••••••••",
     displayName: "",
     yearOfBirth: "",
   });
+
+  const { user } = useAuth();
+
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
-      setUserData({
-        email: user.email || "",
-        password: "••••••••",
-        displayName: user.email.split("@")[0] || "",
-        yearOfBirth: user.year ?? "",
-      });
-    }
+    getUserData({ setUser: setUserData, user });
   }, [user]);
 
   return (

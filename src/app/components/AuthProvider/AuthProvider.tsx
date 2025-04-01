@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import React from "react";
 
-interface IUser {
+export interface IUser {
   id: number;
   email: string;
   role: string;
@@ -190,6 +190,11 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await $api.post(tokenPath.USER_REGISTER, userData);
 
       if (response.status === 201 || response.data.user) {
+        if (birthDate?.year) {
+          document.cookie = `userBirthYear=${birthDate.year}; path=/; max-age=${
+            60 * 60 * 24 * 30
+          }`;
+        }
         refreshTokenFunc();
 
         router.push("/");
