@@ -1,0 +1,52 @@
+.all-settings-change{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+
+.title-settings-change{
+  font-size: 38px;
+  color: #000;
+  font-weight: 600;
+}
+
+.text-settings-change{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-input{
+  max-width: 372px;
+  height: 37px;
+  width: 100%;
+  border-bottom: 1px solid #525252;
+  font-size: 24px;
+  outline: none;
+  color: #525252;
+}
+
+.change-button-block{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.change-button{
+  padding: 17px;
+  font-size: 18px;
+  background-color: #006def;
+  color: #fff;
+  cursor: pointer;
+}
+
+.change-button:hover{
+  background-color: #0564d8;
+}
+
+.change-link{
+  color: #006def;
+  font-weight: 600;
+  text-decoration: none;
+}

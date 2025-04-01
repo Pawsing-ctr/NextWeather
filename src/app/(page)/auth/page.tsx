@@ -8,7 +8,7 @@ import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 import { useRouter, useSearchParams } from "next/navigation";
 import UnauthenticatedRoute from "@/app/components/UnauthenticatedRoute/UnauthenticatedRoute";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
-import { handleSchemeCheckError } from "@/app/checkErrorFunc/checkErrorFunc";
+import { handleSchemeCheckError } from "@/app/GlobalFunc/checkErrorFunc/checkErrorFunc";
 import { loginUserSchem } from "@/app/scheme/zodScheme";
 
 const ClientComponent = () => {

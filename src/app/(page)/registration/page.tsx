@@ -6,7 +6,7 @@ import { Colors } from "@/app/constants/colors";
 import Link from "next/link";
 import { formInputs } from "@/app/constants/formInputs";
 import { initialUser } from "@/app/constants/initialUserConst";
-import { handleSchemeCheckError } from "@/app/checkErrorFunc/checkErrorFunc";
+import { handleSchemeCheckError } from "@/app/GlobalFunc/checkErrorFunc/checkErrorFunc";
 import { registrationUserSchem } from "@/app/scheme/zodScheme";
 import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";

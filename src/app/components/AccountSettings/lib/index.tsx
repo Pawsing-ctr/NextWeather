@@ -11,6 +11,11 @@ export const PersonalDetailsInput: IPersonalDetailsInput[] = [
     type: "text",
     buttonText: "Edit",
     buttonIMG: <PencilSVG />,
+    editPage: {
+      editPageTitle: "Edit email",
+      editPageDescription:
+        "Remember to verify your new email address after you've changed it, using the email we'll send you",
+    },
   },
   {
     id: 2,
@@ -21,16 +26,24 @@ export const PersonalDetailsInput: IPersonalDetailsInput[] = [
     type: "password",
     buttonText: "Edit",
     buttonIMG: <PencilSVG />,
+    editPage: {
+      editPageTitle: "Edit password",
+    },
   },
   {
     id: 3,
-    pageName: "name",
+    pageName: "displayName",
     title: "Display name",
     className: "settings-input",
     buttonInput: "Edit",
     type: "text",
     buttonText: "Add",
     buttonIMG: <PencilSVG />,
+    editPage: {
+      editPageTitle: "Edit display name",
+      editPageDescription:
+        "Your display name is what people will see whenever you do anything public on a BBC website or app. For example, if you comment on a story.",
+    },
   },
   {
     id: 4,
@@ -48,5 +61,8 @@ export const PersonalDetailsInput: IPersonalDetailsInput[] = [
     type: "text",
     buttonText: "Edit",
     buttonIMG: <PencilSVG />,
+    editPage: {
+      editPageTitle: "Edit country and postcode",
+    },
   },
 ];

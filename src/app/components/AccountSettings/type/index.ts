@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
 
+interface IEditPage {
+  editPageTitle: string;
+  editPageDescription?: string;
+}
+
 export interface IPersonalDetailsInput {
   id: number;
   title: string;
@@ -9,6 +14,7 @@ export interface IPersonalDetailsInput {
   buttonText?: string;
   buttonIMG?: ReactNode;
   pageName?: string;
+  editPage?: IEditPage;
 }
 
 export interface IUserData {
