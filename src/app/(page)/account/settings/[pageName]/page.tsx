@@ -13,7 +13,7 @@ import {
 } from "@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
 import Link from "next/link";
 import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
-import BaseFooter from "@/app/components/BaseFooter";
+import { Footer } from "@/app/components/Footer/ui/Footer";
 
 const ClientComponent = () => {
   const [inputValue, setInputValue] = useState("");
@@ -81,7 +81,7 @@ const ClientComponent = () => {
         </AccountSettingsWrapper>
       </PageBlockWrapper>
       <BeforeFooterBlock />
-      <BaseFooter />
+      <Footer />
     </>
   );
 };
