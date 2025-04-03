@@ -29,7 +29,10 @@ const page = () => {
       />
       <MapBlock selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
       <Parallax />
-      <ObservationsBlock />
+      <ObservationsBlock
+        selectedCity={selectedCity}
+        setSelectedCity={setSelectedCity}
+      />
       <SettingsBlock />
       <AboutBlock />
       <Collaborations />
