@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+  max-width: 650px;
 }
 
 
@@ -17,14 +18,14 @@
   gap: 10px;
 }
 
-.settings-input{
-  max-width: 372px;
+.settings-input-edit{
   height: 37px;
   width: 100%;
-  border-bottom: 1px solid #525252;
+  border-bottom: 3px solid #000;
   font-size: 24px;
   outline: none;
-  color: #525252;
+  color: #000;
+  font-weight: 600;
 }
 
 .change-button-block{
@@ -49,4 +50,10 @@
   color: #006def;
   font-weight: 600;
   text-decoration: none;
+}
+
+.new-password-block{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

@@ -6,15 +6,16 @@ import { useRouter } from "next/navigation";
 
 const UnauthenticatedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, loading } = useAuth();
+
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated && !loading) {
+    if (!isAuthenticated && !loading) {
       router.replace("/");
     }
   }, [isAuthenticated, loading, router]);
 
-  if (!isAuthenticated) {
+  if (isAuthenticated) {
     return <>{children}</>;
   }
 
