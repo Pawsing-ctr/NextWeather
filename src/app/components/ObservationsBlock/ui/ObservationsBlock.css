@@ -19,6 +19,7 @@
   position: relative;
   padding-right: 20px;
   min-width: 200px;
+  border-right: 2px solid #e6e8ea;
 }
 
 .observations-title {
@@ -36,11 +37,41 @@
   margin: 2px 0;
 }
 
-.div-outline {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background-color: #e6e8ea;
+.observations-data {
+  justify-content: start;
+  gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.observations-data p {
+  display: flex;
+  margin: 0;
+  color: #545658;
+  font-size: 14px;
+  gap: 5px;
+}
+
+.observations-data strong {
+  font-weight: bold;
+  color: #141414;
+
+}
+
+.observations-data p:first-of-type {
+  font-size: 28px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.weather-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.observation-station {
+  font-size: 14px;
+  color: #545658;
 }

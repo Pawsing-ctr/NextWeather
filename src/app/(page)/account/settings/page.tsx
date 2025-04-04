@@ -6,8 +6,8 @@ import HeaderAccountLink from "@/app/components/AccountBlock/ui/HeaderAccountLin
 import MainSettingsContent from "@/app/components/AccountSettings/ui/MainSettingsContent";
 import { Colors } from "@/app/constants/colors";
 import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
-import BaseFooter from "@/app/components/BaseFooter";
 import UnauthenticatedRoute from "@/app/components/UnauthenticatedRoute/UnauthenticatedRoute";
+import { Footer } from "@/app/components/Footer/ui/Footer";
 
 const page = () => {
   return (
@@ -26,7 +26,7 @@ const page = () => {
       <BeforeFooterBlock
         backgroundColorPage={Colors.backgroundColorSettingsPage}
       />
-      <BaseFooter />
+      <Footer />
     </UnauthenticatedRoute>
   );
 };

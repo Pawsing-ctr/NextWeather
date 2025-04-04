@@ -1,0 +1,26 @@
+.wrapper-collab {
+  width: 100%;
+  background: #f6f6f6;
+}
+
+.container-collab {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-collab {
+  color: #141414e7;
+  line-height: 1.2307692307692308;
+  padding: 2.5rem 0;
+}
+
+.link-collab {
+  color: #111111;
+}
+
+.link-collab:hover {
+  color: #067eb3;
+  text-decoration: underline #0d7faf;
+}

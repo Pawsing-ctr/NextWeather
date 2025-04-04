@@ -13,7 +13,7 @@ import {
 } from "@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
 import Link from "next/link";
 import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
-import BaseFooter from "@/app/components/BaseFooter";
+import { Footer } from "@/app/components/Footer/ui/Footer";
 import $api from "@/app/api/$api";
 import { userPath } from "@/app/api/apiUsers/userPath";
 import { useRouter } from "next/navigation";
@@ -126,7 +126,7 @@ const ClientComponent = () => {
         </AccountSettingsWrapper>
       </PageBlockWrapper>
       <BeforeFooterBlock />
-      <BaseFooter />
+      <Footer />
     </UnauthenticatedRoute>
   );
 };

@@ -4,7 +4,7 @@ import React from "react";
 import "./style.css";
 import { Colors } from "@/app/constants/colors";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
-import BaseFooter from "../../../BaseFooter";
+import { Footer } from "@/app/components/Footer/ui/Footer";
 import HeaderAccountLink from "../HeaderAccountLink";
 import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
 
@@ -43,7 +43,7 @@ const AccountBasePage = () => {
         </section>
       </main>
       <BeforeFooterBlock />
-      <BaseFooter />
+      <Footer />
     </div>
   );
 };
