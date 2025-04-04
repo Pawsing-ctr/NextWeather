@@ -25,7 +25,7 @@ const MainSettingsContent = () => {
   const router = useRouter();
 
   useEffect(() => {
-    getUserData({ setUser: setUserData, user });
+    getUserData({ setUser: setUserData, user, hidePassword: true });
   }, [user]);
 
   return (

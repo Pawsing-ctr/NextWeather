@@ -7,14 +7,16 @@ interface IEditPage {
 
 export interface IPersonalDetailsInput {
   id: number;
-  title: string;
+  title?: string;
   className: string;
+  classNameEdit?: string;
   buttonInput: string;
   type: string;
   buttonText?: string;
   buttonIMG?: ReactNode;
   pageName?: string;
   editPage?: IEditPage;
+  placeholder?: string;
 }
 
 export interface IUserData {

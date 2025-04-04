@@ -11,7 +11,15 @@ export const registrationUserSchem = z.object({
       "Sorry, that email doesn’t look right. Please check it's a proper email."
     )
     .min(1, "Enter your email"),
-  password: z.string().min(8, "Enter your password"),
+  password: z
+    .string()
+    .min(8, "Enter your password")
+    .refine((password) => /[a-zA-Z]/.test(password), {
+      message: "Password must contain at least one letter",
+    })
+    .refine((password) => /[\d\W]/.test(password), {
+      message: "Password must contain at least one number or symbol",
+    }),
   day: z
     .string()
     .regex(dayRegular, "Incorrect day")

@@ -9,15 +9,20 @@ export interface IUserAccountData {
 interface IGetUserData {
   setUser: React.Dispatch<React.SetStateAction<IUserAccountData>>;
   user: IUser | null;
+  hidePassword: boolean;
 }
 
-export const getUserData = ({ setUser, user }: IGetUserData) => {
+export const getUserData = ({
+  setUser,
+  user,
+  hidePassword = true,
+}: IGetUserData) => {
   if (user) {
     setUser({
       email: user.email || "",
-      password: "••••••••",
+      password: hidePassword ? "••••••••" : "",
       displayName: user.email.split("@")[0] || "",
-      yearOfBirth: user.year ?? "",
+      yearOfBirth: user.year || "",
     });
   }
 };

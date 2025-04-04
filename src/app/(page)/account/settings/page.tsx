@@ -6,11 +6,12 @@ import HeaderAccountLink from "@/app/components/AccountBlock/ui/HeaderAccountLin
 import MainSettingsContent from "@/app/components/AccountSettings/ui/MainSettingsContent";
 import { Colors } from "@/app/constants/colors";
 import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
+import UnauthenticatedRoute from "@/app/components/UnauthenticatedRoute/UnauthenticatedRoute";
 import { Footer } from "@/app/components/Footer/ui/Footer";
 
 const page = () => {
   return (
-    <div>
+    <UnauthenticatedRoute>
       <Header />
       <PageBlockWrapper backgroundColor={Colors.backgroundColorSettingsPage}>
         <div className="account-settings-block">
@@ -26,7 +27,7 @@ const page = () => {
         backgroundColorPage={Colors.backgroundColorSettingsPage}
       />
       <Footer />
-    </div>
+    </UnauthenticatedRoute>
   );
 };
 
