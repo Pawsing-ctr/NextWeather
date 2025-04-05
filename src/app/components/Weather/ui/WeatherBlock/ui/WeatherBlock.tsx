@@ -1,16 +1,16 @@
 "use client";
 import axios from "axios";
 import { type FC, useEffect, useState } from "react";
-import ModalGeo from "../../../ModalGeo/ModalGeo";
+import ModalGeo from "../../../../ModalGeo/ModalGeo";
 import type { WeatherProps } from "@/app/page";
 import type {
   WeatherData,
   ForecastData,
   ForecastItem,
-} from "../../types/index";
-import { getWeatherBackground } from "../../utils/weather-utils";
-import HourlyCast from "../HourlyCast/HourlyCast";
-import WeatherCard from "../WeatherCard/WeatherCard";
+} from "../../../types/index";
+import { getWeatherBackground } from "../../../utils/weather-utils";
+import HourlyCast from "../../HourlyCast/HourlyCast";
+import WeatherCard from "../../WeatherCard/WeatherCard";
 import "./WeatherBlock.css";
 import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 

@@ -14,21 +14,25 @@ const ModalGeo: FC<ModalProps> = ({ onClose, onAccept }) => {
 
   useEffect(() => {
     const geoContent = sessionStorage.getItem("geoConsent");
-
+    document.body.style.overflow = "hidden";
     if (!geoContent) {
       setIsVisible(true);
+    } else {
+      document.body.style.overflow = "";
     }
   }, []);
 
   const handleAccept = () => {
     sessionStorage.setItem("geoConsent", "accepted");
     setIsVisible(false);
+    document.body.style.overflow = "";
     onAccept();
   };
 
   const handleDecline = () => {
     sessionStorage.setItem("geoConsent", "declined");
     setIsVisible(false);
+    document.body.style.overflow = "";
     onClose();
   };
 
