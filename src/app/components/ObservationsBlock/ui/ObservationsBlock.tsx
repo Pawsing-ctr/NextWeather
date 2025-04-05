@@ -17,10 +17,12 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
     humidity: string;
     visibility: string;
     pressure: string;
+    windSpeed: string;
     icon: string;
   } | null>(null);
+
   const [isLoading, setIsLoading] = useState(true);
-  const { t } = useSettings();
+  const { t, temperature: tempUnit, windSpeed: windUnit } = useSettings();
 
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -35,11 +37,24 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
           `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&appid=${API_KEY}&units=metric`
         );
 
+        const tempC = res.data.main.temp;
+        const temperature =
+          tempUnit === "fahrenheit"
+            ? Math.round((tempC * 9) / 5 + 32).toString()
+            : Math.round(tempC).toString();
+
+        const windKmh = res.data.wind.speed * 3.6;
+        const windSpeed =
+          windUnit === "mph"
+            ? Math.round(windKmh * 0.621371) + " mph"
+            : Math.round(windKmh) + " km/h";
+
         setWeather({
-          temperature: Math.round(res.data.main.temp).toString(),
+          temperature,
           humidity: res.data.main.humidity + "%",
           visibility: (res.data.visibility / 1000).toFixed(0) + " km",
           pressure: res.data.main.pressure + " mb",
+          windSpeed,
           icon: `https://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`,
         });
       } catch (error) {
@@ -50,7 +65,7 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
     };
 
     fetchWeather();
-  }, [selectedCity]);
+  }, [selectedCity, tempUnit, windUnit]);
 
   return (
     <div className="observations-wrapper">
@@ -65,27 +80,38 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
 
         <div className="observations-data">
           {isLoading ? (
-            <p>Loading...</p>
+            <p className="loading-text">Loading...</p>
           ) : weather ? (
             <>
-              <img src={weather.icon} className="weather-icon" />
-              <p>{weather.temperature}°</p>
-              <p>
-                <strong>Humidity:</strong> {weather.humidity}
-              </p>
-              <p>
-                <strong>Visibility:</strong> {weather.visibility}
-              </p>
-              <p>
-                <strong>Pressure:</strong> {weather.pressure}
-              </p>
+              <div className="weather-main-info">
+                <img
+                  src={weather.icon}
+                  className="weather-icon"
+                />
+                <p className="temperature">{weather.temperature}°</p>
+                <p>
+                  <strong>Humidity:</strong> {weather.humidity}
+                </p>
+                <p>
+                  <strong>Visibility:</strong> {weather.visibility}
+                </p>
+                <p>
+                  <strong>Pressure:</strong> {weather.pressure}
+                </p>
+                {weather.windSpeed && (
+                  <p>
+                    <strong>Wind:</strong> {weather.windSpeed}
+                  </p>
+                )}
+              </div>
+              <div className="station-separator"></div>
+              <div className="observation-station">
+                Observation Station: {selectedCity}
+              </div>
             </>
           ) : (
-            <p>404!</p>
+            <p className="error-text">404!</p>
           )}
-          <div className="observation-station">
-            Observation Station: {selectedCity}
-          </div>
         </div>
       </div>
     </div>

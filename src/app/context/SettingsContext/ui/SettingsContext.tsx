@@ -9,13 +9,17 @@ import React, {
 } from "react";
 import { translations } from "../types/SettingsTypes";
 
+type Language = "en" | "ru";
+type TemperatureUnit = "celsius" | "fahrenheit";
+type WindSpeedUnit = "kmh" | "mph";
+
 interface SettingsContextType {
-  language: string;
-  setLanguage: (lang: string) => void;
-  temperature: string;
-  setTemperature: (temp: string) => void;
-  windSpeed: string;
-  setWindSpeed: (speed: string) => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  temperature: TemperatureUnit;
+  setTemperature: (temp: TemperatureUnit) => void;
+  windSpeed: WindSpeedUnit;
+  setWindSpeed: (speed: WindSpeedUnit) => void;
   t: (key: string) => string;
 }
 
@@ -24,14 +28,14 @@ const SettingsContext = createContext<SettingsContextType | null>(null);
 export const SettingsProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState(
-    localStorage.getItem("language") || "en"
+  const [language, setLanguage] = useState<Language>(
+    (localStorage.getItem("language") as Language) || "en"
   );
-  const [temperature, setTemperature] = useState(
-    localStorage.getItem("temperature") || "celsius"
+  const [temperature, setTemperature] = useState<TemperatureUnit>(
+    (localStorage.getItem("temperature") as TemperatureUnit) || "celsius"
   );
-  const [windSpeed, setWindSpeed] = useState(
-    localStorage.getItem("windSpeed") || "kmh"
+  const [windSpeed, setWindSpeed] = useState<WindSpeedUnit>(
+    (localStorage.getItem("windSpeed") as WindSpeedUnit) || "kmh"
   );
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export const SettingsProvider: FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("windSpeed", windSpeed);
   }, [language, temperature, windSpeed]);
 
-  const t = (key: string) => translations[language as "en" | "ru"][key] || key;
+  const t = (key: string) => translations[language][key] || key;
 
   return (
     <SettingsContext.Provider
