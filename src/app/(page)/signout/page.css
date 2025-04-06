@@ -1,0 +1,50 @@
+.all-signount-page{
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.all-signount-block{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+
+.all-signount-block{
+  max-width: 510px;
+}
+
+.signount-title{
+  font-size: 34px;
+  color: #000;
+  font-weight: 700;
+}
+
+.signount-button{
+  padding: 16px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #006def;
+  cursor: pointer;
+}
+
+.button-block{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.signount-text{
+  font-size: 18px;
+
+}
+
+.signount-link{
+  color: #005bc8;
+  font-weight: 600;
+}
+
+.signount-button:hover{
+  background-color: #005bc8;
+}

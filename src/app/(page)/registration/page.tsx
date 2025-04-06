@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import "../auth/page.css";
+import "./page.css";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import Link from "next/link";
@@ -15,7 +15,6 @@ import PasswordConditions from "@/app/components/PasswordConditions/PasswordCond
 const ClientComponent = () => {
   const [newUser, setNewUser] = useState(initialUser);
   const [error, setError] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
   const { register } = useAuth();
@@ -40,7 +39,6 @@ const ClientComponent = () => {
   const handleRegistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setIsSubmitting(true);
     setServerError(null);
 
     const errorResult = handleSchemeCheckError(
@@ -65,27 +63,27 @@ const ClientComponent = () => {
       setServerError(
         error.response?.data?.message || "Ошибка при регистрации пользователя"
       );
-    } finally {
-      setIsSubmitting(false);
     }
   };
+
   return (
     <PageBlockWrapper backgroundColor={Colors.backgroundColorAuth}>
-      <div className="auth-page">
-        <div className="auth-content">
-          <div className="auth-title">
-            <img className="auth-logo" src="/authLogoIMG.png" alt="" />
-            <p className="sign-into-text">Register for a MEX account</p>
-            <p className="sign-into-discripton">
+      <div className="registration-page">
+        <div className="registration-content">
+          <div className="registration-title">
+            <img className="registration-logo" src="/authLogoIMG.png" alt="" />
+            <p className="registration-text">Register for a MEX account</p>
+            <p className="registration-discripton">
               You must be 16 or over to register for a MEX account
             </p>
           </div>
 
-          {serverError && (
-            <div className="server-error-message">{serverError}</div>
-          )}
+          {serverError && <div className="error-message">{serverError}</div>}
 
-          <form onSubmit={handleRegistSubmit} className="auth-form-block">
+          <form
+            onSubmit={handleRegistSubmit}
+            className="registration-form-block"
+          >
             <div className="input-wrapper">
               {formInputs.loginInputs.map((el) => {
                 return (
@@ -139,18 +137,14 @@ const ClientComponent = () => {
                 <p className="error-message">{birthdayError}</p>
               )}
             </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="form-button"
-            >
-              {isSubmitting ? "Registration..." : "Continue"}
+            <button type="submit" className="form-button">
+              Continue
             </button>
-            <div className="auth-link-block">
-              <Link className="auth-link" href={"#"}>
+            <div className="registration-link-block">
+              <Link className="registration-link" href={"#"}>
                 <p>I have forgotten my email</p>
               </Link>
-              <Link className="auth-link" href={"#"}>
+              <Link className="registration-link" href={"#"}>
                 <p>More help signing in</p>
               </Link>
             </div>

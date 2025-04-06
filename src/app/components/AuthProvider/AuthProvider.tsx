@@ -220,8 +220,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await $api.post(tokenPath.USER_LOGOUT);
 
       errorRefreshToken();
-
-      router.push("/");
     } catch (error: any) {
       setError(
         error.response?.data?.message || "An error occurred during logout"
