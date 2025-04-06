@@ -6,11 +6,13 @@ import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import Link from "next/link";
 import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
   const { loading } = useAuth();
   const { t } = useSettings();
+  const router = useRouter();
 
   return (
     <PageBlockWrapper>
@@ -18,7 +20,12 @@ const Header = () => {
         {loading ? (
           <>
             <div className="logo-header">
-              <img className="logo-img" src="./logoIMG.jpg" alt="" />
+              <img
+                onClick={() => router.push("/")}
+                className="logo-img"
+                src="./logoIMG.jpg"
+                alt=""
+              />
               <div className="user-text">
                 <UserAssets width="28px" height="28px" />
                 <span>{t("loading")}</span>
@@ -28,7 +35,12 @@ const Header = () => {
           </>
         ) : (
           <div className="logo-header">
-            <img className="logo-img" src="./logoIMG.jpg" alt="" />
+            <img
+              onClick={() => router.push("/")}
+              className="logo-img"
+              src="./logoIMG.jpg"
+              alt=""
+            />
             <div className="user-text">
               <UserAssets width="28px" height="28px" />
               {!isAuthenticated ? (
