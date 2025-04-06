@@ -1,13 +1,3 @@
-.all-footer-block {
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  right: 50px;
-  position: relative;
-}
-
 .footer-container {
   max-width: 1200px;
   width: 100%;

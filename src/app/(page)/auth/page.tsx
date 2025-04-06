@@ -57,13 +57,7 @@ const ClientComponent = () => {
       router.push(decodeURIComponent(returnUrl));
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // } catch (err: any) {
-    //   console.error("Login error:", err);
-    //   setError(err.response?.data?.message || "Произошла ошибка при входе");
-    // } finally {
     setIsLoading(false);
-    // }
   };
 
   return (

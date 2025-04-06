@@ -18,14 +18,14 @@ export const formInputs: IFormInput = {
       type: "text",
       name: "email",
       placeholder: "Email",
-      className: "auth-form-input",
+      className: "registration-form-input",
     },
     {
       id: 2,
       type: "password",
       name: "password",
       placeholder: "Password",
-      className: "auth-form-input",
+      className: "registration-form-input",
     },
   ],
   dateInputs: [
