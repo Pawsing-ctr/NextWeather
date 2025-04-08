@@ -59,8 +59,12 @@ const Header = () => {
 
         <div className="right-header-content">
           <div className="central-navigation-block">
-            <p className="navigation-text">{t("home")}</p>
-            <p className="navigation-text">{t("news")}</p>
+            <Link href={"/"} className="navigation-text">
+              {t("home")}
+            </Link>
+            <Link href={"/news"} className="navigation-text">
+              {t("news")}
+            </Link>
           </div>
           <div className="button-content">
             <LoopAssets width="20" height="20" />
