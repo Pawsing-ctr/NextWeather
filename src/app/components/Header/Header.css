@@ -63,6 +63,8 @@
 }
 
 .navigation-text {
+  color: black;
+  text-decoration: none;
   font-weight: 600;
   position: relative;
   cursor: pointer;
