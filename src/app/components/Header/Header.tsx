@@ -6,11 +6,13 @@ import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import Link from "next/link";
 import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
   const { loading } = useAuth();
   const { t } = useSettings();
+  const router = useRouter();
 
   return (
     <PageBlockWrapper>
@@ -54,7 +56,10 @@ const Header = () => {
               {t("news")}
             </Link>
           </div>
-          <div className="button-content">
+          <div
+            onClick={() => router.push("/search")}
+            className="button-content"
+          >
             <LoopAssets width="20" height="20" />
             <button className="search-button">{t("searchMEX")}</button>
           </div>
