@@ -66,7 +66,10 @@ const Header = () => {
               {t("news")}
             </Link>
           </div>
-          <div className="button-content">
+          <div
+            onClick={() => router.push("/search")}
+            className="button-content"
+          >
             <LoopAssets width="20" height="20" />
             <button className="search-button">{t("searchMEX")}</button>
           </div>
