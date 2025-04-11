@@ -32,9 +32,12 @@ export interface ForecastItem {
       main: string;
       description: string;
       icon: string;
-      wind: number;
     }
   ];
+  wind: {
+    speed: number;
+    deg: number;
+  };
 }
 
 export interface ForecastData {

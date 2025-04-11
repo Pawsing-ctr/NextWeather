@@ -46,8 +46,8 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
         const windKmh = res.data.wind.speed * 3.6;
         const windSpeed =
           windUnit === "mph"
-            ? Math.round(windKmh * 0.621371) + " mph"
-            : Math.round(windKmh) + " km/h";
+            ? Math.round(windKmh * 0.621371) + " " + t("mph")
+            : Math.round(windKmh) + " " + t("kmh");
 
         setWeather({
           temperature,
@@ -80,37 +80,38 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
 
         <div className="observations-data">
           {isLoading ? (
-            <p className="loading-text">Loading...</p>
+            <p className="loading-text">{t("loading")}</p>
           ) : weather ? (
             <>
               <div className="weather-main-info">
                 <img
-                  src={weather.icon}
+                  src={weather.icon || "/placeholder.svg"}
                   className="weather-icon"
+                  alt={t("weather")}
                 />
                 <p className="temperature">{weather.temperature}°</p>
                 <p>
-                  <strong>Humidity:</strong> {weather.humidity}
+                  <strong>{t("humidity")}:</strong> {weather.humidity}
                 </p>
                 <p>
-                  <strong>Visibility:</strong> {weather.visibility}
+                  <strong>{t("visibility")}:</strong> {weather.visibility}
                 </p>
                 <p>
-                  <strong>Pressure:</strong> {weather.pressure}
+                  <strong>{t("pressure")}:</strong> {weather.pressure}
                 </p>
                 {weather.windSpeed && (
                   <p>
-                    <strong>Wind:</strong> {weather.windSpeed}
+                    <strong>{t("wind")}:</strong> {weather.windSpeed}
                   </p>
                 )}
               </div>
               <div className="station-separator"></div>
               <div className="observation-station">
-                Observation Station: {selectedCity}
+                {t("observationStation")} {selectedCity}
               </div>
             </>
           ) : (
-            <p className="error-text">404!</p>
+            <p className="error-text">{t("error404")}</p>
           )}
         </div>
       </div>

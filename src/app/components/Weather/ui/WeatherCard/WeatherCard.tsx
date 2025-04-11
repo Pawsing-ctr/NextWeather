@@ -13,7 +13,7 @@ import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 interface WeatherCardProps {
   day: WeatherData | ForecastItem;
   activeDay: string | null;
-  setActiveDay: (day: string) => void;
+  setActiveDay: (day: string | null) => void;
   isToday: boolean;
 }
 
@@ -23,7 +23,15 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   setActiveDay,
   isToday,
 }) => {
-  const { t } = useSettings();
+  const { t, temperature, language } = useSettings();
+
+  const formatTemperature = (tempCelsius: number) => {
+    if (temperature === "fahrenheit") {
+      return Math.round((tempCelsius * 9) / 5 + 32);
+    }
+    return Math.round(tempCelsius);
+  };
+
   const isWeatherData = "name" in day;
 
   const timestamp = isWeatherData ? Math.floor(Date.now() / 1000) : day.dt;
@@ -32,14 +40,14 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
   const isActive = isToday ? activeDay === null : dateStr === activeDay;
 
-  const temp = Math.round(day.main.temp);
-  const feelsLike = Math.round(day.main.feels_like);
+  const temp = formatTemperature(day.main.temp);
+  const feelsLike = formatTemperature(day.main.feels_like);
+
   const weather = day.weather[0];
   const icon = weather.icon.replace("n", "d");
 
   const handleClick = () => {
     if (isToday && activeDay === null) return;
-
     setActiveDay(isToday ? null : dateStr);
   };
 
@@ -50,9 +58,9 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
     >
       <div className="weather-card-header">
         <div className="day-name">
-          {isToday ? t("today") : formatDay(timestamp)}
+          {isToday ? t("today") : formatDay(timestamp, language)}
         </div>
-        <div className="day-date">{formatDate(timestamp)}</div>
+        <div className="day-date">{formatDate(timestamp, language)}</div>
       </div>
 
       <div className="weather-card-content">
@@ -70,7 +78,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
         {isActive && (
           <div className="weather-card-description">
-            {getWeatherDescription(weather)}
+            {getWeatherDescription(weather, language)}
           </div>
         )}
       </div>

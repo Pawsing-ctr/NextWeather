@@ -1,19 +1,27 @@
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import Link from "next/link";
-import React from "react";
 import "./Footer.css";
-import { bottomLinks, footerCategories } from "../model/Links";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
+import {
+  getLocalizedFooterCategories,
+  getLocalizedBottomLinks,
+} from "../model/Links";
 
 const currentYear = new Date().getFullYear();
 
 export const Footer = () => {
+  const { t, language } = useSettings();
+
+  const footerCategories = getLocalizedFooterCategories(language);
+  const bottomLinks = getLocalizedBottomLinks(language);
+
   return (
     <PageBlockWrapper backgroundColor={Colors.backgroundColorFooter}>
       <footer>
         <div className="all-footer-block">
           <div className="footer-container">
-            <p className="footer-title">Explore the MEX</p>
+            <p className="footer-title">{t("exploreMex")}</p>
             <div className="footer-block">
               {footerCategories.map((category, index) => (
                 <div key={index} className="footer-column">
@@ -35,7 +43,7 @@ export const Footer = () => {
             <p className="copyright-text">
               {`Copyright © ${currentYear} MEX. The MEX is not responsible for the content of external sites. `}
               <Link className="read-us" href={"/"}>
-                Read about our approach to external linking.
+                {t("readAboutApproach")}
               </Link>
             </p>
           </div>

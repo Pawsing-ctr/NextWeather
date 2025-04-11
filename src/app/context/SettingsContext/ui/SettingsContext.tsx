@@ -12,6 +12,7 @@ import { translations } from "../types/SettingsTypes";
 type Language = "en" | "ru";
 type TemperatureUnit = "celsius" | "fahrenheit";
 type WindSpeedUnit = "kmh" | "mph";
+type TranslationKeys = keyof (typeof translations)["en"];
 
 interface SettingsContextType {
   language: Language;
@@ -20,7 +21,7 @@ interface SettingsContextType {
   setTemperature: (temp: TemperatureUnit) => void;
   windSpeed: WindSpeedUnit;
   setWindSpeed: (speed: WindSpeedUnit) => void;
-  t: (key: string) => string;
+  t: (key: TranslationKeys) => string;
 }
 
 const SettingsContext = createContext<SettingsContextType | null>(null);
@@ -28,15 +29,19 @@ const SettingsContext = createContext<SettingsContextType | null>(null);
 export const SettingsProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>(
-    (localStorage.getItem("language") as Language) || "en"
-  );
-  const [temperature, setTemperature] = useState<TemperatureUnit>(
-    (localStorage.getItem("temperature") as TemperatureUnit) || "celsius"
-  );
-  const [windSpeed, setWindSpeed] = useState<WindSpeedUnit>(
-    (localStorage.getItem("windSpeed") as WindSpeedUnit) || "kmh"
-  );
+  const [language, setLanguage] = useState<Language>("en");
+  const [temperature, setTemperature] = useState<TemperatureUnit>("celsius");
+  const [windSpeed, setWindSpeed] = useState<WindSpeedUnit>("kmh");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language") as Language;
+    const storedTemp = localStorage.getItem("temperature") as TemperatureUnit;
+    const storedSpeed = localStorage.getItem("windSpeed") as WindSpeedUnit;
+
+    if (storedLang) setLanguage(storedLang);
+    if (storedTemp) setTemperature(storedTemp);
+    if (storedSpeed) setWindSpeed(storedSpeed);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("language", language);
@@ -44,7 +49,9 @@ export const SettingsProvider: FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("windSpeed", windSpeed);
   }, [language, temperature, windSpeed]);
 
-  const t = (key: string) => translations[language][key] || key;
+  const t = (key: TranslationKeys): string => {
+    return translations[language][key] || key;
+  };
 
   return (
     <SettingsContext.Provider

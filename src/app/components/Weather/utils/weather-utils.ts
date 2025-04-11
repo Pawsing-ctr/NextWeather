@@ -10,17 +10,39 @@ export const weatherBackgrounds: WeatherBackgrounds = {
   "8": "clouds",
 };
 
-export const formatDay = (timestamp: number): string => {
+const dayNamesRu = {
+  Mon: "Пн",
+  Tue: "Вт",
+  Wed: "Ср",
+  Thu: "Чт",
+  Fri: "Пт",
+  Sat: "Сб",
+  Sun: "Вс",
+};
+
+export const formatDay = (timestamp: number, language = "en"): string => {
   const date = new Date(timestamp * 1000);
   const options: Intl.DateTimeFormatOptions = {
     weekday: "short",
   };
-  return new Intl.DateTimeFormat("en-EN", options).format(date);
+
+  const dayName = new Intl.DateTimeFormat("en-EN", options).format(date);
+
+  if (language === "ru") {
+    return dayNamesRu[dayName as keyof typeof dayNamesRu] || dayName;
+  }
+
+  return dayName;
 };
 
-export const formatDate = (timestamp: number): string => {
+export const formatDate = (timestamp: number, language = "en"): string => {
   const date = new Date(timestamp * 1000);
   const day = date.getDate();
+
+  if (language === "ru") {
+    return `${day}`;
+  }
+
   let suffix = "th";
   if (day % 10 === 1 && day !== 11) suffix = "st";
   else if (day % 10 === 2 && day !== 12) suffix = "nd";
@@ -29,10 +51,37 @@ export const formatDate = (timestamp: number): string => {
   return `${day}${suffix}`;
 };
 
-export const getWeatherDescription = (weather: any): string => {
-  const description =
-    weather.description.charAt(0).toUpperCase() + weather.description.slice(1);
-  return `${description} and a gentle breeze`;
+const weatherDescriptionsRu: Record<string, string> = {
+  "clear sky": "Ясное небо",
+  "few clouds": "Небольшая облачность",
+  "scattered clouds": "Рассеянные облака",
+  "broken clouds": "Облачно с прояснениями",
+  "overcast clouds": "Пасмурно",
+  "light rain": "Небольшой дождь",
+  "moderate rain": "Умеренный дождь",
+  "heavy rain": "Сильный дождь",
+  thunderstorm: "Гроза",
+  snow: "Снег",
+  mist: "Туман",
+  fog: "Густой туман",
+  drizzle: "Морось",
+  "and a gentle breeze": "и легкий ветерок",
+};
+
+export const getWeatherDescription = (
+  weather: any,
+  language = "en"
+): string => {
+  const description = weather.description.toLowerCase();
+
+  if (language === "ru") {
+    const translatedDesc = weatherDescriptionsRu[description] || description;
+    return `${translatedDesc} ${weatherDescriptionsRu["and a gentle breeze"]}`;
+  }
+
+  const capitalizedDesc =
+    description.charAt(0).toUpperCase() + description.slice(1);
+  return `${capitalizedDesc} and a gentle breeze`;
 };
 
 export const getWeatherBackground = (weatherData: any): string => {

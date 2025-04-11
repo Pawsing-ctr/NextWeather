@@ -10,6 +10,7 @@ import { ObservationsBlock } from "./components/ObservationsBlock/ui/Observation
 import AboutBlock from "./components/AboutBlock/ui/AboutBlock";
 import { Footer } from "./components/Footer/ui/Footer";
 import { Collaborations } from "./components/Collaborations/Collaborations";
+import { SettingsProvider } from "./context/SettingsContext/ui/SettingsContext";
 
 export interface WeatherProps {
   selectedCity: string;
@@ -20,24 +21,29 @@ const page = () => {
   const [selectedCity, setSelectedCity] = useState("");
 
   return (
-    <div>
-      <Header />
-      <Nav setSelectedCity={setSelectedCity} selectedCity={selectedCity} />
-      <WeatherBlock
-        setSelectedCity={setSelectedCity}
-        selectedCity={selectedCity}
-      />
-      <MapBlock selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
-      <Parallax />
-      <ObservationsBlock
-        selectedCity={selectedCity}
-        setSelectedCity={setSelectedCity}
-      />
-      <SettingsBlock />
-      <AboutBlock />
-      <Collaborations />
-      <Footer />
-    </div>
+    <SettingsProvider>
+      <>
+        <Header />
+        <Nav setSelectedCity={setSelectedCity} selectedCity={selectedCity} />
+        <WeatherBlock
+          setSelectedCity={setSelectedCity}
+          selectedCity={selectedCity}
+        />
+        <MapBlock
+          selectedCity={selectedCity}
+          setSelectedCity={setSelectedCity}
+        />
+        <Parallax />
+        <ObservationsBlock
+          selectedCity={selectedCity}
+          setSelectedCity={setSelectedCity}
+        />
+        <SettingsBlock />
+        <AboutBlock />
+        <Collaborations />
+        <Footer />
+      </>
+    </SettingsProvider>
   );
 };
 
