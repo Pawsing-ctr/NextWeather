@@ -1,7 +1,7 @@
 "use client";
-import AuthProvider, {
-  useAuth,
-} from "@/app/components/AuthProvider/AuthProvider";
+import FormAdmin from "@/app/components/AdminMain/ui/FormAdmin";
+import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
+import Header from "@/app/components/Header/Header";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -11,22 +11,19 @@ const ClientComponent = () => {
 
   useEffect(() => {
     if (!loading && (!isAuthenticated || !isAdmin)) {
-      router.push("/auth");
+      router.push("/");
     }
   }, [isAuthenticated, isAdmin, loading, router]);
-
-  if (loading) {
-    return <div>Загрузка...</div>;
-  }
 
   if (!isAuthenticated || !isAdmin) {
     return null;
   }
 
   return (
-    <div>
-      <p>12312312312</p>
-    </div>
+    <>
+      <Header />
+      <FormAdmin />
+    </>
   );
 };
 
