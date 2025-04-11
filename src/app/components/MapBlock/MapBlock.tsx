@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useEffect, useState } from "react";
 import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
 import "./MapBlock.css";

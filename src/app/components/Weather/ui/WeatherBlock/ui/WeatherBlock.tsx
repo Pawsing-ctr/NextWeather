@@ -15,7 +15,7 @@ import "./WeatherBlock.css";
 import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
-  const { t } = useSettings();
+  const { t, language } = useSettings();
   const [searchGeo, setSearchGeo] = useState(
     () => sessionStorage.getItem("searchGeo") || ""
   );
@@ -40,12 +40,14 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   const fetchWeatherData = async (city: string) => {
     setLoading(true);
     try {
+      const lang = language === "ru" ? "ru" : "en";
+
       const [weatherResponse, forecastResponse] = await Promise.all([
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=en`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=${lang}`
         ),
         axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=en`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=${lang}`
         ),
       ]);
 
@@ -79,6 +81,14 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   useEffect(() => {
     if (searchGeo) sessionStorage.setItem("searchGeo", searchGeo);
   }, [searchGeo]);
+
+  useEffect(() => {
+    if (selectedCity) {
+      fetchWeatherData(selectedCity);
+    } else if (searchGeo) {
+      fetchWeatherData(searchGeo);
+    }
+  }, [language]);
 
   useEffect(() => {
     if (selectedCity) {

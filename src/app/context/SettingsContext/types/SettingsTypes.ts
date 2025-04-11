@@ -70,6 +70,23 @@ export const translations = {
     friday: "Friday",
     saturday: "Saturday",
     sunday: "Sunday",
+    // Footer translations
+    exploreMex: "Explore the MEX",
+    copyright:
+      "Copyright © {year} MEX. The MEX is not responsible for the content of external sites.",
+    readAboutApproach: "Read about our approach to external linking.",
+    // About section
+    aboutMexWeather: "About MEX Weather",
+    faqs: "FAQs",
+    feeds: "Feeds",
+    elsewhere: "Elsewhere",
+    openWeather: "OpenWeather",
+    openOffice: "Open Office",
+    // Collaborations
+    mexWeatherAssociation: "Mex Weather in association with",
+    // Observations
+    observationStation: "Observation Station:",
+    error404: "404!",
   },
   ru: {
     settings: "Настройки",
@@ -143,5 +160,22 @@ export const translations = {
     friday: "Пятница",
     saturday: "Суббота",
     sunday: "Воскресенье",
+    // Footer translations
+    exploreMex: "Исследуйте MEX",
+    copyright:
+      "Авторское право © {year} MEX. MEX не несет ответственности за содержание внешних сайтов.",
+    readAboutApproach: "Ознакомьтесь с нашим подходом к внешним ссылкам.",
+    // About section
+    aboutMexWeather: "О погоде MEX",
+    faqs: "Вопросы и ответы",
+    feeds: "Ленты",
+    elsewhere: "В других местах",
+    openWeather: "OpenWeather",
+    openOffice: "Open Office",
+    // Collaborations
+    mexWeatherAssociation: "Погода MEX в сотрудничестве с",
+    // Observations
+    observationStation: "Станция наблюдения:",
+    error404: "404!",
   },
 };

@@ -1,16 +1,18 @@
-import React from "react";
 import Link from "next/link";
 import "./Collaborations.css";
+import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 export const Collaborations = () => {
+  const { t } = useSettings();
+
   return (
     <div className="wrapper-collab">
       <div className="container-collab">
         <div className="text-collab">
           <p>
-            Mex Weather in association with{" "}
+            {t("mexWeatherAssociation")}{" "}
             <Link className="link-collab" href={"https://openweathermap.org/"}>
-              OpenWeather
+              {t("openWeather")}
             </Link>
           </p>
         </div>
@@ -18,4 +20,3 @@ export const Collaborations = () => {
     </div>
   );
 };
-
