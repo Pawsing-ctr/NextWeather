@@ -1,194 +1,158 @@
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import "./NewsBlock.css";
+import $api from "@/app/api/$api";
+import { newsPath } from "@/app/api/apiNews/newsPath";
+import { useEffect, useState } from "react";
+import { structureNews, timeAgo } from "../../modal";
+import { INewsItem } from "../../type";
 
 export const NewsBlock = () => {
+  const [news, setNews] = useState<INewsItem[]>([]);
+
+  const getNews = async () => {
+    try {
+      const response = await $api.get(newsPath.BASE_NEW_PATH);
+      setNews(response.data);
+    } catch (error) {
+      console.error("Error fetching news:", error);
+    }
+  };
+
+  useEffect(() => {
+    getNews();
+  }, []);
+
+  const { main, side, topContent, banner, bottomContent } = structureNews(news);
+
+  if (!main || !side) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(side[0]);
+
   return (
-      <div className="news-container">
-        <div className="news-header">
-          <p className="title-news">NEWS</p>
-        </div>
-
-        <div className="news-featured-row">
-          <div className="news-featured-main">
-            <div className="news-content">
-              <span className="news-live-tag">LIVE</span>
-              <h2 className="news-title">
-                US will impose 104% tariffs on some Chinese goods from tonight,
-                White House confirms
-              </h2>
-              <p className="news-description">
-                Donald Trump threatened to hit Beijing with the higher tariff if
-                it did not withdraw its own retaliatory levy.
-              </p>
-            </div>
-          </div>
-
-          <div className="news-featured-secondary">
-            <div className="news-image-container"></div>
-            <div className="news-content">
-              <h2 className="news-title">
-                Musk labels Trump trade adviser 'moron' over Tesla comments
-              </h2>
-              <p className="news-description">
-                Peter Navarro had described Musk's electric car company as a
-                "car assembler" rather than manufacturer.
-              </p>
-              <div className="news-meta">
-                <span className="news-time">4 hrs ago</span>
-                <span className="news-category">Business</span>
-              </div>
-            </div>
+    <PageBlockWrapper>
+      <div className="news-header">
+        <p className="title-news">NEWS</p>
+      </div>
+      <div className="news-featured-row">
+        <div className="news-featured-main">
+          <div className="news-content">
+            <span className="news-live-tag">LIVE</span>
+            <h2
+              dangerouslySetInnerHTML={{ __html: main.title }}
+              className="news-title"
+            />
+            <p
+              dangerouslySetInnerHTML={{ __html: main.description }}
+              className="news-description"
+            />
           </div>
         </div>
 
-        <div className="news-grid">
-          <div className="news-item">
-            <div className="news-image-container"></div>
-            <h3 className="news-title">
-              Ukraine captures two Chinese nationals fighting for Russia
-            </h3>
-            <p className="news-description">
-              President Zelensky says two soldiers were captured while fighting
-              in Ukraine's Donetsk region.
-            </p>
+        <div className="news-featured-secondary">
+          {main.imageUrl && (
+            <div className="news-image-wrapper">
+              <img
+                // src={main.imageUrl || "/placeholder.svg"}
+                alt={main.title}
+                className="news-main-image"
+                onError={(e) => {
+                  e.currentTarget.src = "/placeholder.svg?height=300&width=500";
+                }}
+              />
+            </div>
+          )}
+          {/* <div className="news-image-container"></div> */}
+          <img src={side[0].imageUrl} className="news-image-container" />
+          <div className="news-content">
+            <h2
+              dangerouslySetInnerHTML={{ __html: side[0].title }}
+              className="news-title"
+            ></h2>
+            <p
+              dangerouslySetInnerHTML={{ __html: side[0].description }}
+              className="news-description"
+            ></p>
             <div className="news-meta">
-              <span className="news-time">4 hrs ago</span>
-              <span className="news-category">World</span>
-            </div>
-          </div>
-
-          <div className="news-item">
-            <div className="news-image-container"></div>
-            <h3 className="news-title">
-              Gaza is a 'killing field', says UN chief, as agencies urge world
-              to act
-            </h3>
-            <p className="news-description">
-              Israel has blocked humanitarian supplies and fuel from entering
-              for five weeks.
-            </p>
-            <div className="news-meta">
-              <span className="news-time">52 mins ago</span>
-              <span className="news-category">Middle East</span>
-            </div>
-          </div>
-
-          <div className="news-item">
-            <div className="news-image-container"></div>
-            <h3 className="news-title">
-              Roof collapse at Dominican Republic nightclub kills dozens
-            </h3>
-            <p className="news-description">
-              Rescue workers are searching for survivors beneath the rubble in
-              Santo Domingo.
-            </p>
-            <div className="news-meta">
-              <span className="news-time">45 mins ago</span>
-              <span className="news-category">Latin America</span>
-            </div>
-          </div>
-
-          <div className="news-item">
-            <div className="news-image-container"></div>
-            <h3 className="news-title">
-              Titanic scan reveals ground-breaking details of ship's final hours
-            </h3>
-            <p className="news-description">
-              The 3D replica corroborates eye witness accounts about what
-              happened.
-            </p>
-            <div className="news-meta">
-              <span className="news-time">8 hrs ago</span>
-              <span className="news-category">Science & Environment</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="news-secondary-row">
-          <div className="news-secondary-main">
-            <div className="news-content">
-              <h2 className="news-title">
-                Migrants who used Biden-era app told to leave US 'immediately'
-              </h2>
-              <p className="news-description">
-                More than 900,000 legally entered the US with the app, which is
-                now used for "self-deportations".
-              </p>
-              <div className="news-meta">
-                <span className="news-time">4 hrs ago</span>
-                <span className="news-category">World</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="news-secondary-item">
-            <div className="news-content">
-              <h2 className="news-title">
-                Experts dispute claim dire wolf brought back from extinction
-              </h2>
-              <p className="news-description">
-                Independent experts say three white wolf puppies are not dire
-                wolves, as claimed by US company.
-              </p>
-              <div className="news-meta">
-                <span className="news-time">8 hrs ago</span>
-                <span className="news-category">Science & Environment</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="news-small-row">
-          <div className="news-small-item">
-            <h4 className="news-title">
-              Germany wary of claims Russian influence behind attacks
-            </h4>
-            <div className="news-meta">
-              <span className="news-time">4 hrs ago</span>
-              <span className="news-category">Europe</span>
-            </div>
-          </div>
-
-          <div className="news-small-item">
-            <h4 className="news-title">
-              Dutch vote to ban New Year's fireworks, but not just yet
-            </h4>
-            <div className="news-meta">
-              <span className="news-time">29 mins ago</span>
-              <span className="news-category">Europe</span>
-            </div>
-          </div>
-
-          <div className="news-small-item">
-            <h4 className="news-title">
-              Prince Harry's downgraded security was unjustified, court hears
-            </h4>
-            <div className="news-meta">
-              <span className="news-time">3 hrs ago</span>
-              <span className="news-category">UK</span>
-            </div>
-          </div>
-
-          <div className="news-small-item">
-            <h4 className="news-title">
-              Fifty hippos killed by anthrax in DR Congo
-            </h4>
-            <div className="news-meta">
-              <span className="news-time">5 hrs ago</span>
-              <span className="news-category">Africa</span>
-            </div>
-          </div>
-
-          <div className="news-small-item">
-            <h4 className="news-title">
-              Man posing as UK doctor held in India after fatal surgeries
-            </h4>
-            <div className="news-meta">
-              <span className="news-time">7 hrs ago</span>
-              <span className="news-category">Asia</span>
+              <span className="news-time">{timeAgo(side[0].created_at)}</span>
+              <span className="news-category">Business</span>
             </div>
           </div>
         </div>
       </div>
+      <div className="news-grid">
+        {topContent.map((el) => {
+          return (
+            <div key={el.id} className="news-item">
+              <img src={el.imageUrl} className="news-image-container" alt="" />
+              <h3
+                dangerouslySetInnerHTML={{ __html: el.title }}
+                className="news-title"
+              />
+              <p
+                dangerouslySetInnerHTML={{ __html: el.description }}
+                className="news-description"
+              />
+              <div className="news-meta">
+                <span className="news-time">{timeAgo(el.created_at)}</span>
+                <span className="news-category">World</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="news-secondary-row">
+        <div className="news-secondary-main">
+          <div className="news-content">
+            <h2
+              dangerouslySetInnerHTML={{ __html: banner.title }}
+              className="news-title"
+            />
+            <p
+              dangerouslySetInnerHTML={{ __html: banner.description }}
+              className="news-description"
+            />
+            <div className="news-meta">
+              <span className="news-time">{timeAgo(banner.created_at)}</span>
+              <span className="news-category">World</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="news-secondary-item">
+          <div className="news-content">
+            <h2
+              dangerouslySetInnerHTML={{ __html: side[1].title }}
+              className="news-title"
+            />
+            <p
+              dangerouslySetInnerHTML={{ __html: side[1].description }}
+              className="news-description"
+            />
+            <div className="news-meta">
+              <span className="news-time">{timeAgo(side[1].created_at)}</span>
+              <span className="news-category">Science & Environment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="news-small-row">
+        {bottomContent.map((el) => {
+          return (
+            <div key={el.id} className="news-small-item">
+              <h4
+                dangerouslySetInnerHTML={{ __html: el.title }}
+                className="news-title"
+              />
+              <div className="news-meta">
+                <span className="news-time">{timeAgo(el.created_at)}</span>
+                <span className="news-category">Europe</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </PageBlockWrapper>
   );
 };
