@@ -8,7 +8,7 @@ import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 import axios from "axios";
 import type { WeatherProps } from "@/app/page";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 export interface ICitiies {
   el: number;

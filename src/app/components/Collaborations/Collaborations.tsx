@@ -1,6 +1,6 @@
 import Link from "next/link";
 import "./Collaborations.css";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 export const Collaborations = () => {
   const { t } = useSettings();

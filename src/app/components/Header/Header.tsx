@@ -5,8 +5,8 @@ import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import Link from "next/link";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 import { useRouter } from "next/navigation";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
@@ -24,7 +24,6 @@ const Header = () => {
                 onClick={() => router.push("/")}
                 className="logo-img"
                 src="./logoIMG.jpg"
-                alt=""
               />
               <div className="user-text">
                 <UserAssets width="28px" height="28px" />
@@ -39,7 +38,6 @@ const Header = () => {
               onClick={() => router.push("/")}
               className="logo-img"
               src="./logoIMG.jpg"
-              alt=""
             />
             <div className="user-text">
               <UserAssets width="28px" height="28px" />

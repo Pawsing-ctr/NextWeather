@@ -7,9 +7,9 @@ import {
   now,
 } from "../model/getDays";
 import "./ObservationsBlock.css";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 import type { WeatherProps } from "@/app/page";
 import axios from "axios";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
   const [weather, setWeather] = useState<{

@@ -8,7 +8,7 @@ import {
   getWeatherDescription,
 } from "../../utils/weather-utils";
 import "./WeatherCard.css";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 interface WeatherCardProps {
   day: WeatherData | ForecastItem;

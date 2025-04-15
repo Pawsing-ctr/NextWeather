@@ -1,7 +1,7 @@
 import type React from "react";
 import type { ForecastItem } from "../../types/index";
 import "./HourlyCast.css";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 interface HourlyCastProps {
   data: ForecastItem[];

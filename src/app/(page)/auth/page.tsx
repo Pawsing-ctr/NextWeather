@@ -65,7 +65,11 @@ const ClientComponent = () => {
       <div className="auth-page">
         <div className="auth-content">
           <div className="auth-title">
-            <img className="auth-logo" src="/authLogoIMG.png" alt="" />
+            <img
+              className="auth-logo"
+              src="/authLogoIMG.png"
+              onClick={() => router.push("/")}
+            />
             <p className="sign-into-text">Sign into MEX account</p>
           </div>
           <form className="auth-form-block">

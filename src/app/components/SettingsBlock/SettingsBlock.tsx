@@ -1,6 +1,11 @@
 "use client";
+import {
+  useSettings,
+  Language,
+  TemperatureUnit,
+  WindSpeedUnit,
+} from "@/app/context/ui/SettingsContext";
 import "./SettingsBlock.css";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 
 const SettingsBlock = () => {
   const {
@@ -24,7 +29,7 @@ const SettingsBlock = () => {
             <select
               id="language-select"
               value={language}
-              onChange={(e) => setLanguage(e.target.value)}
+              onChange={(e) => setLanguage(e.target.value as Language)}
               className="settings-select"
             >
               <option value="en">{t("english")}</option>
@@ -37,7 +42,9 @@ const SettingsBlock = () => {
             <select
               id="temperature-select"
               value={temperature}
-              onChange={(e) => setTemperature(e.target.value)}
+              onChange={(e) =>
+                setTemperature(e.target.value as TemperatureUnit)
+              }
               className="settings-select"
             >
               <option value="celsius">{t("celsius")}</option>
@@ -50,7 +57,7 @@ const SettingsBlock = () => {
             <select
               id="wind-select"
               value={windSpeed}
-              onChange={(e) => setWindSpeed(e.target.value)}
+              onChange={(e) => setWindSpeed(e.target.value as WindSpeedUnit)}
               className="settings-select"
             >
               <option value="mph">{t("mph")}</option>
