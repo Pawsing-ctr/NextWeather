@@ -9,10 +9,10 @@ import React, {
 } from "react";
 import { translations } from "../types/SettingsTypes";
 
-type Language = "en" | "ru";
-type TemperatureUnit = "celsius" | "fahrenheit";
-type WindSpeedUnit = "kmh" | "mph";
-type TranslationKeys = keyof (typeof translations)["en"];
+export type Language = "en" | "ru";
+export type TemperatureUnit = "celsius" | "fahrenheit";
+export type WindSpeedUnit = "kmh" | "mph";
+export type TranslationKeys = keyof (typeof translations)["en"];
 
 interface SettingsContextType {
   language: Language;

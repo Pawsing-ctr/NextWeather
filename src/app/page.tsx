@@ -10,7 +10,7 @@ import { ObservationsBlock } from "./components/ObservationsBlock/ui/Observation
 import AboutBlock from "./components/AboutBlock/ui/AboutBlock";
 import { Footer } from "./components/Footer/ui/Footer";
 import { Collaborations } from "./components/Collaborations/Collaborations";
-import { SettingsProvider } from "./context/SettingsContext/ui/SettingsContext";
+import { SettingsProvider } from "./context/ui/SettingsContext";
 
 export interface WeatherProps {
   selectedCity: string;

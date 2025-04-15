@@ -2,11 +2,11 @@ import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper
 import { Colors } from "@/app/constants/colors";
 import Link from "next/link";
 import "./Footer.css";
-import { useSettings } from "@/app/context/SettingsContext/ui/SettingsContext";
 import {
   getLocalizedFooterCategories,
   getLocalizedBottomLinks,
 } from "../model/Links";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 const currentYear = new Date().getFullYear();
 
