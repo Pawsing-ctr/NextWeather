@@ -8,12 +8,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 0;
+  width: 100%;
 }
 
 .logo-header {
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .central-navigation-block {
@@ -24,7 +29,6 @@
 .user-text {
   display: flex;
   align-items: center;
-  min-width: 136px;
   position: relative;
   cursor: pointer;
   gap: 5px;
@@ -34,15 +38,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-}
-
-.three-point-button {
-  background: none;
-  color: black;
-  font-weight: 500;
-  font-size: 34px;
-  border: none;
-  cursor: pointer;
+  flex-wrap: wrap;
 }
 
 .button-content {
@@ -60,6 +56,9 @@
   background: none;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .navigation-text {
@@ -73,7 +72,7 @@
 .navigation-text::after {
   content: "";
   position: absolute;
-  top: 25;
+  top: 25px;
   left: 0;
   bottom: 0;
   width: 0;
@@ -86,7 +85,7 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 35;
+  top: 35px;
   bottom: 0;
   width: 0;
   height: 2px;
@@ -113,4 +112,96 @@
   text-decoration: none;
   color: black;
   font-weight: 600;
+}
+
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.mobile-menu {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px 0;
+}
+
+.mobile-menu-active {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .header {
+    justify-content: space-between;
+  }
+
+  .right-header-content {
+    gap: 10px;
+  }
+
+  .button-content {
+    width: 160px;
+    padding: 8px;
+  }
+
+  .central-navigation-block {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navigation-text::after {
+    background-color: transparent;
+  }
+  .mobile-menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .central-navigation-block {
+    display: none;
+  }
+
+  .button-content {
+    display: none;
+  }
+
+  .header {
+    position: relative;
+  }
+
+  .mobile-menu .navigation-text {
+    padding: 10px 0;
+  }
+
+  .mobile-menu .button-content {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-header {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .logo-img {
+    width: 90px;
+    height: auto;
+  }
+
+  .user-text {
+    font-size: 14px;
+  }
+
+  .right-user-border {
+    display: none;
+  }
 }
