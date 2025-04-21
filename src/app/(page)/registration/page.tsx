@@ -154,7 +154,6 @@ const ClientComponent = () => {
           <img
             className="background-img"
             src="./authBackgroundIMG.png"
-            alt=""
           />
           <Link className="link-button" href={"/"}>
             <button className="close-button">

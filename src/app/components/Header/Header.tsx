@@ -7,12 +7,19 @@ import { useAuth } from "../AuthProvider/AuthProvider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSettings } from "@/app/context/ui/SettingsContext";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
   const { loading } = useAuth();
   const { t } = useSettings();
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   return (
     <PageBlockWrapper>
@@ -66,6 +73,40 @@ const Header = () => {
           </div>
           <div
             onClick={() => router.push("/search")}
+            className="button-content"
+          >
+            <LoopAssets width="20" height="20" />
+            <button className="search-button">{t("searchMEX")}</button>
+          </div>
+          <button className="mobile-menu-button" onClick={toggleMobileMenu}>
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        <div
+          className={`mobile-menu ${
+            mobileMenuOpen ? "mobile-menu-active" : ""
+          }`}
+        >
+          <Link
+            href={"/"}
+            className="navigation-text"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t("home")}
+          </Link>
+          <Link
+            href={"/news"}
+            className="navigation-text"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t("news")}
+          </Link>
+          <div
+            onClick={() => {
+              router.push("/search");
+              setMobileMenuOpen(false);
+            }}
             className="button-content"
           >
             <LoopAssets width="20" height="20" />

@@ -197,3 +197,11 @@
   background-color: rgba(46, 89, 132, 0.3);
   margin: 5px 0;
 }
+
+@media (max-width: 640px) {
+  .input-container {
+  }
+}
+
+@media (max-width: 480px) {
+}

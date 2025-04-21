@@ -124,11 +124,7 @@ const ClientComponent = () => {
           </div>
         </div>
         <div className="background-and-button">
-          <img
-            className="background-img"
-            src="./authBackgroundIMG.png"
-            alt=""
-          />
+          {/* <img className="background-img" src="./authBackgroundIMG.png" /> */}
           <Link className="link-button" href={"/"}>
             <button className="close-button">
               <CrossSVG width="16" height="16" />
