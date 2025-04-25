@@ -1,6 +1,6 @@
 "use client";
 import type React from "react";
-import { type FC, useState } from "react";
+import { type FC, useState, useEffect } from "react";
 import "./Nav.css";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
@@ -22,6 +22,19 @@ const Nav: FC<WeatherProps> = ({ setSelectedCity }) => {
   const [cities, setCities] = useState<ICitiies[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { t } = useSettings();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleCityClick = (city: ICitiies) => {
     setSelectedCity(city.name);
@@ -93,11 +106,17 @@ const Nav: FC<WeatherProps> = ({ setSelectedCity }) => {
                 autoFocus={isDropdownOpen}
               />
               <button className="search-icon">
-                <LoopAssets width="30" height="30" />
+                <LoopAssets
+                  width={isMobile ? "24" : "30"}
+                  height={isMobile ? "24" : "30"}
+                />
               </button>
               {isDropdownOpen && (
                 <button className="close-button" onClick={closeMenu}>
-                  <CrossSVG width="26" height="26" />
+                  <CrossSVG
+                    width={isMobile ? "20" : "26"}
+                    height={isMobile ? "20" : "26"}
+                  />
                 </button>
               )}
             </div>

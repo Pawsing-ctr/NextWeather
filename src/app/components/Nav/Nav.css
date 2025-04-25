@@ -14,6 +14,7 @@
   max-width: 1200px;
   margin: 0 auto;
   gap: 40px;
+  padding: 0 16px;
 }
 
 .logo-weather {
@@ -27,10 +28,21 @@
   font-weight: 700;
   font-family: "Inter", serif;
   font-size: 36px;
+  transition: font-size 0.3s ease;
+}
+
+.text-weather-drop {
+  text-transform: uppercase;
+  color: #000000;
+  font-weight: 700;
+  font-family: "Inter", serif;
+  font-size: 36px;
+  transition: font-size 0.3s ease;
 }
 
 .rightSection {
   width: 100%;
+  max-width: 600px;
 }
 
 .input-container {
@@ -52,9 +64,13 @@
   border: solid 0.0625rem rgba(0, 0, 0, 0);
   outline: none;
   box-sizing: border-box;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
 .search-icon {
+  position: absolute;
+  right: 0;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -66,6 +82,7 @@
   height: 2.75rem;
   padding: 0;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .wrapper-menu {
@@ -75,25 +92,22 @@
   width: 100%;
 }
 
-.text-weather-drop {
-  text-transform: uppercase;
-  color: #000000;
-  font-weight: 700;
-  font-family: "Inter", serif;
-  font-size: 36px;
-}
-
 .close-button {
+  position: absolute;
+  right: 50px;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 10px;
   cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease;
 }
 
 .close-button:hover svg {
   fill: #0078ff;
+  transform: scale(1.1);
 }
 
 .search-dropdown {
@@ -108,6 +122,7 @@
   right: 0;
   padding: 16px;
   box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }
 
 .dropdown-section {
@@ -143,6 +158,7 @@
   line-height: 2.5rem;
   padding: 0 1rem;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .city-li:hover {
@@ -168,28 +184,7 @@
 .info-text {
   color: #545658;
   font-size: 16px;
-}
-
-.dropdown-divider {
-  height: 1px;
-  background-color: #ddd;
-  margin: 8px 0;
-}
-
-.dropdown-content {
-  background-color: #b8d1e5;
-  padding: 0 20px 20px 20px;
-}
-
-.dropdown-section {
-  padding: 10px 0;
-}
-
-.section-title {
-  font-size: 14px;
-  color: #5456588a;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
 }
 
 .dropdown-divider {
@@ -198,10 +193,142 @@
   margin: 5px 0;
 }
 
-@media (max-width: 640px) {
-  .input-container {
+.dropdown-content {
+  background-color: #b8d1e5;
+  padding: 0 20px 20px 20px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-weather {
+    margin-bottom: 10px;
+  }
+
+  .text-weather,
+  .text-weather-drop {
+    font-size: 32px;
+  }
+
+  .rightSection {
+    max-width: 100%;
+  }
+
+  .city-dropdown {
+    left: 0;
+    padding: 0;
+  }
+
+  .dropdown-section {
+    padding: 8px;
+  }
+
+  .close-button {
+    right: 40px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
+  .text-weather,
+  .text-weather-drop {
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  .input-weather {
+    height: 2.5rem;
+    font-size: 14px;
+  }
+
+  .search-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .close-button {
+    right: 35px;
+  }
+
+  .info-text {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    padding: 4px;
+  }
+
+  .city-li {
+    line-height: 2.25rem;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 425px) {
+  .text-weather,
+  .text-weather-drop {
+    font-size: 24px;
+  }
+
+  .input-weather {
+    padding-right: 30px;
+    height: 2.25rem;
+  }
+
+  .search-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .close-button {
+    right: 30px;
+  }
+
+  .dropdown-container {
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 375px) {
+  .search-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .close-button {
+    right: 25px;
+  }
+
+  .input-weather {
+    font-size: 13px;
+  }
+
+  .dropdown-section {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 320px) {
+  .text-weather,
+  .text-weather-drop {
+    font-size: 20px;
+  }
+
+  .input-weather {
+    height: 2rem;
+    padding-right: 25px;
+  }
+
+  .search-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .close-button {
+    right: 22px;
+  }
 }
