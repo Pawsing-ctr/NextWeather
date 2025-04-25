@@ -1,9 +1,9 @@
 .hourly-forecast-container {
   width: 100%;
   background-color: white;
-  margin-top: 0; /* Убираем отступ сверху */
+  margin-top: 0;
   overflow: hidden;
-  border-top: none; /* Убираем верхнюю границу */
+  border-top: none;
 }
 
 .hourly-forecast-scroll {
@@ -97,7 +97,7 @@
   }
 
   .hourly-forecast-item {
-    min-width: 60px;
-    padding: 0 8px;
+    min-width: 100px;
+    padding: 0 6px;
   }
 }
