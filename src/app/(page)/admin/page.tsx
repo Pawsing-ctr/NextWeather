@@ -1,5 +1,5 @@
 "use client";
-import FormAdmin from "@/app/components/AdminMain/ui/FormAdmin";
+import FormsBlock from "@/app/components/AdminMain/ui/FormsBlock";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import Header from "@/app/components/Header/Header";
 import { useRouter } from "next/navigation";
@@ -22,7 +22,7 @@ const ClientComponent = () => {
   return (
     <>
       <Header />
-      <FormAdmin />
+      <FormsBlock />
     </>
   );
 };
