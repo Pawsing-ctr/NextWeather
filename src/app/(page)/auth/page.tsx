@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import { handleSchemeCheckError } from "@/app/GlobalFunc/checkErrorFunc/checkErrorFunc";
 import { loginUserSchem } from "@/app/scheme/zodScheme";
+import Image from "next/image";
 
 const ClientComponent = () => {
   const [formData, setFormData] = useState({
@@ -65,10 +66,13 @@ const ClientComponent = () => {
       <div className="auth-page">
         <div className="auth-content">
           <div className="auth-title">
-            <img
+            <Image
+              width={512}
+              height={512}
               className="auth-logo"
               src="/authLogoIMG.png"
               onClick={() => router.push("/")}
+              alt=""
             />
             <p className="sign-into-text">Sign into MEX account</p>
           </div>

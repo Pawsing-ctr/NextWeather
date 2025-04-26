@@ -36,7 +36,7 @@ const MapClient: FC<MapProps> = ({ selectedCity, setSelectedCity }) => {
           const { lat, lon } = response.data[0];
           setPosition([parseFloat(lat), parseFloat(lon)]);
         }
-      } catch (error) {
+      } catch {
         console.log("Oh, 404!");
       }
     };
