@@ -14,19 +14,36 @@ export const useWeather = (
   const { language } = useSettings();
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-  const [searchGeo, setSearchGeo] = useState(
-    () => sessionStorage.getItem("searchGeo") || ""
-  );
-  const [isGeoAllowed, setIsGeoAllowed] = useState(
-    () => sessionStorage.getItem("isGeoAllowed") === "true"
-  );
+  const [searchGeo, setSearchGeo] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("searchGeo") || "";
+    }
+    return "";
+  });
+
+  const [isGeoAllowed, setIsGeoAllowed] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("isGeoAllowed") === "true";
+    }
+    return false;
+  });
+
   const [loading, setLoading] = useState(false);
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(() =>
-    JSON.parse(sessionStorage.getItem("weatherData") || "null")
-  );
-  const [forecastData, setForecastData] = useState<ForecastData | null>(() =>
-    JSON.parse(sessionStorage.getItem("forecastData") || "null")
-  );
+
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(sessionStorage.getItem("weatherData") || "null");
+    }
+    return null;
+  });
+
+  const [forecastData, setForecastData] = useState<ForecastData | null>(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(sessionStorage.getItem("forecastData") || "null");
+    }
+    return null;
+  });
+
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [todayHourlyData, setTodayHourlyData] = useState<ForecastItem[]>([]);
 
