@@ -64,8 +64,8 @@ export const useWeather = (
       setForecastData(forecast.data);
       sessionStorage.setItem("weatherData", JSON.stringify(weather.data));
       sessionStorage.setItem("forecastData", JSON.stringify(forecast.data));
-    } catch (err) {
-      console.error("Error fetching weather data", err);
+    } catch {
+      console.error("Error fetching weather data");
     } finally {
       setLoading(false);
     }
@@ -76,7 +76,7 @@ export const useWeather = (
       const { data } = await axios.get("http://ip-api.com/json/");
       setSearchGeo(data.city);
       fetchWeatherData(data.city);
-    } catch (err) {
+    } catch {
       console.error("Error fetching location");
     }
   };

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { LeafletEvent, LeafletMouseEvent } from "leaflet";
-import React, { FC } from "react";
+import { LeafletMouseEvent } from "leaflet";
+import { FC } from "react";
 import { useMapEvents } from "react-leaflet";
 
 const MapClickHandler: FC<{ setSelectedCity: (city: string) => void }> = ({
