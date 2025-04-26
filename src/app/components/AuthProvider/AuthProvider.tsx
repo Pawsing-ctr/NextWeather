@@ -3,38 +3,11 @@
 import $api from "@/app/api/$api";
 import { refreshToken } from "@/app/api/apiTokens";
 import { tokenPath } from "@/app/api/apiTokens/tokenPath";
-import { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import React from "react";
 import { loginRequest, logoutRequest, registrationRequest } from "./request";
-
-export interface IUser {
-  id: number;
-  email: string;
-  role: string;
-  year?: string;
-}
-
-interface ILoginCredentials {
-  email: string;
-  password: string;
-}
-
-interface IAuthContextType {
-  login: (credentials: ILoginCredentials) => Promise<AxiosResponse>;
-  register: (
-    email: string,
-    password: string,
-    birthDate?: { day: string; month: string; year: string }
-  ) => Promise<void>;
-  logout: () => Promise<void>;
-  user: IUser | null;
-  isAuthenticated: boolean;
-  isAdmin: boolean;
-  loading: boolean;
-  error: string | null;
-}
+import { IAuthContextType, IUser } from "./type";
 
 const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
@@ -116,6 +89,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setUser(response.data.user);
       setIsAuthenticated(true);
       setIsAdmin(response.data.user.role === "admin");
+
       if (response.data.accessToken) {
         $api.defaults.headers.common[
           "Authorization"
