@@ -9,15 +9,15 @@ const ClientComponent = () => {
   const { isAuthenticated, isAdmin, loading } = useAuth();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!loading && (!isAuthenticated || !isAdmin)) {
-  //     router.push("/");
-  //   }
-  // }, [isAuthenticated, isAdmin, loading, router]);
+  useEffect(() => {
+    if (!loading && (!isAuthenticated || !isAdmin)) {
+      router.push("/");
+    }
+  }, [isAuthenticated, isAdmin, loading, router]);
 
-  // if (!isAuthenticated || !isAdmin) {
-  //   return null;
-  // }
+  if (!isAuthenticated || !isAdmin) {
+    return null;
+  }
 
   return (
     <>
