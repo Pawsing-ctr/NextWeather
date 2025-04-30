@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import {
   ForecastData,
@@ -47,31 +47,39 @@ export const useWeather = (
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [todayHourlyData, setTodayHourlyData] = useState<ForecastItem[]>([]);
 
-  const fetchWeatherData = async (city: string) => {
-    setLoading(true);
-    try {
-      const lang = language === "ru" ? "ru" : "en";
-      const [weather, forecast] = await Promise.all([
-        axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=${lang}`
-        ),
-        axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=${lang}`
-        ),
-      ]);
+  const fetchWeatherData = useCallback(
+    async (city: string) => {
+      setLoading(true);
+      try {
+        const lang = language === "ru" ? "ru" : "en";
+        const [weather, forecast] = await Promise.all([
+          axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=${lang}`
+          ),
+          axios.get(
+            `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=${lang}`
+          ),
+        ]);
 
-      setWeatherData(weather.data);
-      setForecastData(forecast.data);
-      sessionStorage.setItem("weatherData", JSON.stringify(weather.data));
-      sessionStorage.setItem("forecastData", JSON.stringify(forecast.data));
-    } catch {
-      console.error("Error fetching weather data");
-    } finally {
-      setLoading(false);
-    }
-  };
+        setWeatherData(weather.data);
+        setForecastData(forecast.data);
+        sessionStorage.setItem("weatherData", JSON.stringify(weather.data));
+        sessionStorage.setItem("forecastData", JSON.stringify(forecast.data));
+      } catch {
+        console.error("Error fetching weather data");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [language, API_KEY]
+  );
 
-  const fetchLocation = async () => {
+  useEffect(() => {
+    const city = selectedCity || searchGeo;
+    if (city) fetchWeatherData(city);
+  }, [language, fetchWeatherData, searchGeo, selectedCity]);
+
+  const fetchLocation = useCallback(async () => {
     try {
       const { data } = await axios.get("http://ip-api.com/json/");
       setSearchGeo(data.city);
@@ -79,16 +87,11 @@ export const useWeather = (
     } catch {
       console.error("Error fetching location");
     }
-  };
+  }, [fetchWeatherData]);
 
   useEffect(() => {
     if (searchGeo) sessionStorage.setItem("searchGeo", searchGeo);
   }, [searchGeo]);
-
-  useEffect(() => {
-    const city = selectedCity || searchGeo;
-    if (city) fetchWeatherData(city);
-  }, [language]);
 
   useEffect(() => {
     if (selectedCity) {
@@ -101,7 +104,7 @@ export const useWeather = (
         fetchWeatherData(savedCity);
       }
     }
-  }, [selectedCity]);
+  }, [selectedCity, fetchWeatherData, searchGeo, setSelectedCity]);
 
   useEffect(() => {
     if (forecastData) {
@@ -120,7 +123,7 @@ export const useWeather = (
       sessionStorage.setItem("isGeoAllowed", "true");
       fetchLocation();
     }
-  }, [isGeoAllowed]);
+  }, [isGeoAllowed, fetchLocation]);
 
   return {
     searchGeo,

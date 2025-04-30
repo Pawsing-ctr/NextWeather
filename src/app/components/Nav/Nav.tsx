@@ -64,6 +64,7 @@ const Nav: FC<WeatherProps> = ({ setSelectedCity }) => {
         }
       );
       setCities(response.data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       console.log("Error API");
     }

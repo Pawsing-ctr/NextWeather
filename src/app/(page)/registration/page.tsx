@@ -11,6 +11,7 @@ import { registrationUserSchem } from "@/app/scheme/zodScheme";
 import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import PasswordConditions from "@/app/components/PasswordConditions/PasswordConditions";
+import Image from "next/image";
 
 const ClientComponent = () => {
   const [newUser, setNewUser] = useState(initialUser);
@@ -67,99 +68,100 @@ const ClientComponent = () => {
   };
 
   return (
-    <PageBlockWrapper backgroundColor={Colors.backgroundColorAuth}>
-      <div className="registration-page">
-        <div className="registration-content">
-          <div className="registration-title">
-            <img className="registration-logo" src="/authLogoIMG.png" alt="" />
-            <p className="registration-text">Register for a MEX account</p>
-            <p className="registration-discripton">
-              You must be 16 or over to register for a MEX account
-            </p>
-          </div>
+    <div className="registration-page-wrapper">
+      <PageBlockWrapper backgroundColor={Colors.backgroundColorAuth}>
+        <div className="registration-page">
+          <div className="registration-content">
+            <div className="registration-title">
+              <Image width={140} height={40} src={"/authLogoIMG.png"} alt="" />
+              <p className="registration-text">Register for a MEX account</p>
+              <p className="registration-discripton">
+                You must be 16 or over to register for a MEX account
+              </p>
+            </div>
 
-          {serverError && <div className="error-message">{serverError}</div>}
+            {serverError && <div className="error-message">{serverError}</div>}
 
-          <form
-            onSubmit={handleRegistSubmit}
-            className="registration-form-block"
-          >
-            <div className="input-wrapper">
-              {formInputs.loginInputs.map((el) => {
-                return (
-                  <div className="input-block" key={el.id}>
-                    <input
-                      type={el.type}
-                      className={`${el.className} ${
-                        error[el.name] ? "error" : ""
-                      }`}
-                      name={el.name}
-                      placeholder={el.placeholder}
-                      onChange={(e) =>
-                        handleChangeInput(e.target.value, el.name)
-                      }
-                      value={newUser[el.name as keyof typeof newUser] || ""}
-                    />
-                    {el.name === "password" ? (
-                      <PasswordConditions black={false} />
-                    ) : (
-                      ""
-                    )}
-
-                    {error[el.name] && (
-                      <p className="error-message">{error[el.name]}</p>
-                    )}
-                  </div>
-                );
-              })}
-              <div className="data-user-birthday">
-                {formInputs.dateInputs.map((el) => {
+            <form
+              onSubmit={handleRegistSubmit}
+              className="registration-form-block"
+            >
+              <div className="input-wrapper">
+                {formInputs.loginInputs.map((el) => {
                   return (
-                    <div className="all-data-input" key={el.id}>
+                    <div className="input-block" key={el.id}>
                       <input
-                        key={el.id}
                         type={el.type}
                         className={`${el.className} ${
                           error[el.name] ? "error" : ""
                         }`}
                         name={el.name}
-                        value={newUser[el.name as keyof typeof newUser] || ""}
                         placeholder={el.placeholder}
                         onChange={(e) =>
                           handleChangeInput(e.target.value, el.name)
                         }
+                        value={newUser[el.name as keyof typeof newUser] || ""}
                       />
+                      {el.name === "password" ? (
+                        <PasswordConditions black={false} />
+                      ) : (
+                        ""
+                      )}
+
+                      {error[el.name] && (
+                        <p className="error-message">{error[el.name]}</p>
+                      )}
                     </div>
                   );
                 })}
+                <div className="data-user-birthday">
+                  {formInputs.dateInputs.map((el) => {
+                    return (
+                      <div className="all-data-input" key={el.id}>
+                        <input
+                          key={el.id}
+                          type={el.type}
+                          className={`${el.className} ${
+                            error[el.name] ? "error" : ""
+                          }`}
+                          name={el.name}
+                          value={newUser[el.name as keyof typeof newUser] || ""}
+                          placeholder={el.placeholder}
+                          onChange={(e) =>
+                            handleChangeInput(e.target.value, el.name)
+                          }
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                {birthdayError && (
+                  <p className="error-message">{birthdayError}</p>
+                )}
               </div>
-              {birthdayError && (
-                <p className="error-message">{birthdayError}</p>
-              )}
-            </div>
-            <button type="submit" className="form-button">
-              Continue
-            </button>
-            <div className="registration-link-block">
-              <Link className="registration-link" href={"#"}>
-                <p>I have forgotten my email</p>
-              </Link>
-              <Link className="registration-link" href={"#"}>
-                <p>More help signing in</p>
-              </Link>
-            </div>
-          </form>
+              <button type="submit" className="form-button">
+                Continue
+              </button>
+              <div className="registration-link-block">
+                <Link className="registration-link" href={"#"}>
+                  <p>I have forgotten my email</p>
+                </Link>
+                <Link className="registration-link" href={"#"}>
+                  <p>More help signing in</p>
+                </Link>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="background-and-button">
-          <img className="background-img" src="./authBackgroundIMG.png" />
-          <Link className="link-button" href={"/"}>
-            <button className="close-button">
-              <CrossSVG width="16" height="16" />
-            </button>
-          </Link>
-        </div>
+      </PageBlockWrapper>
+      <div className="registration-exit-button">
+        <Link className="link-button" href={"/"}>
+          <button className="close-button">
+            <CrossSVG width="16" height="16" />
+          </button>
+        </Link>
       </div>
-    </PageBlockWrapper>
+    </div>
   );
 };
 

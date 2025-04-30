@@ -10,6 +10,7 @@ import "./ObservationsBlock.css";
 import type { WeatherProps } from "@/app/page";
 import axios from "axios";
 import { useSettings } from "@/app/context/ui/SettingsContext";
+import Image from "next/image";
 
 export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
   const [weather, setWeather] = useState<{
@@ -57,6 +58,7 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
           windSpeed,
           icon: `https://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`,
         });
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         console.log("404! Weather data not found.");
       } finally {
@@ -65,7 +67,7 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
     };
 
     fetchWeather();
-  }, [selectedCity, tempUnit, windUnit]);
+  }, [selectedCity, tempUnit, windUnit, t, API_KEY]);
 
   return (
     <div className="observations-wrapper">
@@ -84,7 +86,7 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
           ) : weather ? (
             <>
               <div className="weather-main-info">
-                <img
+                <Image
                   src={weather.icon || "/placeholder.svg"}
                   className="weather-icon"
                   alt={t("weather")}

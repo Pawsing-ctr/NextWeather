@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useSettings } from "@/app/context/ui/SettingsContext";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
@@ -27,11 +28,7 @@ const Header = () => {
         {loading ? (
           <>
             <div className="logo-header">
-              <img
-                onClick={() => router.push("/")}
-                className="logo-img"
-                src="./logoIMG.jpg"
-              />
+              <Image width={112} height={32} src={"/logoIMG.jpg"} alt="" />
               <div className="user-text">
                 <UserAssets width="28px" height="28px" />
                 <span>{t("loading")}</span>
@@ -41,11 +38,7 @@ const Header = () => {
           </>
         ) : (
           <div className="logo-header">
-            <img
-              onClick={() => router.push("/")}
-              className="logo-img"
-              src="./logoIMG.jpg"
-            />
+            <Image width={112} height={32} src={"/logoIMG.jpg"} alt="" />
             <div className="user-text">
               <UserAssets width="28px" height="28px" />
               {!isAuthenticated ? (

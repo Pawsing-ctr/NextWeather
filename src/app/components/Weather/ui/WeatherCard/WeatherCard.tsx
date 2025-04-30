@@ -9,6 +9,7 @@ import {
 } from "../../utils/weather-utils";
 import "./WeatherCard.css";
 import { useSettings } from "@/app/context/ui/SettingsContext";
+import Image from "next/image";
 
 interface WeatherCardProps {
   day: WeatherData | ForecastItem;
@@ -65,7 +66,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
       <div className="weather-card-content">
         <div className="weather-card-icon">
-          <img
+          <Image
             src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
             alt={weather.description}
           />

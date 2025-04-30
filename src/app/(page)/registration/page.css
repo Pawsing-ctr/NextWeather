@@ -2,13 +2,13 @@
   display: flex;
   min-height: 100vh; 
   max-width: 650px;
-  gap: 120px;
+  margin: 0 auto;
 }
 
 .registration-content{
   display: flex;
   flex-direction: column;
-  padding-top: 15vh; 
+  justify-content: center;
   gap: 32px;
 }
 
@@ -124,25 +124,19 @@
   max-width: 200px;
 }
 
-.background-and-button{
-  display: flex;
-}
-
-.background-img{
-  width: 650px;
-  height: 1000px;
+.registration-exit-button{
+  position: fixed; 
+  top: 20px; 
+  right: 20px; 
 }
 
 .link-button{
   max-height: 32px;
 }
 
-
 .close-button{
-  max-width: 32px;
-  width: 100;
-  max-height: 32px;
-  height: 100%;
+  width: 32px;
+  min-height: 32px;
   cursor: pointer;
 }
 
