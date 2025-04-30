@@ -52,7 +52,7 @@ const EditorComponent: React.FC<EditorComponentProps> = ({
         quillRef.current = null;
       }
     };
-  }, []);
+  }, [content, setContent]);
 
   useEffect(() => {
     if (quillRef.current && quillRef.current.root.innerHTML !== content) {

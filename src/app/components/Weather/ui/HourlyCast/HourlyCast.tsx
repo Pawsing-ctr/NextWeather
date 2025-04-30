@@ -2,14 +2,15 @@ import type React from "react";
 import type { ForecastItem } from "../../types/index";
 import "./HourlyCast.css";
 import { useSettings } from "@/app/context/ui/SettingsContext";
+import Image from "next/image";
 
 interface HourlyCastProps {
   data: ForecastItem[];
   selectedDay: string | null;
 }
 
-const HourlyCast: React.FC<HourlyCastProps> = ({ data, selectedDay }) => {
-  const { t, temperature, windSpeed, language } = useSettings();
+const HourlyCast: React.FC<HourlyCastProps> = ({ data }) => {
+  const { t, temperature, windSpeed } = useSettings();
 
   const formatTime = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
@@ -48,7 +49,10 @@ const HourlyCast: React.FC<HourlyCastProps> = ({ data, selectedDay }) => {
             <div className="hourly-forecast-item" key={hour.dt}>
               <div className="hourly-time">{time}</div>
               <div className="hourly-icon">
-                <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />
+                <Image
+                  src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+                  alt=""
+                />
               </div>
               <div className="hourly-temp">{temp}°</div>
               <div className="hourly-precipitation">

@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/app/components/Header/Header";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import React from "react";
@@ -9,7 +10,7 @@ import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBl
 import UnauthenticatedRoute from "@/app/components/UnauthenticatedRoute/UnauthenticatedRoute";
 import { Footer } from "@/app/components/Footer/ui/Footer";
 
-const page = () => {
+const ClientComponent = () => {
   return (
     <UnauthenticatedRoute>
       <Header />
@@ -31,4 +32,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ClientComponent;

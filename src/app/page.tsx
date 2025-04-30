@@ -17,7 +17,7 @@ export interface WeatherProps {
   setSelectedCity: (city: string) => void;
 }
 
-const page = () => {
+const ClientComponent = () => {
   const [selectedCity, setSelectedCity] = useState("");
 
   return (
@@ -47,4 +47,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ClientComponent;

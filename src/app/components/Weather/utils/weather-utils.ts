@@ -69,6 +69,7 @@ const weatherDescriptionsRu: Record<string, string> = {
 };
 
 export const getWeatherDescription = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   weather: any,
   language = "en"
 ): string => {
@@ -84,6 +85,7 @@ export const getWeatherDescription = (
   return `${capitalizedDesc} and a gentle breeze`;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getWeatherBackground = (weatherData: any): string => {
   if (!weatherData) return "weather-default";
 

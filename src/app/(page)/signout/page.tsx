@@ -15,7 +15,7 @@ const ClientComponent = () => {
 
   useEffect(() => {
     logout();
-  }, []);
+  }, [logout]);
 
   return (
     <div className="all-signount-page">

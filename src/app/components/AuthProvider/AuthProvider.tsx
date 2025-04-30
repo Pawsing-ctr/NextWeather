@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import $api from "@/app/api/$api";
 import { refreshToken } from "@/app/api/apiTokens";
 import { tokenPath } from "@/app/api/apiTokens/tokenPath";

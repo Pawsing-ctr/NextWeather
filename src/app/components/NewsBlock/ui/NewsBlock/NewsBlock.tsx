@@ -5,6 +5,7 @@ import { newsPath } from "@/app/api/apiNews/newsPath";
 import { useEffect, useState } from "react";
 import { structureNews, timeAgo } from "../../modal";
 import { INewsItem } from "../../type";
+import Image from "next/image";
 
 export const NewsBlock = () => {
   const [news, setNews] = useState<INewsItem[]>([]);
@@ -53,18 +54,31 @@ export const NewsBlock = () => {
         <div className="news-featured-secondary">
           {main.imageUrl && (
             <div className="news-image-wrapper">
-              <img
+              {/* <img
                 // src={main.imageUrl || "/placeholder.svg"}
                 alt={main.title}
                 className="news-main-image"
                 onError={(e) => {
                   e.currentTarget.src = "/placeholder.svg?height=300&width=500";
                 }}
+              /> */}
+              <Image
+                onError={(e) => {
+                  e.currentTarget.src = "/placeholder.svg?height=300&width=500";
+                }}
+                src={main.imageUrl || "/placeholder.svg"}
+                alt={main.title}
+                width={500}
+                height={300}
               />
             </div>
           )}
-          {/* <div className="news-image-container"></div> */}
-          <img src={side[0].imageUrl} className="news-image-container" />
+          <Image
+            src={side[0].imageUrl || "/placeholder.svg"}
+            alt={main.title}
+            width={500}
+            height={300}
+          />
           <div className="news-content">
             <h2
               dangerouslySetInnerHTML={{ __html: side[0].title }}
@@ -85,7 +99,11 @@ export const NewsBlock = () => {
         {topContent.map((el) => {
           return (
             <div key={el.id} className="news-item">
-              <img src={el.imageUrl} className="news-image-container" alt="" />
+              <Image
+                src={el.imageUrl || "/placeholder.svg"}
+                className="news-image-container"
+                alt=""
+              />
               <h3
                 dangerouslySetInnerHTML={{ __html: el.title }}
                 className="news-title"

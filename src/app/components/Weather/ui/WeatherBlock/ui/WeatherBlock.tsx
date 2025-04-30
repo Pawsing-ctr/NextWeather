@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import "./WeatherBlock.css";
 import { useSettings } from "@/app/context/ui/SettingsContext";
@@ -14,7 +14,6 @@ const WeatherBlock: FC<WeatherProps> = ({ setSelectedCity, selectedCity }) => {
   const { t } = useSettings();
   const {
     searchGeo,
-    setSearchGeo,
     isGeoAllowed,
     setIsGeoAllowed,
     loading,

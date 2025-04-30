@@ -1,11 +1,12 @@
 import axios from "axios";
 import { logout, refreshToken } from "./apiTokens";
 import { tokenPath } from "./apiTokens/tokenPath";
-const baseURL = "http://localhost:3011/api/";
+
+const BASE_URL = process.env.BASE_URL || "locahost:3000";
 
 const $api = axios.create({
   withCredentials: true,
-  baseURL,
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",

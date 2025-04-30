@@ -1,4 +1,5 @@
-import { IUser } from "@/app/components/AuthProvider/AuthProvider";
+import { IUser } from "@/app/components/AuthProvider/type";
+
 export interface IUserAccountData {
   email: string;
   password: string;
