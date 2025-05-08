@@ -12,7 +12,7 @@ import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import PasswordConditions from "@/app/components/PasswordConditions/PasswordConditions";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const ClientComponent = () => {
   const [newUser, setNewUser] = useState(initialUser);
