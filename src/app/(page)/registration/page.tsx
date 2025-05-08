@@ -12,11 +12,14 @@ import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import PasswordConditions from "@/app/components/PasswordConditions/PasswordConditions";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const ClientComponent = () => {
   const [newUser, setNewUser] = useState(initialUser);
   const [error, setError] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const { register } = useAuth();
 
@@ -59,6 +62,7 @@ const ClientComponent = () => {
       });
 
       setNewUser(initialUser);
+      router.push("/");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setServerError(
