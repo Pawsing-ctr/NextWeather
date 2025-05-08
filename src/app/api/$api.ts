@@ -2,7 +2,7 @@ import axios from "axios";
 import { logout, refreshToken } from "./apiTokens";
 import { tokenPath } from "./apiTokens/tokenPath";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "locahost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const $api = axios.create({
   withCredentials: true,
