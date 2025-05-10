@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 MexWeather Frontend  
 
-## Getting Started
+![MexWeather](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3J6ZnNqMjE0cTl2NHVxdmJpMTd5amU4c28zYnEzZ3J1cjF2b2Q5ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/za5xikuRr0OzK/giphy.gif)  
 
-First, run the development server:
+**MexWeather** is a modern weather app built on React + Next.js. The important function it's **Authentication** - full registration and login via your own form. It shows current weather and forecast by city with **OpenWeatherMap** API integration, and displays the selected city on a map using **Leaflet**.
 
+## 🚀 Live Demo  
+🔗 [MovieLand (Live)](https://next-weather-delta.vercel.app/)  
+
+---
+
+## 📌 Tech Stack  
+- ⚛️ **React + Next.js** – Modern frontend framework  
+- 🗺 **Leaflet** – Map with city mark
+- 🌦️ **OpenWeatherMap API** – Weather data and forecast  
+- ⚙️ **Axios** – API requests 
+- ☁️ ** Vercel** – Frontend deployment
+- 🔐 **Authentication** — Full registration and login via your own form
+- 🍪 **JWT + HttpOnly Cookies** — Secure storage of tokens
+
+---
+
+## 📖 Installation  
+
+### 1️⃣ Clone the repository  
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Pawsing-ctr/MexWeather.git
+cd MexWeather
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
+### 3️⃣ Add .env.local
+```bash
+Create an .env.local file in the root of the project and add it there:
+NEXT_PUBLIC_API_KEY=your_key_from_OpenWeatherMap
+```
+### The app will be available at:
+🔗 http://localhost:5173
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4️⃣ Start the development server
+```bash
+npm run dev
+```
+---
+### 🛠 Additional Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📦 Build the project
+```bash
+npm run build
+```
 
-## Learn More
+---
+### 📢 Contact
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+👤 Author: Pawsing-ctr & Kimerland
+📧 Email: t-nechayev@internet.ru & kimerland.project@gmail.com
+🐙 GitHub: Pawsing-ctr & Kimerland
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ⭐️ If you like this project, please give it a star!
