@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import // getUserData,
 // IUserAccountData,
 "@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
-import { useEffect } from "react";
 
 const MainSettingsContent = () => {
   // const [userData, setUserData] = useState<IUserAccountData>({

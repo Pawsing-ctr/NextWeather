@@ -95,7 +95,7 @@ export const NewsBlock = () => {
       </div>
       <div className="news-grid">
         {/* ВЕРХНЯЯ ЧАСТЬ НОВОСТЕЙ КОТОРАЯ ПРИХОДИТ С БЕКА */}
-        {/* {topContent.map((el) => {
+        {topContent.map((el) => {
           return (
             <div key={el.id} className="news-item">
               <Image
@@ -117,7 +117,7 @@ export const NewsBlock = () => {
               </div>
             </div>
           );
-        })} */}
+        })}
       </div>
       <div className="news-secondary-row">
         <div className="news-secondary-main">
@@ -157,7 +157,7 @@ export const NewsBlock = () => {
 
       <div className="news-small-row">
         {/* НИЖНЯЯ ЧАСТЬ НОВОСТЕЙ КОТОРАЯ ПРИХОДИТ С БЕКА */}
-        {/* {bottomContent.map((el) => {
+        {bottomContent.map((el) => {
           return (
             <div key={el.id} className="news-small-item">
               <h4
@@ -170,7 +170,7 @@ export const NewsBlock = () => {
               </div>
             </div>
           );
-        })} */}
+        })}
       </div>
     </PageBlockWrapper>
   );

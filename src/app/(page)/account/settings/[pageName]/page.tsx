@@ -59,6 +59,10 @@ const ClientComponent = () => {
     const currentUserStorage = localStorage.getItem("registeredUsers");
 
     // let updateData = {};
+    if (!currentUserStorage) {
+      console.error("Пользователь не найден в LocalStorage");
+      return;
+    }
 
     const userData = JSON.parse(currentUserStorage);
 

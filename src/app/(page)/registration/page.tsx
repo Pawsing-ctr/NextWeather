@@ -49,7 +49,9 @@ const ClientComponent = () => {
 
     try {
       const users = JSON.parse(existingUsers);
-      return users.some((user: any) => user.email === newUser.email);
+      return users.some(
+        (user: { email: string }) => user.email === newUser.email
+      );
     } catch {
       return false;
     }
@@ -89,7 +91,6 @@ const ClientComponent = () => {
 
     // setNewUser(initialUser);
     // router.push("/");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     // } catch (error: any) {
     // setServerError(
     // error.response?.data?.message || "Ошибка при регистрации пользователя"
