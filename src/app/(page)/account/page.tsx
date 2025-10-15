@@ -5,12 +5,10 @@ import React from "react";
 
 const page = () => {
   return (
-    <>
-      <UnauthenticatedRoute>
-        <Header />
-        <AccountBasePage />
-      </UnauthenticatedRoute>
-    </>
+    <UnauthenticatedRoute>
+      <Header />
+      <AccountBasePage />
+    </UnauthenticatedRoute>
   );
 };
 

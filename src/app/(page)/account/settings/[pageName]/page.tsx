@@ -4,18 +4,17 @@ import AccountSettingsWrapper from "@/app/components/AccountSettings/ui/AccountS
 import Header from "@/app/components/Header/Header";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./page.css";
-import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
-import {
-  getUserData,
-  IUserAccountData,
-} from "@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
+// import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
+import // getUserData,
+// IUserAccountData,
+"@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
 import Link from "next/link";
 import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
 import { Footer } from "@/app/components/Footer/ui/Footer";
-import $api from "@/app/api/$api";
-import { userPath } from "@/app/api/apiUsers/userPath";
+// import $api from "@/app/api/$api";
+// import { userPath } from "@/app/api/apiUsers/userPath";
 import { useRouter } from "next/navigation";
 import UnauthenticatedRoute from "@/app/components/UnauthenticatedRoute/UnauthenticatedRoute";
 import PasswordConditions from "@/app/components/PasswordConditions/PasswordConditions";
@@ -24,17 +23,16 @@ const ClientComponent = () => {
   const [inputValue, setInputValue] = useState("");
   // const [errorMessage, setErrorMessage] = useState("");
 
-  const [userData, setUserData] = useState<IUserAccountData>({
-    email: "",
-    password: "",
-    displayName: "",
-    yearOfBirth: "",
-  });
-
+  // const [userData, setUserData] = useState<IUserAccountData>({
+  //   email: "",
+  //   password: "",
+  //   displayName: "",
+  //   yearOfBirth: "",
+  // });
   const params = useParams();
   const { pageName } = params;
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const router = useRouter();
 
@@ -42,35 +40,49 @@ const ClientComponent = () => {
     (el) => el.pageName === pageName
   );
 
-  useEffect(() => {
-    getUserData({ setUser: setUserData, user, hidePassword: false });
-  }, [user]);
+  // useEffect(() => {
+  //   getUserData({ setUser: setUserData, user, hidePassword: false });
+  // }, [user]);
 
-  useEffect(() => {
-    if (currentPage && currentPage.pageName && userData) {
-      setInputValue(
-        userData[currentPage.pageName as keyof IUserAccountData] || ""
-      );
-    }
-  }, [currentPage, userData]);
+  // useEffect(() => {
+  //   if (currentPage && currentPage.pageName && userData) {
+  //     setInputValue(
+  //       userData[currentPage.pageName as keyof IUserAccountData] || ""
+  //     );
+  //   }
+  // }, [currentPage, userData]);
 
   const handleSaveChange = async () => {
     if (!currentPage?.pageName) return;
+    if (!inputValue) return;
 
-    let updateData = {};
+    const currentUserStorage = localStorage.getItem("registeredUsers");
+
+    // let updateData = {};
+
+    const userData = JSON.parse(currentUserStorage);
+
+    // БЭК
+    // if (currentPage.pageName === "password") {
+    //   updateData = {
+    //     newPassword: inputValue,
+    //   };
+    // } else {
+    //   updateData = {
+    //     [currentPage.pageName]: inputValue,
+    //   };
+    // }
 
     if (currentPage.pageName === "password") {
-      updateData = {
-        newPassword: inputValue,
-      };
+      userData.password = inputValue;
     } else {
-      updateData = {
-        [currentPage.pageName]: inputValue,
-      };
+      userData[currentPage.pageName] = inputValue;
     }
 
+    localStorage.setItem("registeredUsers", JSON.stringify(userData));
+
     try {
-      const response = await $api.put(userPath.UPDATE_USERS_DATA, updateData);
+      // const response = await $api.put(userPath.UPDATE_USERS_DATA, updateData);
       // setErrorMessage(response.data.message);
 
       if (currentPage.pageName === "password") {
@@ -79,7 +91,7 @@ const ClientComponent = () => {
         router.push("/account/settings");
       }
 
-      console.log("Данные успешно обновлены:", response.data);
+      // console.log("Данные успешно обновлены:", response.data);
     } catch (error) {
       console.error("Ошибка при отправке запроса: ", error);
     }

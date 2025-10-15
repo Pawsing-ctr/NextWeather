@@ -20,7 +20,7 @@ export const AcountHeaderLink: IAcountHeaderLink[] = [
   {
     id: 3,
     title: "Sign out",
-    href: "signout",
+    href: "/signout",
     className: "account-header-link",
     activeLinkClassName: "active-link",
     isActive: "signOut",

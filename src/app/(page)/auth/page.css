@@ -125,3 +125,10 @@
   color: #fff;
   font-size: 20px;
 }
+
+.error-message{
+  color: #fff;
+  background-color: #e51854;
+  font-size: 16px;
+  padding: 16px;
+}

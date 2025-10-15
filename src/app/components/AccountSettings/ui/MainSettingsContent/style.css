@@ -36,7 +36,6 @@
 .button-block{
   display: flex;
   gap: 15px;
-  border-bottom: 1px solid #005bc8;
   cursor: pointer;
 }
 

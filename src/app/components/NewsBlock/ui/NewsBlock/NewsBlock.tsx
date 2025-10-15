@@ -29,8 +29,6 @@ export const NewsBlock = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(side[0]);
-
   return (
     <PageBlockWrapper>
       <div className="news-header">
@@ -96,7 +94,8 @@ export const NewsBlock = () => {
         </div>
       </div>
       <div className="news-grid">
-        {topContent.map((el) => {
+        {/* ВЕРХНЯЯ ЧАСТЬ НОВОСТЕЙ КОТОРАЯ ПРИХОДИТ С БЕКА */}
+        {/* {topContent.map((el) => {
           return (
             <div key={el.id} className="news-item">
               <Image
@@ -118,7 +117,7 @@ export const NewsBlock = () => {
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
       <div className="news-secondary-row">
         <div className="news-secondary-main">
@@ -155,8 +154,10 @@ export const NewsBlock = () => {
           </div>
         </div>
       </div>
+
       <div className="news-small-row">
-        {bottomContent.map((el) => {
+        {/* НИЖНЯЯ ЧАСТЬ НОВОСТЕЙ КОТОРАЯ ПРИХОДИТ С БЕКА */}
+        {/* {bottomContent.map((el) => {
           return (
             <div key={el.id} className="news-small-item">
               <h4
@@ -169,7 +170,7 @@ export const NewsBlock = () => {
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </PageBlockWrapper>
   );

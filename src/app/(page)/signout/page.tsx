@@ -5,17 +5,21 @@ import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper
 import Link from "next/link";
 import React, { useEffect } from "react";
 import "./page.css";
-import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
+// import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import { useRouter } from "next/navigation";
 
 const ClientComponent = () => {
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
 
   const router = useRouter();
 
+  // useEffect(() => {
+  //   logout();
+  // }, [logout]);
+
   useEffect(() => {
-    logout();
-  }, [logout]);
+    localStorage.removeItem("registeredUsers");
+  });
 
   return (
     <div className="all-signount-page">

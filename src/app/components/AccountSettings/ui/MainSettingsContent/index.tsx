@@ -1,32 +1,31 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { PersonalDetailsInput } from "../../lib";
 import Link from "next/link";
 import "./style.css";
-import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
-import { getInputValue } from "../../modal";
+// import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
+// import { getInputValue } from "../../modal";
 import AccountSettingsWrapper from "../AccountSettingsWrapper";
 import { useRouter } from "next/navigation";
-import {
-  getUserData,
-  IUserAccountData,
-} from "@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
+import // getUserData,
+// IUserAccountData,
+"@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
+import { useEffect } from "react";
 
 const MainSettingsContent = () => {
-  const [userData, setUserData] = useState<IUserAccountData>({
-    email: "",
-    password: "••••••••",
-    displayName: "",
-    yearOfBirth: "",
-  });
+  // const [userData, setUserData] = useState<IUserAccountData>({
+  //   email: "",
+  //   password: "••••••••",
+  //   displayName: "",
+  //   yearOfBirth: "",
+  // });
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const router = useRouter();
 
-  useEffect(() => {
-    getUserData({ setUser: setUserData, user, hidePassword: true });
-  }, [user]);
+  // useEffect(() => {
+  //   getUserData({ setUser: setUserData, user, hidePassword: true });
+  // }, [user]);
 
   return (
     <AccountSettingsWrapper>
@@ -40,7 +39,7 @@ const MainSettingsContent = () => {
                 <input
                   className={el.className}
                   type={el.type}
-                  value={getInputValue(el.id, userData)}
+                  // value={getInputValue(el.id, userData)}
                   readOnly
                 />
                 <div

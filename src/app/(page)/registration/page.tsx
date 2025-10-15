@@ -9,7 +9,7 @@ import { initialUser } from "@/app/constants/initialUserConst";
 import { handleSchemeCheckError } from "@/app/GlobalFunc/checkErrorFunc/checkErrorFunc";
 import { registrationUserSchem } from "@/app/scheme/zodScheme";
 import CrossSVG from "@/app/assets/RegsitrationAssets/CrossSVG";
-import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
+// import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import PasswordConditions from "@/app/components/PasswordConditions/PasswordConditions";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -17,11 +17,11 @@ import { useRouter } from "next/navigation";
 const ClientComponent = () => {
   const [newUser, setNewUser] = useState(initialUser);
   const [error, setError] = useState<Record<string, string>>({});
-  const [serverError, setServerError] = useState<string | null>(null);
+  // const [serverError, setServerError] = useState<string | null>(null);
 
   const router = useRouter();
 
-  const { register } = useAuth();
+  // const { register } = useAuth();
 
   const birthdayError = error["day"] || error["month"] || error["year"];
 
@@ -40,35 +40,60 @@ const ClientComponent = () => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const checkIfUSerExists = (newUser: any) => {
+    if (typeof window === "undefined") return false;
+
+    const existingUsers = localStorage.getItem("registeredUsers");
+    if (!existingUsers) return false;
+
+    try {
+      const users = JSON.parse(existingUsers);
+      return users.some((user: any) => user.email === newUser.email);
+    } catch {
+      return false;
+    }
+  };
+
   const handleRegistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setServerError(null);
+    // setServerError(null);
+
+    checkIfUSerExists(newUser);
 
     const errorResult = handleSchemeCheckError(
       registrationUserSchem,
       newUser,
       setError
     );
+
     if (!errorResult) {
       console.log("Данные введены не правильно");
       return;
     }
-    try {
-      await register(newUser.email, newUser.password, {
-        day: newUser.day,
-        month: newUser.month,
-        year: newUser.year,
-      });
 
-      setNewUser(initialUser);
-      router.push("/");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      setServerError(
-        error.response?.data?.message || "Ошибка при регистрации пользователя"
-      );
-    }
+    localStorage.setItem("registeredUsers", JSON.stringify(newUser));
+
+    setNewUser(initialUser);
+
+    router.push("/");
+
+    // РЕГИСТРАЦИЯ С БЭКОМ
+    // try {
+    // await register(newUser.email, newUser.password, {
+    //   day: newUser.day,
+    //   month: newUser.month,
+    //   year: newUser.year,
+    // });
+
+    // setNewUser(initialUser);
+    // router.push("/");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // } catch (error: any) {
+    // setServerError(
+    // error.response?.data?.message || "Ошибка при регистрации пользователя"
+    // );
   };
 
   return (
@@ -84,7 +109,7 @@ const ClientComponent = () => {
               </p>
             </div>
 
-            {serverError && <div className="error-message">{serverError}</div>}
+            {/* {serverError && <div className="error-message">{serverError}</div>} */}
 
             <form
               onSubmit={handleRegistSubmit}

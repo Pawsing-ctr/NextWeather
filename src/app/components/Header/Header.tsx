@@ -1,19 +1,21 @@
 "use client";
-import UserAssets from "@/app/assets/HeaderAssets/UserAssets";
+// import UserAssets from "@/app/assets/HeaderAssets/UserAssets";
 import "./Header.css";
 import LoopAssets from "@/app/assets/HeaderAssets/LoopAssets";
 import PageBlockWrapper from "../PageBlockWrapper/PageBlockWrapper";
-import { useAuth } from "../AuthProvider/AuthProvider";
+// import { useAuth } from "../AuthProvider/AuthProvider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSettings } from "@/app/context/ui/SettingsContext";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+import UserAssets from "@/app/assets/HeaderAssets/UserAssets";
+// import Image from "next/image";
 
 const Header = () => {
-  const { isAuthenticated } = useAuth();
-  const { loading } = useAuth();
+  // const { isAuthenticated } = useAuth();
+  // const { loading } = useAuth();
   const { t } = useSettings();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -22,10 +24,13 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const getProfile = localStorage?.getItem("registeredUsers");
+
   return (
     <PageBlockWrapper>
       <header className="header">
-        {loading ? (
+        {/* ХЕДЕР С БЭКОМ */}
+        {/* {loading ? (
           <>
             <div className="logo-header">
               <Image width={112} height={32} src={"/logoIMG.jpg"} alt="" />
@@ -53,16 +58,43 @@ const Header = () => {
             </div>
             <div className="right-user-border" />
           </div>
-        )}
+        )} */}
+
+        <div className="logo-header">
+          <Image
+            onClick={() => router.push("/")}
+            width={112}
+            height={32}
+            src={"/logoIMG.jpg"}
+            alt="#"
+            className="header-image-logo"
+          />
+          <div className="user-text">
+            <UserAssets width="28px" height="28px" />
+            {!getProfile ? (
+              <Link className="header-link" href={"/auth"}>
+                {t("signIn")}
+              </Link>
+            ) : (
+              <Link className="header-link" href={"/account"}>
+                {t("yourAccount")}
+              </Link>
+            )}
+          </div>
+          <div className="right-user-border" />
+        </div>
 
         <div className="right-header-content">
           <div className="central-navigation-block">
-            <Link href={"/"} className="navigation-text">
-              {t("home")}
-            </Link>
-            <Link href={"/news"} className="navigation-text">
-              {t("news")}
-            </Link>
+            {!getProfile ? (
+              <Link className="header-link" href={"/auth"}>
+                {t("signIn")}
+              </Link>
+            ) : (
+              <Link className="header-link" href={"/account"}>
+                {t("yourAccount")}
+              </Link>
+            )}
           </div>
           <div
             onClick={() => router.push("/search")}

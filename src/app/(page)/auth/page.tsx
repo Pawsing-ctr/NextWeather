@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import "./page.css";
 import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper";
 import { Colors } from "@/app/constants/colors";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
+// import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import { handleSchemeCheckError } from "@/app/GlobalFunc/checkErrorFunc/checkErrorFunc";
 import { loginUserSchem } from "@/app/scheme/zodScheme";
 import Image from "next/image";
@@ -18,7 +18,7 @@ const AuthFormContent = () => {
   const [error, setError] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const { login } = useAuth();
+  // const { login } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,7 +27,7 @@ const AuthFormContent = () => {
       [name]: value,
     }));
   };
-
+  // ВХОД РАБОТАЕТ С БЭКОМ
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -45,11 +45,12 @@ const AuthFormContent = () => {
     setIsLoading(true);
     setError({});
 
-    const response = await login(formData);
+    //РАБОТАЕТ С БЕКОМ
+    // const response = await login(formData);
 
-    if (response.status === 200) {
-      router.push("/");
-    }
+    // if (response.status === 200) {
+    //   router.push("/");
+    // }
 
     setIsLoading(false);
   };
@@ -95,7 +96,12 @@ const AuthFormContent = () => {
               <p className="error-message">{error.password}</p>
             )}
           </div>
-          <button type="submit" className="form-button" disabled={isLoading}>
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="form-button"
+            disabled={isLoading}
+          >
             {isLoading ? "Loading..." : "Login"}
           </button>
           <div className="auth-link-block">
