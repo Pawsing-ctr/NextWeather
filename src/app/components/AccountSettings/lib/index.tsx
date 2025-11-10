@@ -45,7 +45,7 @@ export const PersonalDetailsInput: IPersonalDetailsInput[] = [
     editPage: {
       editPageTitle: "Edit display name",
       editPageDescription:
-        "Your display name is what people will see whenever you do anything public on a BBC website or app. For example, if you comment on a story.",
+        "Your display name is what people will see whenever you do anything public on a MEX website or app. For example, if you comment on a story.",
     },
   },
   {

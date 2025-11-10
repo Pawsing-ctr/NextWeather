@@ -2,11 +2,11 @@ import axios from "axios";
 import { logout, refreshToken } from "./apiTokens";
 import { tokenPath } from "./apiTokens/tokenPath";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const $api = axios.create({
   withCredentials: true,
-  baseURL: BASE_URL,
+  baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",

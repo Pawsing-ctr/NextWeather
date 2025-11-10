@@ -53,29 +53,29 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Проверка аутентификации при загрузке
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        setLoading(true);
+    let isMounted = true;
 
+    const checkAuth = async () => {
+      setLoading(true);
+      try {
         const success = await refreshTokenFunc();
 
         if (!success) {
-          try {
-            await refreshToken();
-            await refreshTokenFunc();
-          } catch (refreshError) {
-            errorRefreshToken();
-            console.error("Error update token:", refreshError);
-          }
+          await refreshToken();
+          if (isMounted) await refreshTokenFunc();
         }
       } catch (error) {
-        console.error("Ошибка аутентификации:", error);
         errorRefreshToken();
+        console.error("Ошибка аутентификации:", error);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
     checkAuth();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const login = async (credentials: { email: string; password: string }) => {

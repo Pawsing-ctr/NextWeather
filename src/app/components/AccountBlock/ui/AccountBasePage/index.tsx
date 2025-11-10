@@ -27,7 +27,7 @@ const AccountBasePage = () => {
             <div className="welcome-content">
               <h2 className="welcome-title">Lovely to see you here</h2>
               <p className="welcome-text">
-                Welcome to your BBC. You can
+                Welcome to your MEX. You can
                 <strong>
                   find out more about what you can do with your account.
                 </strong>

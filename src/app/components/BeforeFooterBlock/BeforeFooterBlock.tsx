@@ -27,7 +27,7 @@ const BeforeFooterBlock: React.FC<IBeforeFooterBlock> = ({
         }}
       >
         <div className="text-block">
-          <p className="title-text">Your privacy and the BBC</p>
+          <p className="title-text">Your privacy and the MEX</p>
           <p className="desctiption-text">
             Want to know whats happening with your info and how you can take
             control?

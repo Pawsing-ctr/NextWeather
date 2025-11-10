@@ -21,7 +21,6 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
-
   return (
     <PageBlockWrapper>
       <header className="header">

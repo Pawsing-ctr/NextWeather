@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-// hf,jnftn
 
 const Header = dynamic(() => import("@/app/components/Header/Header"), {
   ssr: false,
