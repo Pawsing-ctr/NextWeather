@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Search, X } from "lucide-react";
+import { X } from "lucide-react";
 import Link from "next/link";
 import { ISearch, searchData } from "@/app/data/pages";
 import "./SearchBlock.css";

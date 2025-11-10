@@ -63,9 +63,10 @@ const ClientComponent = () => {
 
       setNewUser(initialUser);
       router.push("/");
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       setServerError(
-        error.response?.data?.message || "Ошибка при регистрации пользователя"
+        err.response?.data?.message || "Ошибка при регистрации пользователя"
       );
     }
   };
