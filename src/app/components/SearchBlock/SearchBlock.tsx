@@ -39,7 +39,6 @@ export const SearchBlock = () => {
       <div className="search-container">
         <form className="search-form" onSubmit={(e) => e.preventDefault()}>
           <div className="search-input-wrapper">
-            <Search className="search-icon" size={20} />
             <input
               onChange={handleClick}
               type="text"

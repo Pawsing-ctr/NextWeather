@@ -1,5 +1,4 @@
-
-.all-account-page{
+.all-account-page {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -9,7 +8,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 50px;
 }
 
 .background-image {
@@ -18,12 +17,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-
   background-size: cover;
   background-position: center;
   background-image: url("/landscape-background.jpg");
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .side-bar {
@@ -48,18 +46,22 @@
   position: relative;
   z-index: 2;
   color: white;
-  height: 372px;
+  min-height: 372px;
+  display: flex;
+  align-items: center;
 }
 
 .welcome-content {
   max-width: 512px;
+  padding: 40px 0;
+  margin-left: 96px;
 }
 
 .welcome-title {
   font-size: 56px;
   font-weight: 700;
   margin-bottom: 24px;
-  line-height: 60px;
+  line-height: 1.1;
 }
 
 .welcome-text {
@@ -84,8 +86,74 @@
   background-color: #0052cc;
 }
 
-.button-link{
+.button-link {
   font-size: 16px;
   text-decoration: none;
   color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .side-bar {
+    display: none;
+  }
+
+  .content-overlay {
+    padding: 0 40px;
+    min-height: 300px;
+  }
+
+  .welcome-content {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 40px 0;
+  }
+
+  .welcome-title {
+    font-size: 48px;
+    line-height: 1.2;
+  }
+
+  .welcome-text {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 768px) {
+  .account-main {
+    gap: 30px;
+  }
+
+  .content-overlay {
+    padding: 0 20px;
+    min-height: 250px;
+  }
+
+  .welcome-content {
+    padding: 30px 0;
+  }
+
+  .welcome-title {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  .welcome-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .settings-button {
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 30px;
+  }
+
+  .welcome-text {
+    font-size: 15px;
+  }
 }

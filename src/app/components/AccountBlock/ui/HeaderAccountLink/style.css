@@ -1,4 +1,4 @@
-.account-header{
+.account-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,18 +6,18 @@
   z-index: 10;
 }
 
-.account-header-title{
+.account-header-title {
   font-size: 28px;
   color: #fff;
   font-weight: 500;
 }
 
-.header-link-block{
+.header-link-block {
   display: flex;
   align-items: center;
 }
 
-.account-header-link{
+.account-header-link {
   font-size: 18px;
   color: #fff;
   padding: 16px;
@@ -25,39 +25,98 @@
   cursor: pointer;
   border-bottom: 3px solid transparent;
   transition: 0.3s ease-in-out;
+  white-space: nowrap;
 }
 
 .active-link,
-.account-header-link:hover{
+.account-header-link:hover {
   border-bottom: 3px solid #fff;
 }
 
-.div-border-link{
+.div-border-link {
   width: 2px;
   height: 25px;
   background-color: #fff;
 }
 
-.settings-header-title{
+.settings-header-title {
   font-size: 28px;
   color: #000;
   font-weight: 600;
 }
 
-.settings-link{
+.settings-link {
   font-size: 18px;
   color: #000;
   font-weight: 600;
+  white-space: nowrap;
 }
 
-
 .active-settings-link,
-.settings-link:hover{
+.settings-link:hover {
   border-bottom: 3px solid #006def;
 }
 
-.settings-div-link{
-    width: 2px;
-    height: 25px;
-    background-color: #000;
+.settings-div-link {
+  width: 2px;
+  height: 25px;
+  background-color: #000;
+}
+
+@media (max-width: 768px) {
+  .account-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  .account-header-title,
+  .settings-header-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+
+  .header-link-block > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .account-header .header-link-block:last-child {
+    overflow-x: auto;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+
+  .div-border-link,
+  .settings-div-link {
+    display: none;
+  }
+
+  .account-header-link,
+  .settings-link {
+    padding: 8px 10px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .account-header-title,
+  .settings-header-title {
+    font-size: 24px;
+  }
+
+  .account-header-link,
+  .settings-link {
+    padding: 12px;
+    font-size: 17px;
+  }
+
+  .div-border-link,
+  .settings-div-link {
+    height: 20px;
+  }
 }

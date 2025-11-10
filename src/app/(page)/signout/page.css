@@ -1,50 +1,86 @@
-.all-signount-page{
+.all-signount-page {
   display: flex;
   flex-direction: column;
   gap: 80px;
 }
 
-.all-signount-block{
+.all-signount-block {
   display: flex;
   flex-direction: column;
   gap: 32px;
-}
-
-
-.all-signount-block{
   max-width: 510px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.signount-title{
+.signount-title {
   font-size: 34px;
   color: #000;
   font-weight: 700;
 }
 
-.signount-button{
+.signount-button {
   padding: 16px;
   font-size: 18px;
   color: #fff;
   background-color: #006def;
   cursor: pointer;
+  border: none;
+  text-align: center;
+  flex-grow: 1;
 }
 
-.button-block{
+.button-block {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.signount-text{
+.signount-text {
   font-size: 18px;
-
 }
 
-.signount-link{
+.signount-link {
   color: #005bc8;
   font-weight: 600;
+  text-decoration: none;
 }
 
-.signount-button:hover{
+.signount-button:hover {
   background-color: #005bc8;
+}
+
+@media (max-width: 768px) {
+  .all-signount-block {
+    gap: 20px;
+  }
+
+  .signount-title {
+    font-size: 26px;
+  }
+
+  .signount-text {
+    font-size: 16px;
+  }
+
+  .signount-button {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .button-block {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .all-signount-page {
+    gap: 30px;
+  }
+
+  .signount-title {
+    font-size: 24px;
+  }
 }

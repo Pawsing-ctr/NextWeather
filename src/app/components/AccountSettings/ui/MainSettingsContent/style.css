@@ -1,10 +1,10 @@
-.form-block-title{
+.form-block-title {
   font-size: 38px;
   color: #000;
   font-weight: 600;
 }
 
-.settings-input{
+.settings-input {
   max-width: 372px;
   height: 37px;
   width: 100%;
@@ -12,51 +12,125 @@
   font-size: 24px;
   outline: none;
   color: #525252;
+  background-color: transparent;
+  padding-right: 10px;
 }
 
-.all-input-block{
+.all-input-block {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.input-edit-button{
+.all-input-block > div > p {
+  font-size: 16px;
+  color: #525252;
+  margin-bottom: 5px;
+}
+
+.input-edit-button {
   font-size: 18px;
   color: #005bc8;
   background-color: #fff;
   font-weight: 600;
   cursor: pointer;
+  border: none;
+  padding: 0;
+  line-height: 1;
 }
 
-.input-edit-block{
+.input-edit-block {
   display: flex;
   gap: 16px;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-.button-block{
+.button-block {
   display: flex;
   gap: 15px;
   cursor: pointer;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .button-block:hover,
-.input-edit-button:hover{
+.input-edit-button:hover {
   color: #0457bd;
 }
 
-.delete-account-title{
+.delete-account-title {
   font-size: 24px;
   font-weight: 600;
+  color: #000;
 }
 
-.delete-account-link{
+.delete-account-link {
   font-size: 18px;
-  border-bottom-color: #006def;
+  border-bottom: 1px solid #006def;
   color: #006def;
+  text-decoration: none;
+  width: fit-content;
 }
 
-.delete-account-block{
+.delete-account-block {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-block-title {
+    font-size: 28px;
+  }
+
+  .all-input-block {
+    gap: 25px;
+  }
+
+  .settings-input {
+    font-size: 18px;
+    max-width: 100%;
+  }
+
+  .input-edit-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .input-edit-block > input {
+    width: 100%;
+  }
+
+  .button-block {
+    padding-top: 5px;
+  }
+
+  .input-edit-button {
+    font-size: 16px;
+  }
+
+  .delete-account-title {
+    font-size: 20px;
+  }
+
+  .delete-account-link {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-block-title {
+    font-size: 24px;
+  }
+
+  .all-input-block {
+    gap: 20px;
+  }
+
+  .settings-input {
+    height: 30px;
+  }
 }
