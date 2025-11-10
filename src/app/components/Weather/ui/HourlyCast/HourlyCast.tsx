@@ -52,6 +52,8 @@ const HourlyCast: React.FC<HourlyCastProps> = ({ data }) => {
                 <Image
                   src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
                   alt=""
+                  height={100}
+                  width={100}
                 />
               </div>
               <div className="hourly-temp">{temp}°</div>

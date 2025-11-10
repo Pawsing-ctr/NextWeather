@@ -90,6 +90,8 @@ export const ObservationsBlock: FC<WeatherProps> = ({ selectedCity }) => {
                   src={weather.icon || "/placeholder.svg"}
                   className="weather-icon"
                   alt={t("weather")}
+                  width={100}
+                  height={100}
                 />
                 <p className="temperature">{weather.temperature}°</p>
                 <p>
