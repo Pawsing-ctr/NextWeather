@@ -81,7 +81,7 @@ export const useWeather = (
 
   const fetchLocation = useCallback(async () => {
     try {
-      const { data } = await axios.get("https://ip-api.com/json/");
+      const { data } = await axios.get("https://ipapi.co/json/");
       setSearchGeo(data.city);
       fetchWeatherData(data.city);
     } catch {
