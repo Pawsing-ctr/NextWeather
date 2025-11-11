@@ -21,7 +21,7 @@ export const useWeather = (
     return "";
   });
 
-  const [isGeoAllowed, setIsGeoAllowed] = useState<boolean>(() => {
+  const [isGeoAllowed, setIsGeoAllowed] = useState<boolean | null>(() => {
     if (typeof window !== "undefined") {
       return sessionStorage.getItem("isGeoAllowed") === "true";
     }
@@ -81,7 +81,7 @@ export const useWeather = (
 
   const fetchLocation = useCallback(async () => {
     try {
-      const { data } = await axios.get("http://ip-api.com/json/");
+      const { data } = await axios.get("https://ip-api.com/json/");
       setSearchGeo(data.city);
       fetchWeatherData(data.city);
     } catch {
