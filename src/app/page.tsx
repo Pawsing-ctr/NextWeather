@@ -11,6 +11,7 @@ import AboutBlock from "./components/AboutBlock/ui/AboutBlock";
 import { Footer } from "./components/Footer/ui/Footer";
 import { Collaborations } from "./components/Collaborations/Collaborations";
 import { SettingsProvider } from "./context/ui/SettingsContext";
+import Widget from "./components/Widget/Widget";
 
 export interface WeatherProps {
   selectedCity: string;
@@ -24,6 +25,7 @@ const ClientComponent = () => {
     <SettingsProvider>
       <>
         <Header />
+        <Widget />
         <Nav setSelectedCity={setSelectedCity} selectedCity={selectedCity} />
         <WeatherBlock
           setSelectedCity={setSelectedCity}
