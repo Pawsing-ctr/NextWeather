@@ -81,7 +81,7 @@ export const useWeather = (
 
   const fetchLocation = useCallback(async () => {
     try {
-      const { data } = await axios.get("https://freegeoip.app/json/");
+      const { data } = await axios.get("/api/apiGeo");
       setSearchGeo(data.city);
       fetchWeatherData(data.city);
     } catch {
