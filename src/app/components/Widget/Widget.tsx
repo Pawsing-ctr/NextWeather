@@ -22,7 +22,7 @@ const Widget = () => {
         />
         <div>
           <h3>{ad.title}</h3>
-          <p>{t(ad.description as any)}</p>
+          <p>{t(ad.description)}</p>
         </div>
       </a>
     </div>

@@ -1,4 +1,15 @@
-export const adsData = [
+import { translations } from "../context/types/SettingsTypes";
+
+type TranslationKey = keyof typeof translations.en
+export interface Ad {
+  id: number;
+  title: string;
+  description: TranslationKey;
+  image: string;
+  link: string;
+}
+
+export const adsData: Ad[] = [
   {
     id: 1,
     title: "Eminem — The Death Of Slim Shady",
