@@ -1,4 +1,4 @@
-.title-news {
+/* .title-news {
     color: rgb(184, 0, 0);
     text-align: center;
     font-size: 24px;
@@ -186,4 +186,90 @@
       grid-template-columns: 1fr;
     }
   }
-  
+   */
+
+   .cards-section{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1240px;
+  gap: 40px;
+  /* вариант (будет скорее всего меняться) */
+  padding-bottom: 70px;
+  border-bottom: 1px solid #B3B3B3; 
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.upper-part{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card-title{
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #000;
+  font-family: "Franchise Regular", sans-serif;
+  border-bottom: 1px solid #000;
+}
+
+.soon-img{
+  background-color: #c4c4c4;
+  width: 400px;
+  height: 266px;
+}
+
+.card-description{
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  text-transform: capitalize;
+  text-align: center;
+  color: #000;
+}
+
+.card-short-description{
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: #4d4d4d;
+  text-align: center;
+}
+
+.lower-part{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.another-card-block{
+  display: flex;
+  padding-top: 15px;
+  border-top: 1px solid #b3b3b3;
+  width: 100%;
+}
+
+.soon-img-v2{
+  background-color: #c4c4c4;
+  width: 100px;
+  height: 65px;
+}
+
+.another-card-text{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 131%;
+  text-transform: capitalize;
+  color: #000;
+  text-align: center;
+  max-width: 250px;
+}
