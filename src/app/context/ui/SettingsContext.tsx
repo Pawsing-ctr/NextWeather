@@ -29,25 +29,41 @@ const SettingsContext = createContext<SettingsContextType | null>(null);
 export const SettingsProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>("ru");
   const [temperature, setTemperature] = useState<TemperatureUnit>("celsius");
   const [windSpeed, setWindSpeed] = useState<WindSpeedUnit>("kmh");
+  const [isMounted, setIsMounted] = useState(false);
+
+  const handleSetLanguage = (lang: Language) => {
+    localStorage.setItem("language", lang);
+    setLanguage(lang);
+    window.location.reload();
+  };
 
   useEffect(() => {
     const storedLang = localStorage.getItem("language") as Language;
     const storedTemp = localStorage.getItem("temperature") as TemperatureUnit;
     const storedSpeed = localStorage.getItem("windSpeed") as WindSpeedUnit;
 
-    if (storedLang) setLanguage(storedLang);
+    if (storedLang) {
+      setLanguage(storedLang);
+    } else {
+      localStorage.setItem("language", "ru");
+      setLanguage("ru");
+    }
+
     if (storedTemp) setTemperature(storedTemp);
     if (storedSpeed) setWindSpeed(storedSpeed);
+
+    setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("language", language);
-    localStorage.setItem("temperature", temperature);
-    localStorage.setItem("windSpeed", windSpeed);
-  }, [language, temperature, windSpeed]);
+    if (isMounted) {
+      localStorage.setItem("temperature", temperature);
+      localStorage.setItem("windSpeed", windSpeed);
+    }
+  }, [isMounted, language, temperature, windSpeed]);
 
   const t = (key: TranslationKeys): string => {
     return translations[language][key] || key;
@@ -57,7 +73,7 @@ export const SettingsProvider: FC<{ children: React.ReactNode }> = ({
     <SettingsContext.Provider
       value={{
         language,
-        setLanguage,
+        setLanguage: handleSetLanguage,
         temperature,
         setTemperature,
         windSpeed,

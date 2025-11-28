@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import {
@@ -14,36 +15,29 @@ export const useWeather = (
   const { language } = useSettings();
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-  const [searchGeo, setSearchGeo] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("searchGeo") || "";
-    }
-    return "";
-  });
+  const [searchGeo, setSearchGeo] = useState<string>("");
+  const [isGeoAllowed, setIsGeoAllowed] = useState<boolean | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [forecastData, setForecastData] = useState<ForecastData | null>(null);
 
-  const [isGeoAllowed, setIsGeoAllowed] = useState<boolean | null>(() => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("isGeoAllowed") === "true";
-    }
-    return false;
-  });
+  useEffect(() => {
+    const savedGeo = sessionStorage.getItem("searchGeo") || "";
+    const savedGeoAllowed = sessionStorage.getItem("isGeoAllowed") === "true";
+    const savedWeather = JSON.parse(
+      sessionStorage.getItem("weatherData") || "null"
+    );
+    const savedForecast = JSON.parse(
+      sessionStorage.getItem("forecastData") || "null"
+    );
 
+    setSearchGeo(savedGeo);
+    setIsGeoAllowed(savedGeoAllowed);
+    setWeatherData(savedWeather);
+    setForecastData(savedForecast);
+  }, []);
+
+  
   const [loading, setLoading] = useState(false);
-
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(() => {
-    if (typeof window !== "undefined") {
-      return JSON.parse(sessionStorage.getItem("weatherData") || "null");
-    }
-    return null;
-  });
-
-  const [forecastData, setForecastData] = useState<ForecastData | null>(() => {
-    if (typeof window !== "undefined") {
-      return JSON.parse(sessionStorage.getItem("forecastData") || "null");
-    }
-    return null;
-  });
-
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [todayHourlyData, setTodayHourlyData] = useState<ForecastItem[]>([]);
 

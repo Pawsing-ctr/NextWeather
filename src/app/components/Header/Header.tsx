@@ -12,8 +12,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 const Header = () => {
-  const { isAuthenticated } = useAuth();
-  const { loading } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
   const { t } = useSettings();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,38 +20,37 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+  
+  const renderAuthContent = () => {
+    if (loading) {
+      return <span>{t("loading")}</span>;
+    }
+    if (!isAuthenticated) {
+      return (
+        <Link className="header-link" href={"/auth"}>
+          {t("signIn")}
+        </Link>
+      );
+    } else {
+      return (
+        <Link className="header-link" href={"/account"}>
+          {t("yourAccount")}
+        </Link>
+      );
+    }
+  };
+
   return (
     <PageBlockWrapper>
       <header className="header">
-        {loading ? (
-          <>
-            <div className="logo-header">
-              <Image width={112} height={32} src={"/logoIMG.jpg"} alt="" />
-              <div className="user-text">
-                <UserAssets width="28px" height="28px" />
-                <span>{t("loading")}</span>
-              </div>
-              <div className="right-user-border" />
-            </div>
-          </>
-        ) : (
-          <div className="logo-header">
-            <Image width={112} height={32} src={"/logoIMG.jpg"} alt="" />
-            <div className="user-text">
-              <UserAssets width="28px" height="28px" />
-              {!isAuthenticated ? (
-                <Link className="header-link" href={"/auth"}>
-                  {t("signIn")}
-                </Link>
-              ) : (
-                <Link className="header-link" href={"/account"}>
-                  {t("yourAccount")}
-                </Link>
-              )}
-            </div>
-            <div className="right-user-border" />
+        <div className="logo-header">
+          <Image width={112} height={32} src={"/logoIMG.jpg"} alt="" />
+          <div className="user-text">
+            <UserAssets width="28px" height="28px" />
+            {renderAuthContent()}{" "}
           </div>
-        )}
+          <div className="right-user-border" />
+        </div>
 
         <div className="right-header-content">
           <div className="central-navigation-block">
@@ -63,6 +61,7 @@ const Header = () => {
               {t("news")}
             </Link>
           </div>
+
           <div
             onClick={() => router.push("/search")}
             className="button-content"
@@ -74,7 +73,6 @@ const Header = () => {
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
         <div
           className={`mobile-menu ${
             mobileMenuOpen ? "mobile-menu-active" : ""
@@ -87,6 +85,7 @@ const Header = () => {
           >
             {t("home")}
           </Link>
+
           <Link
             href={"/news"}
             className="navigation-text"
@@ -94,6 +93,7 @@ const Header = () => {
           >
             {t("news")}
           </Link>
+
           <div
             onClick={() => {
               router.push("/search");
