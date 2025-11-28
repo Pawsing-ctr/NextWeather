@@ -108,8 +108,7 @@ export const translations = {
     placeholderSearch: "Search the MEX",
     // newsCard
     newsCardTitle1: "Deep analysis",
-    newsCardDesc1:
-      "A summary from our weather forecasters with precipitation probabilities",
+    newsCardDesc1: "A summary from our weather forecasters with precipitation",
     newsCardShortDesc1: "Even for you",
     newsCardAnother1_1:
       "Raw data, neural network and expert comments for maximum accuracy.",

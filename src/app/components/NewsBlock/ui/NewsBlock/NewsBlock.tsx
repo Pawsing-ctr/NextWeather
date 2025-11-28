@@ -178,6 +178,7 @@ import { newsCard } from "@/app/data/newCards";
 import "./NewsBlock.css";
 import Image from "next/image";
 import { useSettings } from "@/app/context/ui/SettingsContext";
+import { motion } from "framer-motion";
 
 export const NewsBlock = () => {
   const { t } = useSettings();
@@ -190,12 +191,19 @@ export const NewsBlock = () => {
             <div className="card">
               <div className="upper-part">
                 <p className="card-title">{t(el.cardTitle)}</p>
-                <Image
-                  src={el.bigImagesrc}
-                  alt={t(el.cardTitle)}
-                  height={266}
-                  width={400}
-                />
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <Image
+                    src={el.bigImagesrc}
+                    alt={t(el.cardTitle)}
+                    height={266}
+                    width={400}
+                  />
+                </motion.div>
+
                 <p className="card-description">{t(el.cardDescription)}</p>
                 <p className="card-short-description">
                   {t(el.cardShortDescription)}
@@ -203,21 +211,33 @@ export const NewsBlock = () => {
               </div>
               <div className="lower-part">
                 <div className="another-card-block">
-                  <Image
-                    src={el.smallImageSrcOne}
-                    alt={t(el.firtAnotherCard)}
-                    height={65}
-                    width={100}
-                  />
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <Image
+                      src={el.smallImageSrcOne}
+                      alt={t(el.firtAnotherCard)}
+                      height={65}
+                      width={100}
+                    />
+                  </motion.div>
                   <p className="another-card-text">{t(el.firtAnotherCard)}</p>
                 </div>
                 <div className="another-card-block">
-                  <Image
-                    src={el.smallImageSrcTwo}
-                    alt={t(el.secondAnotherCard)}
-                    height={65}
-                    width={100}
-                  />
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <Image
+                      src={el.smallImageSrcTwo}
+                      alt={t(el.secondAnotherCard)}
+                      height={65}
+                      width={100}
+                    />
+                  </motion.div>
 
                   <p className="another-card-text">{t(el.secondAnotherCard)}</p>
                 </div>

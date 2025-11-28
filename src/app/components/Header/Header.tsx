@@ -20,7 +20,7 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
-  
+
   const renderAuthContent = () => {
     if (loading) {
       return <span>{t("loading")}</span>;

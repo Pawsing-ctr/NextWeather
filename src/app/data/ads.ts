@@ -33,13 +33,6 @@ export const adsData: Ad[] = [
   },
   {
     id: 4,
-    title: "Nest JS",
-    description: "nestAdDesc",
-    image: "/NestJs.png",
-    link: "https://nestjs.com/",
-  },
-  {
-    id: 5,
     title: "Telegram",
     description: "telegramAdDesc",
     image: "/Telegram.webp",
