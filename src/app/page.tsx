@@ -12,7 +12,6 @@ import { Footer } from "./components/Footer/ui/Footer";
 import { Collaborations } from "./components/Collaborations/Collaborations";
 import { SettingsProvider } from "./context/ui/SettingsContext";
 import Widget from "./components/Widget/Widget";
-import PageTransition from "./components/PageTransition/PageTransition";
 
 export interface WeatherProps {
   selectedCity: string;
@@ -23,7 +22,6 @@ const ClientComponent = () => {
   const [selectedCity, setSelectedCity] = useState("");
 
   return (
-    // <PageTransition>
     <SettingsProvider>
       <>
         <Header />
@@ -48,7 +46,6 @@ const ClientComponent = () => {
         <Footer />
       </>
     </SettingsProvider>
-    // </PageTransition>
   );
 };
 
