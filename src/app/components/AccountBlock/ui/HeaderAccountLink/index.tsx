@@ -24,7 +24,7 @@ const HeaderAccountLink: React.FC<IHeaderProps> = ({
           settingsStyle ? "settings-header-title" : "account-header-title"
         }`}
       >
-        {t("settings")}
+        {t(title)}
       </p>
       <div className="header-link-block">
         {AcountHeaderLink.map((el) => {

@@ -17,7 +17,7 @@ const ClientComponent = () => {
       <PageBlockWrapper backgroundColor={Colors.backgroundColorSettingsPage}>
         <div className="account-settings-block">
           <HeaderAccountLink
-            title="Settings"
+            title="settings"
             settingsStyle={true}
             activeLink="settings"
           />
