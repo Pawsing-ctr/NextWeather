@@ -1,10 +1,14 @@
+import { translations } from "../context/types/SettingsTypes";
+
+type TranslationKey = keyof typeof translations.en;
+
 interface IBlogCards {
   id: number;
-  cardTitle: string;
-  cardDescription: string;
-  cardShortDescription: string;
-  firtAnotherCard: string;
-  secondAnotherCard: string;
+  cardTitle: TranslationKey;
+  cardDescription: TranslationKey;
+  cardShortDescription: TranslationKey;
+  firtAnotherCard: TranslationKey;
+  secondAnotherCard: TranslationKey;
   bigImagesrc: string;
   smallImageSrcOne: string;
   smallImageSrcTwo: string;
@@ -13,80 +17,66 @@ interface IBlogCards {
 export const newsCard: IBlogCards[] = [
   {
     id: 1,
-    cardTitle: "Deep analysis",
-    cardDescription:
-      "A summary from our weather forecasters with precipitation probabilities",
-    cardShortDescription: "Even for you",
-    firtAnotherCard:
-      "Raw data, neural network and expert comments for maximum accuracy.",
-    secondAnotherCard:
-      "Precipitation forecast: Probability, intensity, and start/end time based on the model.",
+    cardTitle: "newsCardTitle1",
+    cardDescription: "newsCardDesc1",
+    cardShortDescription: "newsCardShortDesc1",
+    firtAnotherCard: "newsCardAnother1_1",
+    secondAnotherCard: "newsCardAnother1_2",
     bigImagesrc: "/Deep_Analytics.jpg",
     smallImageSrcOne: "/tiger_1.jpg",
     smallImageSrcTwo: "/forecast.jpg",
   },
   {
     id: 2,
-    cardTitle: "MEX Express",
-    cardDescription: "Current Weather and Key Facts for the Day",
-    cardShortDescription: "Simple, perfect, just see",
-    firtAnotherCard:
-      "Atmospheric Fronts: Accurate maps of mass movement and collision.",
-    secondAnotherCard:
-      "From sunrise to sunset: temperature, cloud cover, and the perfect time for a walk.",
+    cardTitle: "newsCardTitle2",
+    cardDescription: "newsCardDesc2",
+    cardShortDescription: "newsCardShortDesc2",
+    firtAnotherCard: "newsCardAnother2_1",
+    secondAnotherCard: "newsCardAnother2_2",
     bigImagesrc: "/curr_w.jpeg",
     smallImageSrcOne: "/Atmospheric.jpg",
     smallImageSrcTwo: "/sunny_sun.jpg",
   },
   {
     id: 3,
-    cardTitle: "Crazy Weather",
-    cardDescription:
-      "Storm warnings, red danger levels, and viral videos of thunderstorms.",
-    cardShortDescription: "So far, so crazy, so best ",
-    firtAnotherCard:
-      "Visibility and Fog: Current conditions for drivers and passengers.",
-    secondAnotherCard: "Weather Records: When the Climate Goes Beyond Normal",
+    cardTitle: "newsCardTitle3",
+    cardDescription: "newsCardDesc3",
+    cardShortDescription: "newsCardShortDesc3",
+    firtAnotherCard: "newsCardAnother3_1",
+    secondAnotherCard: "newsCardAnother3_2",
     bigImagesrc: "/storm.webp",
     smallImageSrcOne: "/vis.jpg",
     smallImageSrcTwo: "/myname.webp",
   },
   {
     id: 4,
-    cardTitle: "New Forecast Model",
-    cardDescription:
-      "Stay up-to-date with the latest technological weather forecasting.",
-    cardShortDescription: "New weather right now",
-    firtAnotherCard:
-      "Storm Archive: The Most Destructive Hurricanes of Recent Decades.",
-    secondAnotherCard:
-      "Climate Change: How 2025 broke all previous heat records.",
+    cardTitle: "newsCardTitle4",
+    cardDescription: "newsCardDesc4",
+    cardShortDescription: "newsCardShortDesc4",
+    firtAnotherCard: "newsCardAnother4_1",
+    secondAnotherCard: "newsCardAnother4_2",
     bigImagesrc: "/map.png",
     smallImageSrcOne: "/storm_2.webp",
     smallImageSrcTwo: "/climate.webp",
   },
   {
     id: 5,
-    cardTitle: "Personal inside",
-    cardDescription:
-      "Personal insights, stories, and thoughts from the weather world.",
-    cardShortDescription: "Just personal opinion",
-    firtAnotherCard:
-      "New Weather Sensors: Data straight from the heart of the storm.",
-    secondAnotherCard:
-      "Tomorrow's Weather: What my experience and intuition tell me.",
+    cardTitle: "newsCardTitle5",
+    cardDescription: "newsCardDesc5",
+    cardShortDescription: "newsCardShortDesc5",
+    firtAnotherCard: "newsCardAnother5_1",
+    secondAnotherCard: "newsCardAnother5_2",
     bigImagesrc: "/snowy.jpg",
     smallImageSrcOne: "/web_things.webp",
     smallImageSrcTwo: "/tommorw.jpg",
   },
   {
     id: 6,
-    cardTitle: "Users Articles",
-    cardDescription:
-      "Community-driven content: reviews, opinions, and trends by real users.",
-    cardShortDescription: "Users can write? Yeah!",
-    firtAnotherCard: "5 Myths About Weather: Debunking Popular Misconceptions.",
-    secondAnotherCard: "MEX: The Best App? Discussing functionality and bugs.",
+    cardTitle: "newsCardTitle6",
+    cardDescription: "newsCardDesc6",
+    cardShortDescription: "newsCardShortDesc6",
+    firtAnotherCard: "newsCardAnother6_1",
+    secondAnotherCard: "newsCardAnother6_2",
     bigImagesrc: "/weather_234.webp",
     smallImageSrcOne: "/webik.jpg",
     smallImageSrcTwo: "/snow1223.jpg",

@@ -177,45 +177,52 @@
 import { newsCard } from "@/app/data/newCards";
 import "./NewsBlock.css";
 import Image from "next/image";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 export const NewsBlock = () => {
+  const { t } = useSettings();
+
   return (
     <section className="cards-section">
       {newsCard.map((el) => {
         return (
           <div key={el.id}>
-            <div className="card" key={el.id}>
+            <div className="card">
               <div className="upper-part">
-                <p className="card-title">{el.cardTitle}</p>
-                <Image src={el.bigImagesrc} alt="#" height={266} width={400} />
-                <p className="card-description">{el.cardDescription}</p>
+                <p className="card-title">{t(el.cardTitle)}</p>
+                <Image
+                  src={el.bigImagesrc}
+                  alt={t(el.cardTitle)}
+                  height={266}
+                  width={400}
+                />
+                <p className="card-description">{t(el.cardDescription)}</p>
                 <p className="card-short-description">
-                  {el.cardShortDescription}
+                  {t(el.cardShortDescription)}
                 </p>
               </div>
               <div className="lower-part">
                 <div className="another-card-block">
                   <Image
                     src={el.smallImageSrcOne}
-                    alt="#"
+                    alt={t(el.firtAnotherCard)}
                     height={65}
                     width={100}
                   />
-
-                  <p className="another-card-text">{el.firtAnotherCard}</p>
+                  <p className="another-card-text">{t(el.firtAnotherCard)}</p>
                 </div>
                 <div className="another-card-block">
                   <Image
                     src={el.smallImageSrcTwo}
-                    alt="#"
+                    alt={t(el.secondAnotherCard)}
                     height={65}
                     width={100}
                   />
-                  <p className="another-card-text">{el.secondAnotherCard}</p>
+
+                  <p className="another-card-text">{t(el.secondAnotherCard)}</p>
                 </div>
               </div>
             </div>
-            {/* {index % 3 !== 2 ? <div className="card-separator" /> : ""} */}
           </div>
         );
       })}

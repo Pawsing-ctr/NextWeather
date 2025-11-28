@@ -7,8 +7,10 @@ import PageBlockWrapper from "@/app/components/PageBlockWrapper/PageBlockWrapper
 import { Footer } from "@/app/components/Footer/ui/Footer";
 import HeaderAccountLink from "../HeaderAccountLink";
 import BeforeFooterBlock from "@/app/components/BeforeFooterBlock/BeforeFooterBlock";
-
+import { useSettings } from "@/app/context/ui/SettingsContext";
 const AccountBasePage = () => {
+  const { t } = useSettings();
+
   return (
     <div className="all-account-page">
       <main className="account-main">
@@ -16,7 +18,10 @@ const AccountBasePage = () => {
           style={{ position: "relative", zIndex: "10", maxHeight: "64px" }}
           backgroundColor={Colors.backgroundColorHeaderAccount}
         >
-          <HeaderAccountLink title="Your account" activeLink="overview" />
+          <HeaderAccountLink
+            title="account_header_title_main"
+            activeLink="overview"
+          />
         </PageBlockWrapper>
         <div className="side-bar left-bar" />
         <div className="background-image" />
@@ -25,17 +30,15 @@ const AccountBasePage = () => {
         <section className="content-overlay">
           <PageBlockWrapper backgroundColor={Colors.backgroundColorNothing}>
             <div className="welcome-content">
-              <h2 className="welcome-title">Lovely to see you here</h2>
+              <h2 className="welcome-title">{t("account_welcome_title")}</h2>
               <p className="welcome-text">
-                Welcome to your MEX. You can
-                <strong>
-                  find out more about what you can do with your account.
-                </strong>
-                Or visit your settings to view and edit your personal info.
+                {t("account_welcome_text_part1")}
+                <strong>{t("account_welcome_text_strong")}</strong>
+                {t("account_welcome_text_part2")}
               </p>
               <button className="settings-button">
                 <Link className="button-link" href={"/account/settings"}>
-                  Continue to Settings
+                  {t("account_welcome_button_settings")}
                 </Link>
               </button>
             </div>

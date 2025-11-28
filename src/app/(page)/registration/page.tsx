@@ -13,8 +13,10 @@ import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import PasswordConditions from "@/app/components/PasswordConditions/PasswordConditions";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import { useSettings } from "@/app/context/ui/SettingsContext";
 const ClientComponent = () => {
+  const { t } = useSettings();
+
   const [newUser, setNewUser] = useState(initialUser);
   const [error, setError] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState<string | null>(null);
@@ -51,7 +53,7 @@ const ClientComponent = () => {
       setError
     );
     if (!errorResult) {
-      console.log("Данные введены не правильно");
+      console.log(t("reg_error_invalid_data"));
       return;
     }
     try {
@@ -66,7 +68,7 @@ const ClientComponent = () => {
     } catch (error: unknown) {
       const err = error as { response?: { data?: { message?: string } } };
       setServerError(
-        err.response?.data?.message || "Ошибка при регистрации пользователя"
+        err.response?.data?.message || t("reg_error_server_default")
       );
     }
   };
@@ -78,9 +80,9 @@ const ClientComponent = () => {
           <div className="registration-content">
             <div className="registration-title">
               <Image width={140} height={40} src={"/authLogoIMG.png"} alt="" />
-              <p className="registration-text">Register for a MEX account</p>
+              <p className="registration-text">{t("reg_page_title")}</p>
               <p className="registration-discripton">
-                You must be 16 or over to register for a MEX account
+                {t("reg_page_description")}
               </p>
             </div>
 
@@ -100,7 +102,7 @@ const ClientComponent = () => {
                           error[el.name] ? "error" : ""
                         }`}
                         name={el.name}
-                        placeholder={el.placeholder}
+                        placeholder={t(el.placeholderKey)}
                         onChange={(e) =>
                           handleChangeInput(e.target.value, el.name)
                         }
@@ -130,7 +132,7 @@ const ClientComponent = () => {
                           }`}
                           name={el.name}
                           value={newUser[el.name as keyof typeof newUser] || ""}
-                          placeholder={el.placeholder}
+                          placeholder={t(el.placeholderKey)}
                           onChange={(e) =>
                             handleChangeInput(e.target.value, el.name)
                           }
@@ -144,14 +146,14 @@ const ClientComponent = () => {
                 )}
               </div>
               <button type="submit" className="form-button">
-                Continue
+                {t("reg_button_continue")}
               </button>
               <div className="registration-link-block">
                 <Link className="registration-link" href={"#"}>
-                  <p>I have forgotten my email</p>
+                  <p>{t("reg_link_forgot_email")}</p>
                 </Link>
                 <Link className="registration-link" href={"#"}>
-                  <p>More help signing in</p>
+                  <p>{t("reg_link_more_help")}</p>
                 </Link>
               </div>
             </form>

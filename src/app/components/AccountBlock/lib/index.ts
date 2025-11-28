@@ -1,9 +1,18 @@
-import { IAcountHeaderLink } from "../type";
+import { TranslationKeys } from "@/app/context/ui/SettingsContext";
+
+interface IAcountHeaderLink {
+  id: number;
+  titleKey: TranslationKeys;
+  href: string;
+  className: string;
+  activeLinkClassName: string;
+  isActive: string;
+}
 
 export const AcountHeaderLink: IAcountHeaderLink[] = [
   {
     id: 1,
-    title: "Overview",
+    titleKey: "account_link_overview",
     href: "/account",
     className: "account-header-link",
     activeLinkClassName: "active-link",
@@ -11,7 +20,7 @@ export const AcountHeaderLink: IAcountHeaderLink[] = [
   },
   {
     id: 2,
-    title: "Settings",
+    titleKey: "account_link_settings",
     href: "/account/settings",
     className: "account-header-link",
     activeLinkClassName: "active-link",
@@ -19,7 +28,7 @@ export const AcountHeaderLink: IAcountHeaderLink[] = [
   },
   {
     id: 3,
-    title: "Sign out",
+    titleKey: "account_link_signout",
     href: "/signout",
     className: "account-header-link",
     activeLinkClassName: "active-link",

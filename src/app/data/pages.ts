@@ -1,48 +1,52 @@
+import { translations } from "../context/types/SettingsTypes";
+
+type TranslationKey = keyof typeof translations.en;
+
 export interface ISearch {
   id: number;
-  title: string;
+  title: TranslationKey;
   link: string;
 }
 
-export const searchData = [
+export const searchData: ISearch[] = [
   {
     id: 1,
-    title: "Create your account",
+    title: "createAccLink",
     link: "/auth",
   },
   {
     id: 2,
-    title: "Read news",
+    title: "readNewsLink",
     link: "/news",
   },
   {
     id: 3,
-    title: "Weather",
+    title: "weatherLink",
     link: "/",
   },
   {
     id: 4,
-    title: "Starting",
+    title: "startingLink",
     link: "/",
   },
   {
     id: 5,
-    title: "Registration",
+    title: "registrationLink",
     link: "/registration",
   },
   {
     id: 6,
-    title: "Languages",
+    title: "languagesLink",
     link: "/",
   },
   {
     id: 7,
-    title: "Creators",
+    title: "creatorsLink",
     link: "https://github.com/Pawsing-ctr/NextWeather",
   },
   {
     id: 8,
-    title: "Daily",
+    title: "dailyLink",
     link: "/news",
   },
 ];

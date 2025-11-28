@@ -1,3 +1,4 @@
+import { TranslationKeys } from "@/app/context/ui/SettingsContext";
 import { ReactNode } from "react";
 
 interface IEditPage {
@@ -7,12 +8,12 @@ interface IEditPage {
 
 export interface IPersonalDetailsInput {
   id: number;
-  title?: string;
+  title: TranslationKeys;
   className: string;
   classNameEdit?: string;
   buttonInput: string;
   type: string;
-  buttonText?: string;
+  buttonText: TranslationKeys;
   buttonIMG?: ReactNode;
   pageName?: string;
   editPage?: IEditPage;

@@ -1,5 +1,6 @@
 import React from "react";
 import "./PasswordConditions.css";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 interface IPasswordConditions {
   black: boolean;
@@ -8,6 +9,8 @@ interface IPasswordConditions {
 const PasswordConditions: React.FC<IPasswordConditions> = ({
   black = true,
 }) => {
+  const { t } = useSettings();
+
   return (
     <div className="conditions-block">
       <p
@@ -17,7 +20,7 @@ const PasswordConditions: React.FC<IPasswordConditions> = ({
             : "conditions-block-title-registration"
         }
       >
-        Passwords need to include...
+        {t("reg_password_condition_title")}
       </p>
       <ul
         className={black ? "conditions-block" : "conditions-block-registration"}
@@ -25,17 +28,17 @@ const PasswordConditions: React.FC<IPasswordConditions> = ({
         <li
           className={black ? "conditions-list" : "conditions-list-registration"}
         >
-          At least eight characters
+          {t("reg_password_condition_chars")}
         </li>
         <li
           className={black ? "conditions-list" : "conditions-list-registration"}
         >
-          At least one letter
+          {t("reg_password_condition_letter")}
         </li>
         <li
           className={black ? "conditions-list" : "conditions-list-registration"}
         >
-          At least one number or symbol
+          {t("reg_password_condition_number")}
         </li>
       </ul>
     </div>

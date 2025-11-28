@@ -1,8 +1,10 @@
+import { TranslationKeys } from "../context/ui/SettingsContext";
+
 interface IRegistrationInput {
   id: number;
   type: string;
   name: string;
-  placeholder: string;
+  placeholderKey: TranslationKeys;
   className: string;
 }
 
@@ -17,14 +19,14 @@ export const formInputs: IFormInput = {
       id: 1,
       type: "text",
       name: "email",
-      placeholder: "Email",
+      placeholderKey: "reg_input_placeholder_email",
       className: "registration-form-input",
     },
     {
       id: 2,
       type: "password",
       name: "password",
-      placeholder: "Password",
+      placeholderKey: "reg_input_placeholder_password",
       className: "registration-form-input",
     },
   ],
@@ -33,21 +35,21 @@ export const formInputs: IFormInput = {
       id: 1,
       type: "text",
       name: "day",
-      placeholder: "Day",
+      placeholderKey: "reg_input_placeholder_day",
       className: "data-user-input",
     },
     {
       id: 2,
       type: "text",
       name: "month",
-      placeholder: "Month",
+      placeholderKey: "reg_input_placeholder_month",
       className: "data-user-input",
     },
     {
       id: 3,
       type: "text",
       name: "year",
-      placeholder: "Year",
+      placeholderKey: "reg_input_placeholder_year",
       className: "data-user-input",
     },
   ],

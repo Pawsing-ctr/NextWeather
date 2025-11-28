@@ -1,6 +1,6 @@
 import { translations } from "../context/types/SettingsTypes";
 
-type TranslationKey = keyof typeof translations.en
+type TranslationKey = keyof typeof translations.en;
 export interface Ad {
   id: number;
   title: string;
@@ -35,7 +35,7 @@ export const adsData: Ad[] = [
     id: 4,
     title: "Nest JS",
     description: "nestAdDesc",
-    image: "/NestJs.svg",
+    image: "/NestJs.png",
     link: "https://nestjs.com/",
   },
   {

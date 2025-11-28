@@ -9,8 +9,11 @@ import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import { handleSchemeCheckError } from "@/app/GlobalFunc/checkErrorFunc/checkErrorFunc";
 import { loginUserSchem } from "@/app/scheme/zodScheme";
 import Image from "next/image";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 const AuthFormContent = () => {
+  const { t } = useSettings();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -67,7 +70,8 @@ const AuthFormContent = () => {
             alt="Logo"
             priority
           />
-          <p className="sign-into-text">Sign into MEX account</p>
+
+          <p className="sign-into-text">{t("auth_page_title")}</p>
         </div>
         <form className="auth-form-block" onSubmit={handleSubmit}>
           <div className="input-wrapper">
@@ -75,7 +79,7 @@ const AuthFormContent = () => {
               className="auth-form-input"
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder={t("auth_input_email_placeholder")}
               value={formData.email}
               onChange={handleChange}
               required
@@ -86,7 +90,7 @@ const AuthFormContent = () => {
               className="auth-form-input"
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder={t("auth_input_password_placeholder")}
               value={formData.password}
               onChange={handleChange}
               required
@@ -96,23 +100,23 @@ const AuthFormContent = () => {
             )}
           </div>
           <button type="submit" className="form-button" disabled={isLoading}>
-            {isLoading ? "Loading..." : "Login"}
+            {isLoading ? t("auth_button_loading") : t("auth_button_login")}
           </button>
           <div className="auth-link-block">
             <Link className="auth-link" href="/forgot-email">
-              <p>I have forgotten my email</p>
+              <p>{t("auth_link_forgot_email")}</p>
             </Link>
             <Link className="auth-link" href="/help">
-              <p>More help signing in</p>
+              <p>{t("auth_link_more_help")}</p>
             </Link>
           </div>
         </form>
         <div className="registration-route-link-block">
           <p className="registration-route-link-title">
-            Don&apos;t have a MEX account?
+            {t("auth_no_account_title")}
           </p>
           <Link href="/registration" className="auth-link">
-            Register now
+            {t("auth_link_register_now")}
           </Link>
         </div>
       </div>
@@ -121,9 +125,15 @@ const AuthFormContent = () => {
 };
 
 const AuthPage = () => {
+  const { t } = useSettings();
+
   return (
     <PageBlockWrapper backgroundColor={Colors.backgroundColorAuth}>
-      <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="loading-spinner">{t("global_loading_spinner")}</div>
+        }
+      >
         <AuthFormContent />
       </Suspense>
     </PageBlockWrapper>

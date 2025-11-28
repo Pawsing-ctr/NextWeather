@@ -7,9 +7,11 @@ import React, { useEffect } from "react";
 import "./page.css";
 import { useAuth } from "@/app/components/AuthProvider/AuthProvider";
 import { useRouter } from "next/navigation";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 const ClientComponent = () => {
   const { logout } = useAuth();
+  const { t } = useSettings();
 
   const router = useRouter();
 
@@ -22,22 +24,21 @@ const ClientComponent = () => {
       <Header />
       <PageBlockWrapper>
         <div className="all-signount-block">
-          <p className="signount-title">
-            You&apos;ve signed out, sorry to see you go.
-          </p>
+          <p className="signount-title">{t("signout_message")}</p>
           <div className="button-block">
             <button
               onClick={() => router.push("/")}
               className="signount-button"
             >
-              Continue
+              {t("signout_button_continue")}
             </button>
             <p className="signount-text">
-              Or{" "}
+              {t("signout_text_or")}
               <Link className="signount-link" href={"/auth"}>
-                Sign in
-              </Link>{" "}
-              again
+                {t("signout_link_signin")}
+              </Link>
+
+              {t("signout_text_again")}
             </p>
           </div>
         </div>

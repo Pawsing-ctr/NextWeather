@@ -11,8 +11,11 @@ import {
   getUserData,
   IUserAccountData,
 } from "@/app/GlobalFunc/getUserDataFunc/getUserDataFunc";
+import { useSettings } from "@/app/context/ui/SettingsContext";
 
 const MainSettingsContent = () => {
+  const { t } = useSettings();
+
   const [userData, setUserData] = useState<IUserAccountData>({
     email: "",
     password: "••••••••",
@@ -30,12 +33,12 @@ const MainSettingsContent = () => {
 
   return (
     <AccountSettingsWrapper>
-      <p className="form-block-title">Personal details</p>
+      <p className="form-block-title">{t("settings_personal_details_title")}</p>
       <div className="all-input-block">
         {PersonalDetailsInput.map((el) => {
           return (
             <div key={el.id}>
-              <p>{el.title}</p>
+              <p>{t(el.title)}</p>
               <div className="input-edit-block">
                 <input
                   className={el.className}
@@ -49,7 +52,9 @@ const MainSettingsContent = () => {
                   }
                   className="button-block"
                 >
-                  <button className="input-edit-button">{el.buttonText}</button>
+                  <button className="input-edit-button">
+                    {t(el.buttonText)}
+                  </button>
                   {el.buttonIMG}
                 </div>
               </div>
@@ -58,9 +63,11 @@ const MainSettingsContent = () => {
         })}
       </div>
       <div className="delete-account-block">
-        <p className="delete-account-title">Delete your account</p>
+        <p className="delete-account-title">
+          {t("settings_delete_account_title")}
+        </p>
         <Link className="delete-account-link" href={"/"}>
-          I want to delete my account
+          {t("settings_delete_account_link")}
         </Link>
       </div>
     </AccountSettingsWrapper>
